@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-//TODO: see description naming (should it be postText or postData?)
+//TODO: see description naming (should it be postText?)
 const postSchema = new Schema(
   {
-    description: {
+    postText: {
       type: String,
       trim: true,
     },
