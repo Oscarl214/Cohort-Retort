@@ -86,18 +86,43 @@ const resolvers = {
 
       return { token, user };
     },
+    addPost: async (parent, { postText, postAuthor, createdAt }) => {
+      return Post.create({ postText, postAuthor, createdAt });
+    },
+    addComment: async (parent, { postId, commentText, createdAt }) => {
+      return Post.findOneAndUpdate(
+        { _id: postId },
+        {
+          $addToSet: { comments: { commentText, createdAt } },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+    removePost: async (parent, { postId }) => {
+      return Post.findOneAndDelete({ _id: postId });
+    },
+    removeComment: async (parent, { postId, commentId }) => {
+      return Post.findOneAndUpdate(
+        { _id: postId },
+        { $pull: { comments: { _id: commentId } } },
+        { new: true }
+      );
+    },
   },
 
   //We need mutations for our Posts & Comments
 
   //Posts:
-  //Create
+  //Create *
   //Update
-  //Delete
+  //Delete *
   //Comments:
-  //Create
+  //Create *
   //Update
-  //Delete
+  //Delete *
 };
 
 module.exports = resolvers;

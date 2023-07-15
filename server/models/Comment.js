@@ -7,7 +7,7 @@ const commentSchema = new Schema({
     type: String,
     trim: true,
   },
-  createdat: {
+  createdAt: {
     type: Date,
     default: Date.now,
     get: (date) => date.toISOString().split("T")[0],
