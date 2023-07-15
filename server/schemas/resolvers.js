@@ -86,14 +86,14 @@ const resolvers = {
 
       return { token, user };
     },
-    addPost: async (parent, { postText, postAuthor }) => {
+    addPost: async (parent, { postText, postAuthor, createdAt }) => {
       return Post.create({ postText, postAuthor, createdAt });
     },
-    addComment: async (parent, { postId, commentText }) => {
+    addComment: async (parent, { postId, commentText, createdAt }) => {
       return Post.findOneAndUpdate(
         { _id: postId },
         {
-          $addToSet: { comments: { commentText } },
+          $addToSet: { comments: { commentText, createdAt } },
         },
         {
           new: true,
