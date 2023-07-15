@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
+//TODO: see description naming (should it be postText or postData?)
 const postSchema = new Schema(
   {
     description: {
@@ -9,7 +10,7 @@ const postSchema = new Schema(
       trim: true,
     },
     comments: [Comment.schema],
-    createdat: {
+    createdAt: {
       type: Date,
       default: Date.now,
       get: (date) => date.toISOString().split("T")[0],
