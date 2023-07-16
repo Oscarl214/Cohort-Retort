@@ -20,14 +20,14 @@ const typeDefs = gql`
   type Post {
     _id: ID!
     postAuthor: User!
-    postText: String!
+    postText: String
     createdAt: String!
     comments: [Comment]
   }
   type Comment {
     _id: ID!
     commentAuthor: User!
-    postText: String!
+    commentText: String!
     createdAt: String!
   }
 
@@ -58,7 +58,7 @@ const typeDefs = gql`
     ): User
     login(email: String!, password: String!): Auth
 
-    addPost(postText: String!, postAuthor: String!, createdAt: String!): Post
+    addPost(postText: String!): Post
     addComment(postId: ID!, commentText: String!, createdAt: String!): Post
     removePost(postId: ID!): Post
     removeComment(postId: ID!, commentId: ID!): Post
