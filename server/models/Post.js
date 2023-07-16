@@ -21,6 +21,7 @@ const postSchema = new Schema(
       {
         comment: {
           type: String,
+          required: true,
           trim: true,
         },
         createdAt: {
