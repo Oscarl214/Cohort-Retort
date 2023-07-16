@@ -8,9 +8,7 @@ const resolvers = {
     user: async (parent, args, context) => {
       //dedicated for our profile page, allows us populate posts based on user that is logged in on the profile page
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          populate: "posts",
-        });
+        const user = await User.findById(context.user._id).populate("posts");
         return user;
       }
       throw new AuthenticationError("Not logged in");
@@ -61,6 +59,7 @@ const resolvers = {
 
       return { token, user };
     },
+    //Works via GraphQL
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {
@@ -69,7 +68,9 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
+    //Works via GraphQL
     login: async (parent, { email, password }) => {
+      //Works via GraphQL
       const user = await User.findOne({ email });
 
       if (!user) {
@@ -86,14 +87,31 @@ const resolvers = {
 
       return { token, user };
     },
-    addPost: async (parent, { postText, postAuthor, createdAt }) => {
-      return Post.create({ postText, postAuthor, createdAt });
+    addPost: async (parent, { postText }, context) => {
+      //Works via GraphQL
+
+      if (context.user) {
+        //create our post
+        const post = await Post.create({ postText });
+
+        //we update our User that is logged in to add the post they just created to their account
+
+        await User.findByIdAndUpdate(
+          context.user._id,
+          { $push: { posts: post._id } }
+          // { new: true }
+        );
+
+        return post;
+      }
+
+      throw new AuthenticationError("Not logged in");
     },
-    addComment: async (parent, { postId, commentText, createdAt }) => {
+    addComment: async (parent, { postId, commentText }) => {
       return Post.findOneAndUpdate(
         { _id: postId },
         {
-          $addToSet: { comments: { commentText, createdAt } },
+          $addToSet: { comments: { commentText } },
         },
         {
           new: true,
