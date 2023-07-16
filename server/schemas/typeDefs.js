@@ -3,6 +3,17 @@ const { gql } = require("apollo-server-express");
 //TODO: need to update addUser, updateUser mutations
 
 const typeDefs = gql`
+ type Comment {
+    _id: ID!
+    commentText: String!
+    createdAt: String!
+  }
+  type Post {
+      _id: ID!
+      postText: String!
+      createdAt: String!
+      comments: [Comment]!
+    }
   type User {
     _id: ID!
     firstName: String!
@@ -15,20 +26,7 @@ const typeDefs = gql`
     linkedin: String
     github: String
     bio: String
-    posts: [Post]
-  }
-  type Post {
-    _id: ID!
-    postAuthor: User!
-    postText: String
-    createdAt: String!
-    comments: [Comment]
-  }
-  type Comment {
-    _id: ID!
-    commentAuthor: User!
-    commentText: String!
-    createdAt: String!
+    posts: [Post]!
   }
 
   type Auth {
@@ -37,8 +35,9 @@ const typeDefs = gql`
   }
 
   type Query {
-    user: User!
-    users: [User!]!
+    user: User
+    users: [User]
+    posts: [Post]
     post(postID: ID!): Post!
     comment(commentId: ID!): Comment!
   }
@@ -59,7 +58,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
 
     addPost(postText: String!): Post
-    addComment(postId: ID!, commentText: String!, createdAt: String!): Post
+    addComment(postId: ID!, commentText: String!): Comment
     removePost(postId: ID!): Post
     removeComment(postId: ID!, commentId: ID!): Post
   }
