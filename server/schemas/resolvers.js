@@ -87,19 +87,20 @@ const resolvers = {
 
       return { token, user };
     },
-    addPost: async (parent, { postText }, context) => {
+    addPost: async (parent, postText, context) => {
       //Works via GraphQL
 
       if (context.user) {
         //create our post
-        const post = await Post.create({ postText });
+        const post = new Post({ postText });
 
         //we update our User that is logged in to add the post they just created to their account
 
         await User.findByIdAndUpdate(
           context.user._id,
-          { $push: { posts: post._id } }
-          // { new: true }
+          { $push: { posts: postText } },
+          { new: true,
+            runValidators: true, }
         );
 
         return post;
