@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { Schema, Types } = mongoose;
 
 const commentSchema = new Schema({
-  comment: {
+  commentText: {
     type: String,
     required: true,
     trim: true,
