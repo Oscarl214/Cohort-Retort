@@ -27,18 +27,12 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
-    post: async (parent, { postId }, context) => {
-      //query dedicated to targeting a specific post that user creates to be able to execute mutations
+    post: async (parent, { postID }, context) => {
       if (context.user) {
-        const userPosts = await Post.findOne({
-          _id: postId,
-          user: context.user._id,
-        }).populate({
-          populate: "comments",
-        });
-        return userPosts;
+        const post = await Post.findById(postID).populate('comments');
+        return post;
       }
-      throw new AuthenticationError("Not logged in");
+      throw new AuthenticationError('Not logged in');
     },
     comment: async (parent, { commentId }, context) => {
       //query dedicated to targeting specific comments that user creates to be able to execute mutations
