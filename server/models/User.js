@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const { Schema } = mongoose;
+const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const Post = require("./Post");
 
@@ -56,7 +56,12 @@ const userSchema = new Schema(
       required: false,
       trim: true,
     },
-    posts: [Post.schema], // Amount of Posts User has, references post schema,
+    posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ], // Amount of Posts User has, references post schema,
   },
   {
     toJSON: {
@@ -83,6 +88,13 @@ userSchema.methods.isCorrectPassword = async function (password) {
 userSchema.virtual("postCount").get(function () {
   return this.posts.length;
 });
+
+userSchema
+  .virtual("fullName")
+  // Getter
+  .get(function () {
+    return `${this.firstName} ${this.lastName}`;
+  });
 
 const User = mongoose.model("User", userSchema);
 
