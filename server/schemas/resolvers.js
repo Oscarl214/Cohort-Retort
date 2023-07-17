@@ -8,7 +8,13 @@ const resolvers = {
     user: async (parent, args, context) => {
       //dedicated for our profile page, allows us populate posts based on user that is logged in on the profile page
       if (context.user) {
-        const user = await User.findById(context.user._id).populate("posts");
+        const user = await User.findById(context.user._id).populate({
+          path: "posts",
+          populate: {
+            path: "comments",
+            model: "Comment",
+          },
+        });
         return user;
       }
       throw new AuthenticationError("Not logged in");
@@ -37,10 +43,7 @@ const resolvers = {
     comment: async (parent, { commentId }, context) => {
       //query dedicated to targeting specific comments that user creates to be able to execute mutations
       if (context.user) {
-        const comment = await Comment.findOne({
-          _id: commentId,
-          user: context.user._id,
-        }).populate("post");
+        const comment = await Comment.findOne(commentId);
         return comment;
       }
       throw new AuthenticationError("Not logged in");
@@ -101,27 +104,9 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-    // addComment: async (parent, { postId, commentText }, context) => {
-    //   if (context.user) {
-    //     const comment = await Comment.create({ commentText });
-
-    //     await Post.findByIdAndUpdate(
-    //       postId,
-    //       { $push: { comments: comment._id } },
-    //       { new: true }
-    //     );
-
-    //     if (!updatedPost) {
-    //       throw new Error("Post not found");
-    //     }
-
-    //     return comment;
-    //   }
-    //   throw new AuthenticationError("Not logged in");
-    // },
     addComment: async (parent, { postId, commentText }, context) => {
       if (context.user) {
-        const comment = await Comment.create({ comment: commentText });
+        const comment = await Comment.create({ commentText });
 
         const updatedPost = await Post.findByIdAndUpdate(
           postId,
@@ -137,15 +122,43 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
-    removePost: async (parent, { postId }) => {
-      return Post.findOneAndDelete({ _id: postId });
+    removePost: async (parent, { postId }, context) => {
+      if (context.user) {
+        const deletedPost = await Post.deleteOne({ _id: postId });
+
+        if (deletedPost.deletedCount === 1) {
+          //deletedCount comes from Mongo when performing delete operations
+
+          await User.findByIdAndUpdate(
+            context.user._id,
+            { $pull: { posts: postId } },
+            { new: true }
+          );
+          return "Post deleted Successfully";
+        } else {
+          throw new Error("Post not found");
+        }
+      }
+      throw new AuthenticationError("Not logged in");
     },
-    removeComment: async (parent, { postId, commentId }) => {
-      return Post.findOneAndUpdate(
-        { _id: postId },
-        { $pull: { comments: { _id: commentId } } },
-        { new: true }
-      );
+    removeComment: async (parent, { commentId }, context) => {
+      if (context.user) {
+        const deletedComment = await Comment.deleteOne({
+          _id: commentId,
+        });
+
+        if (deletedComment.deletedCount === 1) {
+          await Post.findOneAndUpdate(
+            { comments: commentId },
+            { $pull: { comments: commentId } },
+            { new: true }
+          );
+          return "Comment deleted Successfully";
+        } else {
+          throw new Error("Comment not found");
+        }
+      }
+      throw new AuthenticationError("Not logged in");
     },
   },
 
