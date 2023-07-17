@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const { Schema } = mongoose;
-
-// const { commentSchema } = require("./Comment");
+// const Comment = require("./Comment");
 
 //TODO: see description naming (should it be postText?)
 const postSchema = new Schema(
@@ -19,16 +18,8 @@ const postSchema = new Schema(
     },
     comments: [
       {
-        comment: {
-          type: String,
-          required: true,
-          trim: true,
-        },
-        createdAt: {
-          type: Date,
-          default: Date.now,
-          get: (date) => date.toISOString().split("T")[0],
-        },
+        type: Schema.Types.ObjectId,
+        ref: "Comment",
       },
     ],
   },
