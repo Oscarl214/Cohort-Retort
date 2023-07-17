@@ -1,26 +1,20 @@
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-// const { Schema } = mongoose;
+const { Schema, Types } = mongoose;
 
-// const commentSchema = new Schema(
-//   {
-//     comment: {
-//       type: String,
-//       trim: true,
-//     },
-//     createdAt: {
-//       type: Date,
-//       default: Date.now,
-//       get: (date) => date.toISOString().split("T")[0],
-//     },
-//   },
-//   {
-//     toJSON: {
-//       virtuals: true,
-//     },
-//   }
-// );
+const commentSchema = new Schema({
+  comment: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    get: (date) => date.toISOString().split("T")[0],
+  },
+});
 
-// const Comment = mongoose.model("Comment", commentSchema);
+const Comment = mongoose.model("Comment", commentSchema);
 
-// module.exports = Comment;
+module.exports = Comment;
