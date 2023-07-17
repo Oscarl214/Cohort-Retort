@@ -29,10 +29,10 @@ const resolvers = {
     },
     post: async (parent, { postID }, context) => {
       if (context.user) {
-        const post = await Post.findById(postID).populate('comments');
+        const post = await Post.findById(postID).populate("comments");
         return post;
       }
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
     comment: async (parent, { commentId }, context) => {
       //query dedicated to targeting specific comments that user creates to be able to execute mutations
@@ -101,17 +101,41 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-    addComment: async (parent, { postId, commentText }) => {
-      return Post.findOneAndUpdate(
-        { _id: postId },
-        {
-          $addToSet: { comments: { commentText } },
-        },
-        {
-          new: true,
-          runValidators: true,
+    // addComment: async (parent, { postId, commentText }, context) => {
+    //   if (context.user) {
+    //     const comment = await Comment.create({ commentText });
+
+    //     await Post.findByIdAndUpdate(
+    //       postId,
+    //       { $push: { comments: comment._id } },
+    //       { new: true }
+    //     );
+
+    //     if (!updatedPost) {
+    //       throw new Error("Post not found");
+    //     }
+
+    //     return comment;
+    //   }
+    //   throw new AuthenticationError("Not logged in");
+    // },
+    addComment: async (parent, { postId, commentText }, context) => {
+      if (context.user) {
+        const comment = await Comment.create({ comment: commentText });
+
+        const updatedPost = await Post.findByIdAndUpdate(
+          postId,
+          { $push: { comments: comment._id } },
+          { new: true }
+        ).populate("comments");
+
+        if (!updatedPost) {
+          throw new Error("Post not found");
         }
-      );
+
+        return comment;
+      }
+      throw new AuthenticationError("Not logged in");
     },
     removePost: async (parent, { postId }) => {
       return Post.findOneAndDelete({ _id: postId });
