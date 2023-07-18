@@ -3,24 +3,22 @@ import { gql } from "@apollo/client";
 export const QUERY_USER = gql`
   query getUser {
     user {
-      _id
       firstName
       lastName
       email
-      orders {
+      phone
+      website
+      employer
+      linkedin
+      github
+      posts {
         _id
-        purchaseDate
-        products {
+        postText
+        createdAt
+        comments {
           _id
-          name
-          description
-          image
-          quantity
-          price
-          category {
-            _id
-            name
-          }
+          commentText
+          createdAt
         }
       }
     }
@@ -69,7 +67,7 @@ export const QUERY_POST = gql`
 
 export const QUERY_COMMENT = gql`
   query getComment($commentId: ID!) {
-    comment(commentId: $commentID) {
+    comment(commentId: $commentId) {
       _id
       commentText
       createdAt
