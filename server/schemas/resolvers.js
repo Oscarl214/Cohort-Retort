@@ -43,7 +43,7 @@ const resolvers = {
     comment: async (parent, { commentId }, context) => {
       //query dedicated to targeting specific comments that user creates to be able to execute mutations
       if (context.user) {
-        const comment = await Comment.findOne(commentId);
+        const comment = await Comment.findById(commentId);
         return comment;
       }
       throw new AuthenticationError("Not logged in");
