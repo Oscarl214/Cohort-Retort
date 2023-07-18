@@ -23,24 +23,16 @@ export const ADD_USER = gql`
       lastName: $lastName
       email: $email
       password: $password
-      phone: $phone
-      website: $website
-      employer: $employer
-      linkedin: $linkedin
-      github: $github
-      bio: $bio
-      posts: [Post]!
     ) {
-      token
-      user {
-        _id
-      }
+      _id
+      firstName
+      email
     }
   }
 `;
 // TODO: Double check update user mutation
 export const UPDATE_USER = gql`
-  mutation updateUser{
+  mutation updateUser {
     updateUser(
       firstName: $firstName
       lastName: $lastName
@@ -73,9 +65,10 @@ export const ADD_POST = gql`
 export const REMOVE_POST = gql`
   mutation removePost($postId: ID!) {
     removePost(postId: $postId) {
+      _id
     }
   }
-`;
+`; //need to return a response
 
 export const ADD_COMMENT = gql`
   mutation addComment($postId: ID!, $commentText: String!) {
@@ -95,8 +88,7 @@ export const ADD_COMMENT = gql`
 export const REMOVE_COMMENT = gql`
   mutation removeComment($commentId: ID!) {
     removeComment(commentId: $commentId) {
-      }
+      _id
     }
   }
 `;
-

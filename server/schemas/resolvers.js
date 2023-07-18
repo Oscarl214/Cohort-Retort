@@ -52,9 +52,8 @@ const resolvers = {
   Mutation: {
     addUser: async (parent, args) => {
       const user = await User.create(args);
-      const token = signToken(user);
 
-      return { token, user };
+      return { user };
     },
     //Works via GraphQL
     updateUser: async (parent, args, context) => {
@@ -161,17 +160,6 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
   },
-
-  //We need mutations for our Posts & Comments
-
-  //Posts:
-  //Create *
-  //Update
-  //Delete *
-  //Comments:
-  //Create *
-  //Update
-  //Delete *
 };
 
 module.exports = resolvers;

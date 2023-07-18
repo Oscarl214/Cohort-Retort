@@ -26,7 +26,7 @@ const typeDefs = gql`
     linkedin: String
     github: String
     bio: String
-    posts: [Post]!
+    posts: [Post]
   }
 
   type Auth {
@@ -37,8 +37,8 @@ const typeDefs = gql`
   type Query {
     user: User
     users: [User]
-    post(postID: ID!): Post!
-    comment(commentId: ID!): Comment!
+    post(postID: ID!): Post
+    comment(commentId: ID!): Comment
   }
 
   type Mutation {
@@ -47,7 +47,7 @@ const typeDefs = gql`
       lastName: String!
       email: String!
       password: String!
-    ): Auth
+    ): User
     updateUser(
       firstName: String
       lastName: String
