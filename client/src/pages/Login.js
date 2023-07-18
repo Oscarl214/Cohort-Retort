@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
-import { LOGIN } from '../utils/mutations';
-import Auth from '../utils/auth';
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { Link } from "react-router-dom";
+import { LOGIN } from "../utils/mutations";
+import Auth from "../utils/auth";
 
 function Login(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error }] = useMutation(LOGIN);
 
   const handleFormSubmit = async (event) => {
@@ -30,40 +30,60 @@ function Login(props) {
   };
 
   return (
-    <div className="container my-1">
-      <Link to="/signup">← Go to Signup</Link>
-
-      <h2>Login</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email address:</label>
-          <input
-            placeholder="youremail@test.com"
-            name="email"
-            type="email"
-            id="email"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
-          <input
-            placeholder="******"
-            name="password"
-            type="password"
-            id="pwd"
-            onChange={handleChange}
-          />
-        </div>
-        {error ? (
-          <div>
-            <p className="error-text">The provided credentials are incorrect</p>
+    <div className="flex items-center justify-center h-screen bg-blue-900">
+      <div className="container w-full max-w-sm bg-blue-100 p-6 rounded-lg">
+        <form onSubmit={handleFormSubmit} className="mt-4">
+          <div className="flex flex-col mb-4">
+            <label htmlFor="email" className="text-lg text-black-500">
+              Email address:
+            </label>
+            <input
+              placeholder="youremail@test.com"
+              name="email"
+              type="email"
+              id="email"
+              onChange={handleChange}
+              className="border border-blue-300 p-2 mt-2"
+            />
           </div>
-        ) : null}
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+          <div className="flex flex-col mb-4">
+            <label htmlFor="pwd" className="text-lg">
+              Password:
+            </label>
+            <input
+              placeholder="******"
+              name="password"
+              type="password"
+              id="pwd"
+              onChange={handleChange}
+              className="border border-blue-300 p-2 mt-2"
+            />
+          </div>
+          {error ? (
+            <div>
+              <p className="text-red-500">
+                The provided credentials are incorrect
+              </p>
+            </div>
+          ) : null}
+          <div className="flex justify-between items-center">
+            <button
+              type="submit"
+              className="bg-blue-500 text-black py-2 px-4 rounded hover:bg-blue-600"
+            >
+              Submit
+            </button>
+            <div>
+              <Link
+                to="/signup"
+                className="bg-blue-500 text-black py-2 px-4 rounded hover:bg-blue-600 border border-black-500 ml-4"
+              >
+                Create Account
+              </Link>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
