@@ -30,34 +30,38 @@ function Login(props) {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-blue-900">
-      <div className="container w-full max-w-sm bg-blue-100 p-6 rounded-lg">
-        <form onSubmit={handleFormSubmit} className="mt-4">
+    <div className="flex flex-col items-center justify-center h-screen background-darkBlue">
+      <h1 className="text-7xl font-bold text-center mb-6 color-yellow">COHORT RETORT</h1>
+      <h3 className="text-2xl tenxt-center mb-6 text-white">Connect with your classmates</h3>
+    <div className="container w-full max-w-md background-medBlue p-5 rounded-lg shrink-1">      
+      <form onSubmit={handleFormSubmit} className="mt-4">
           <div className="flex flex-col mb-4">
-            <label htmlFor="email" className="text-lg text-black-500">
-              Email address:
-            </label>
+            
             <input
               placeholder="youremail@test.com"
               name="email"
               type="email"
               id="email"
               onChange={handleChange}
-              className="border border-blue-300 p-2 mt-2"
+              className="border border-blue-300 p-2 mt-2 rounded-md"
             />
+            <label htmlFor="pwd" className="text-lg text-white">
+              Email
+            </label>
           </div>
           <div className="flex flex-col mb-4">
-            <label htmlFor="pwd" className="text-lg">
-              Password:
-            </label>
+            
             <input
               placeholder="******"
               name="password"
               type="password"
               id="pwd"
               onChange={handleChange}
-              className="border border-blue-300 p-2 mt-2"
+              className="border border-blue-300 p-2 mt-2 rounded-md"
             />
+            <label htmlFor="pwd" className="text-lg text-white">
+              Password
+            </label>
           </div>
           {error ? (
             <div>
@@ -69,14 +73,14 @@ function Login(props) {
           <div className="flex justify-between items-center">
             <button
               type="submit"
-              className="bg-blue-500 text-black py-2 px-4 rounded hover:bg-blue-600"
+              className="background-yellow text-black py-2 px-4 rounded hover:background-darkBlue hover:text-white text-bold"
             >
-              Submit
+              Sign In
             </button>
             <div>
               <Link
                 to="/signup"
-                className="bg-blue-500 text-black py-2 px-4 rounded hover:bg-blue-600 border border-black-500 ml-4"
+                className="background-yellow text-black py-2 px-4 rounded hover:background-darkBlue hover:text-white ml-4"
               >
                 Create Account
               </Link>

@@ -1,4 +1,26 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
 
+@layer utilities {
+  .color-yellow {
+    color: #F0D258;
+  }
+
+  .background-yellow {
+    background-color: #F0D258;
+  }
+
+  .background-darkBlue {
+    background-color: #0c2c64;
+  }
+
+  .background-medBlue {
+    background-color: #476ba9;
+  }
+
+  .background-gray {
+    background-color: #f0f1f7;
+  }
+}
+
+@tailwind utilities;
