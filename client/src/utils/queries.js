@@ -74,3 +74,16 @@ export const QUERY_COMMENT = gql`
     }
   }
 `;
+
+export const QUERY_POSTS = gql`
+  {
+    _id
+    postText
+    createdAt
+    comments {
+      _id
+      commentText
+      createdAt
+    }
+  }
+`;
