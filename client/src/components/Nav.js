@@ -8,8 +8,13 @@ function Nav() {
       return (
         <ul className="flex-row">
           <li className="mx-1">
-            <Link to="/orderHistory" className="text-white hover:text-gray-300">
-              Order History
+            <Link to="/Profile" className="text-white hover:text-gray-300">
+              Profile
+            </Link>
+          </li>
+          <li className="mx-1">
+            <Link to="/Home" className="text-white hover:text-gray-300">
+              Home
             </Link>
           </li>
           <li className="mx-1">
