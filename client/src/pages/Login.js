@@ -33,6 +33,7 @@ function Login(props) {
     <div className="flex flex-col items-center justify-center h-screen background-darkBlue">
       <h1 className="text-7xl font-bold text-center mb-6 color-yellow">COHORT RETORT</h1>
       <h3 className="text-2xl tenxt-center mb-6 text-white">Connect with your classmates</h3>
+
     <div className="container w-full max-w-md background-medBlue p-5 rounded-lg shrink-1">      
       <form onSubmit={handleFormSubmit} className="mt-4">
           <div className="flex flex-col mb-4">
@@ -50,7 +51,7 @@ function Login(props) {
             </label>
           </div>
           <div className="flex flex-col mb-4">
-            
+
             <input
               placeholder="******"
               name="password"
