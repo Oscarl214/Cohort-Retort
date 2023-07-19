@@ -20,12 +20,9 @@ const typeDefs = gql`
     lastName: String!
     email: String!
     password: String!
-    phone: String
     website: String
-    employer: String
     linkedin: String
     github: String
-    bio: String
     posts: [Post]
   }
 
@@ -47,12 +44,18 @@ const typeDefs = gql`
       lastName: String!
       email: String!
       password: String!
+      website: String
+      linkedin: String
+      github: String
     ): User
     updateUser(
       firstName: String
       lastName: String
       email: String
       password: String
+      website: String
+      linkedin: String
+      github: String
     ): User
     login(email: String!, password: String!): Auth
 
