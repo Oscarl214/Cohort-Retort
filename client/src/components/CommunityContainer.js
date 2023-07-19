@@ -1,13 +1,13 @@
 import React from "react";
 import CreatePost from "./CreatePost";
-import PostCard from "./PostCard";
+import PostViewContainer from "./PostCard";
 
 
 const CommunityContainer = () => {
   return (
     <div className="">
         <CreatePost />
-        <PostCard />
+        <PostViewContainer />
     </div>
   );
 };
