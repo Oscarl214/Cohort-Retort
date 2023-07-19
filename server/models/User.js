@@ -26,17 +26,7 @@ const userSchema = new Schema(
       required: true,
       minlength: 5,
     },
-    phone: {
-      type: Number,
-      required: false,
-      trim: true,
-    },
     website: {
-      type: String,
-      required: false,
-      trim: true,
-    },
-    employer: {
       type: String,
       required: false,
       trim: true,
@@ -47,11 +37,6 @@ const userSchema = new Schema(
       trim: true,
     },
     github: {
-      type: String,
-      required: false,
-      trim: true,
-    },
-    bio: {
       type: String,
       required: false,
       trim: true,
