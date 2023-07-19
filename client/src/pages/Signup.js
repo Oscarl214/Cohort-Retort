@@ -37,16 +37,15 @@ setFormState({
 
 
 return (
-<div>
 
-<div className="flex flex-col items-center justify-center h-screen background-darkBlue">
+<div className="flex flex-col items-center justify-center  background-darkBlue">
+
+    <h1 className="display: inline text-7xl font-bold text-center mb-2 mt-20 color-yellow">COHORT RETORT</h1>
+
+    <p className="display: inline; text-2xl tenxt-center mb-10 text-white">Connect with your classmates</p>
  
-<div>
-    <h1 className="font-bold text-7xl color-yellow flex items-center justify-center" >COHORT RETORT</h1>
-    <p className="text-white text-lg flex items-center justify-center mb-6">Connect with your classmates</p>
-  </div>
-
-  <div className="container w-full max-w-md background-medBlue p-5 rounded-lg shrink-1">
+  <div className="container w-full max-w-md background-medBlue p-5 mb-32
+   rounded-lg shrink-1 ">
 
       <form className="mt-4" onSubmit={handleFormSubmit}>
           <div className="flex flex-col mb-4">
@@ -56,9 +55,9 @@ return (
               type="firstName"
               id="firstName"
               onChange={handleChange}
-              className="border border-blue-300 p-2 mt-2 rounded-md"
+              className="border border-blue-300 p-2 mt-2 rounded-md "
               />
-              <label className="text-white text-lg" htmlFor="firstName">First Name:</label>
+              <label className="text-white text-lg after:content-['*'] after:ml-0.5 after:text-red-500" htmlFor="firstName">First Name</label>
           </div>
           <div className="flex flex-col mb-4">
               <input
@@ -69,7 +68,7 @@ return (
               onChange={handleChange}
               className="border border-blue-300 p-2 mt-2 rounded-md"
               />
-               <label className="text-white text-lg" htmlFor="lastName">Last Name:</label>
+               <label className="text-white text-lg after:content-['*'] after:ml-0.5 after:text-red-500" htmlFor="lastName">Last Name</label>
           </div>
           <div className="flex flex-col mb-4">
           
@@ -81,7 +80,7 @@ return (
               onChange={handleChange}
               className="border border-blue-300 p-2 mt-2 rounded-md"
               />
-              <label className="text-white text-lg" htmlFor="email">Email:</label>
+              <label className="text-white text-lg after:content-['*'] after:ml-0.5 after:text-red-500" htmlFor="email">Email</label>
           </div>
           <div className="flex flex-col mb-4">
               <input
@@ -92,7 +91,7 @@ return (
               onChange={handleChange}
               className="border border-blue-300 p-2 mt-2 rounded-md"
               />
-              <label className="text-white text-lg" htmlFor="pwd">Password:</label>
+              <label className="text-white text-lg after:content-['*'] after:ml-0.5 after:text-red-500" htmlFor="pwd">Password</label>
           </div>
           <div className="flex flex-col mb-4">
               <input
@@ -127,18 +126,33 @@ return (
               />
               <label className="text-white text-lg" htmlFor="email">Personal Website</label>
           </div>
-          <div className="flex justify-between items-center">
-            <button className="bg-yellow-300 text-blue-900 py-2 px-4 rounded hover:background-medBlue" type="submit">Sign In</button>
+         
 
-            <button className="bg-blue-900 text-white py-2 px-4 rounded hover:color-yellow ml-4" to="/login" type="submit">Back</button>
-          </div>
-          <Link className="text-white text-lg flex flex-col items-center justify-center" to="/login"><a>Have an account?</a>Log In</Link>
-          <div>
+          <div className="flex justify-between items-center mt-4">
+            <button 
+            className="background-yellow text-black py-2 px-4 rounded hover:background-darkBlue hover:text-white text-bold"
+            type="submit" >
+            Sign In</button>
+            
+{/* add navigation to back button */}
+            <Link
+            to="/login" 
+            className="background-yellow text-black py-2 px-4 rounded hover:background-darkBlue hover:text-white text-bold"
+            >Back</Link>
+         
+         </div>
+         <div className="">
+            <p className="text-m text-white flex items-center justify-center mt-6">Have an account?&nbsp;&nbsp;<Link 
+            to="/login"
+            className="color-yellow hover:color-dkblue focus:text-sky-400" 
+            >Log In</Link></p>
+            
+         </div>
            
-          </div>
+          
       </form>
   </div>
-</div>
+
 </div>
 );
 }
