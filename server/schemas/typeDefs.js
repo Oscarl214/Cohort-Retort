@@ -34,6 +34,7 @@ const typeDefs = gql`
   type Query {
     user: User
     users: [User]
+    posts: [Post]
     post(postID: ID!): Post
     comment(commentId: ID!): Comment
   }

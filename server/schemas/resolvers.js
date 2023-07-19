@@ -40,6 +40,9 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
+    posts: async (parent, args, context) => {
+      return Post.find().sort({ createdAt: -1 }).populate("comments");
+    },
     comment: async (parent, { commentId }, context) => {
       //query dedicated to targeting specific comments that user creates to be able to execute mutations
       if (context.user) {
