@@ -1,14 +1,14 @@
 import React from "react";
-import Nav from "../components/Nav";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import CommunityContainer from "../components/CommunityContainer";
 
 const Home = () => {
   return (
     <div>
-      <Nav />
-      <CommunityContainer>
-        
-      </CommunityContainer>
+      <Header />
+      <CommunityContainer />
+      <Footer />
     </div>
   );
 };

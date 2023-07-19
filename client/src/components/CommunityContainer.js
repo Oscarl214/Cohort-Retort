@@ -1,11 +1,13 @@
 import React from "react";
+import CreatePost from "./CreatePost";
+import PostCard from "./PostCard";
 
 
 const CommunityContainer = () => {
   return (
-    <div>
-        <p className="text-red-600 text-2xl">Sup?</p>
-      
+    <div className="">
+        <CreatePost />
+        <PostCard />
     </div>
   );
 };
