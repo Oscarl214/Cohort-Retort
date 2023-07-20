@@ -1,6 +1,6 @@
 import React from "react";
 import CreatePost from "./CreatePost";
-import PostViewContainer from "./PostViewContainer";
+import PostViewContainer from "../components/PostComponents/PostViewContainer";
 import Auth from "../utils/auth"; // Bring in your Auth middleware
 import { Link } from "react-router-dom";
 const CommunityContainer = () => {
