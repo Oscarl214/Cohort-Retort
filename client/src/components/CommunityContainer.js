@@ -1,13 +1,22 @@
 import React from "react";
 import CreatePost from "./CreatePost";
-import PostCard from "./PostCard";
-
-
+import PostViewContainer from "./PostViewContainer";
+import Auth from "../utils/auth"; // Bring in your Auth middleware
+import { Link } from "react-router-dom";
 const CommunityContainer = () => {
   return (
-    <div className="">
-        <CreatePost />
-        <PostCard />
+    <div>
+      {Auth.loggedIn() ? (
+        <>
+          <CreatePost />
+          <PostViewContainer />{" "}
+        </>
+      ) : (
+        <p>
+          You need to be logged in to view and create posts. Please{" "}
+          <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
+        </p>
+      )}
     </div>
   );
 };
