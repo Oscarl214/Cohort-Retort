@@ -24,6 +24,7 @@ userWebsite: formState.userWebsite,
 });
 const token = mutationResponse.data.addUser.token;
 Auth.login(token);
+window.location.href = '/login';
 };
 
 
