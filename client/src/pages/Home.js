@@ -5,7 +5,7 @@ import CommunityContainer from "../components/CommunityContainer";
 
 const Home = () => {
   return (
-    <div>
+    <div className="background-gray h-screen"> 
       <Header />
       <CommunityContainer />
       <Footer />
