@@ -1,7 +1,8 @@
 import React from "react";
 import Nav from "./Nav";
 
-const Header = () => {
+const Header = ({ user }) => { // user object is passed as a prop
+
   return (
     <div className="h-96 hero">
         <Nav/> 
@@ -14,9 +15,11 @@ const Header = () => {
               </svg>
             </div>
         </div>
-            <h1 className="text-4xl text-white  text-center ">John Doe</h1>
-        </div> 
+        
+        {/* Check if user is defined, and if so, access firstName and lastName */}
+        <h1 className="text-4xl text-white text-center ">Hi {user?.firstName} {user?.lastName}</h1>
+    </div> 
   );
 };
 
-export default Header;
+export default Header; 
