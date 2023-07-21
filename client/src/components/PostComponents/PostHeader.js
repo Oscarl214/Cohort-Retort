@@ -12,11 +12,20 @@ const PostHeader = (props) => {
     return <p>Loading...</p>;
   }
 
-  const userInfo = usersData.find((user) => user.posts.includes(props.postID));
+  // const userInfo = usersData.map((user) => user.posts.includes(props.postID));
 
-  const userInfo2 = usersData.map();
+  let userPost;
 
-  console.log("userInfo", userInfo);
+  const userInfo = usersData.map((user) => {
+    for (let i = 0; i < user.posts.length; i++) {
+      if (user.posts[i]._id === props.postID) {
+        userPost = user;
+        return userPost;
+      }
+    }
+  });
+
+  console.log("userInfo", userPost);
 
   //   console.log("This is key", props.postID);
   // Map through the posts array to render each post card
@@ -32,9 +41,9 @@ const PostHeader = (props) => {
           <div>
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-semibold text-gray-900 -mt-1">
-                {userInfo.firstName} {userInfo.lastName}
+                {userPost.firstName} {userPost.lastName}
               </h2>
-              <small className="text-sm text-gray-700">{userInfo.email}</small>
+              <small className="text-sm text-gray-700">{userPost.email}</small>
             </div>
           </div>
         </div>
