@@ -6,23 +6,28 @@ function Nav() {
   function showNavigation() {
     if (Auth.loggedIn()) {
       return (
-        <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="/Profile" className="text-white hover:text-gray-300">
+        <ul className="flex items-center">
+          <li className="ml-3">
+            <Link
+              to="/Profile"
+              className="text-white hover:text-blue-300 px-2 py-1 rounded-lg"
+            >
               Profile
             </Link>
           </li>
-          <li className="mx-1">
-            <Link to="/Home" className="text-white hover:text-gray-300">
+          <li className="ml-3">
+            <Link
+              to="/Home"
+              className="text-white hover:text-blue-300 px-2 py-1 rounded-lg"
+            >
               Home
             </Link>
           </li>
-          <li className="mx-1">
-            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
+          <li className="ml-3">
             <a
               href="/"
               onClick={() => Auth.logout()}
-              className="text-white hover:text-gray-300"
+              className="background-medBlue text-white py-2 px-4 rounded hover:background-yellow hover:text-black text-bold"
             >
               Logout
             </a>
@@ -31,14 +36,20 @@ function Nav() {
       );
     } else {
       return (
-        <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="/signup" className="text-white hover:text-gray-300">
+        <ul className="flex items-center">
+          <li className="ml-3">
+            <Link
+              to="/signup"
+              className="text-white hover:text-blue-300 px-2 py-1 rounded-lg"
+            >
               Signup
             </Link>
           </li>
-          <li className="mx-1">
-            <Link to="/login" className="text-white hover:text-gray-300">
+          <li className="ml-3">
+            <Link
+              to="/login"
+              className="text-white hover:text-blue-300 px-2 py-1 rounded-lg"
+            >
               Login
             </Link>
           </li>
@@ -48,17 +59,15 @@ function Nav() {
   }
 
   return (
-    <header className="flex-row px-1 bg-blue-500 py-4">
+    <header className="flex items-center justify-between px-5 background-darkBlue py-4">
       <h1>
-        <Link to="/" className="text-white text-xl font-bold">
-          <span role="img" aria-label="shopping bag">🛍️</span>
-          -Shop-Shop
+        <Link to="/" className=" text-2xl font-bold">
+          <span style={{ color: "#F0D258" }}>COHORT RETORT</span>
         </Link>
+        {/* color work but may want to fix it to use the index.css classname later...or not */}
       </h1>
 
-      <nav>
-        {showNavigation()}
-      </nav>
+      <nav>{showNavigation()}</nav>
     </header>
   );
 }
