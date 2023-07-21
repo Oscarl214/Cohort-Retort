@@ -1,28 +1,34 @@
 import React from "react";
 import Auth from "../utils/auth";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Nav() {
+  const location = useLocation();
+
   function showNavigation() {
     if (Auth.loggedIn()) {
       return (
         <ul className="flex items-center">
-          <li className="ml-3">
-            <Link
-              to="/Profile"
-              className="text-white hover:text-blue-300 px-2 py-1 rounded-lg"
-            >
-              Profile
-            </Link>
-          </li>
-          <li className="ml-3">
-            <Link
-              to="/Home"
-              className="text-white hover:text-blue-300 px-2 py-1 rounded-lg"
-            >
-              Home
-            </Link>
-          </li>
+          {location.pathname !== "/Profile" && (
+            <li className="ml-3">
+              <Link
+                to="/Profile"
+                className="text-white hover:text-blue-300 px-2 py-1 rounded-lg"
+              >
+                Profile
+              </Link>
+            </li>
+          )}
+          {location.pathname !== "/" && (
+            <li className="ml-3">
+              <Link
+                to="/"
+                className="text-white hover:text-blue-300 px-2 py-1 rounded-lg"
+              >
+                Home
+              </Link>
+            </li>
+          )}
           <li className="ml-3">
             <a
               href="/"
