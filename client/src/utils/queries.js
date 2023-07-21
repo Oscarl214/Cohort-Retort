@@ -6,9 +6,6 @@ export const QUERY_USER = gql`
       firstName
       lastName
       email
-      phone
-      website
-      employer
       linkedin
       github
       posts {
@@ -27,13 +24,11 @@ export const QUERY_USER = gql`
 
 export const QUERY_USERS = gql`
   {
-    user {
+    users {
       firstName
       lastName
       email
-      phone
       website
-      employer
       linkedin
       github
       posts {
@@ -49,6 +44,31 @@ export const QUERY_USERS = gql`
     }
   }
 `;
+
+// // Replace this query with the appropriate one for fetching all users
+// export const USERS_QUERY = gql`
+//   query GetAllUsers {
+//     user {
+//       _id
+//       firstName
+//       lastName
+//       email
+//       website
+//       linkedin
+//       github
+//       posts {
+//         _id
+//         postText
+//         createdAt
+//         comments {
+//           _id
+//           commentText
+//           createdAt
+//         }
+//       }
+//     }
+//   }
+// `;
 
 export const QUERY_POST = gql`
   query getPost($postID: ID!) {
@@ -76,14 +96,16 @@ export const QUERY_COMMENT = gql`
 `;
 
 export const QUERY_POSTS = gql`
-  {
-    _id
-    postText
-    createdAt
-    comments {
+  query {
+    posts {
       _id
-      commentText
+      postText
       createdAt
+      comments {
+        _id
+        commentText
+        createdAt
+      }
     }
   }
 `;
