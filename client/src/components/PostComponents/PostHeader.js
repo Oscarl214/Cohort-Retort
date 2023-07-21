@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../utils/userContext";
-import { useState, useEffect } from "react";
 
 const PostHeader = (props) => {
   const { usersData } = useContext(UserContext);
@@ -12,11 +11,10 @@ const PostHeader = (props) => {
     return <p>Loading...</p>;
   }
 
-  // const userInfo = usersData.map((user) => user.posts.includes(props.postID));
-
   let userPost;
 
   const userInfo = usersData.map((user) => {
+    console.log(user.posts);
     for (let i = 0; i < user.posts.length; i++) {
       if (user.posts[i]._id === props.postID) {
         userPost = user;
@@ -26,6 +24,7 @@ const PostHeader = (props) => {
   });
 
   console.log("userInfo", userPost);
+  console.log("UserInfo", userInfo);
 
   //   console.log("This is key", props.postID);
   // Map through the posts array to render each post card
