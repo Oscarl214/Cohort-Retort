@@ -56,9 +56,11 @@ const CreatePost = () => {
   };
   const handleAddPostClick = () => {
     setShowInputBox(true);
+    setPostText(""); // Clear the text box
   };
 
   const handleCancelClick = () => {
+    setPostText(""); // Clear the text box
     setShowInputBox(false);
   };
 
