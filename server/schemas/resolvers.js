@@ -58,8 +58,8 @@ const resolvers = {
   Mutation: {
     addUser: async (parent, args) => {
       const user = await User.create(args);
-
-      return { user };
+      const token = signToken(user);
+      return { user, token };
     },
     //Works via GraphQL
     updateUser: async (parent, args, context) => {
