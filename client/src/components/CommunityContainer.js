@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useContext} from "react";
 import CreatePost from "./CreatePost";
 import PostViewContainer from "../components/PostComponents/PostViewContainer";
 import Auth from "../utils/auth"; // Bring in your Auth middleware
@@ -10,7 +10,7 @@ const CommunityContainer = () => {
       {Auth.loggedIn() ? (
         <>
           <CreatePost />
-          <PostViewContainer />{" "}
+          <PostViewContainer />
         </>
       ) : (
         <p>
