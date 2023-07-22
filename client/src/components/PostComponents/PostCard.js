@@ -27,11 +27,11 @@ console.log("Posts Array:", posts);
 
 
   return (
-    <div className="flex bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6 " >
+    <div className="" >
       {posts.map((post) => (
 
         <>
-        <div className="">
+        <div className="bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6">
          <PostHeader postID={post._id} />
           <div key={post._id} className="">
             <div className="pl-20 pr-8">
@@ -65,7 +65,7 @@ console.log("Posts Array:", posts);
 
           <CreateComment postID={post._id}/>
 
-          <Comment />
+          <Comment postID={post._id} />
 
           </div>
         </div>
