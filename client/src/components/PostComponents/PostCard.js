@@ -17,6 +17,8 @@ const PostCard = () => {
 
   const posts = data.posts || [];
 
+  console.log("Posts Array:", posts);
+
   return (
     <div>
       {posts.map((post) => (
