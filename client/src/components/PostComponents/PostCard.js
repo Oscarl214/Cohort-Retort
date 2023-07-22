@@ -30,11 +30,9 @@ console.log("Posts Array:", posts);
     <div className="flex bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6 " >
       {posts.map((post) => (
         <>
-          <div
-          key={post._id}
-          className=""
-
-          <PostHeader postID={post._id} />
+        <div className="">
+         <PostHeader postID={post._id} />
+          <div key={post._id} className="">
             <div className="pl-20 pr-8">
               <p className="-mt-8 text-slate-400">{post.createdAt}</p>
               <p className="mt-2 color-medblue text-sm">{post.postText}</p>fs
@@ -61,6 +59,7 @@ console.log("Posts Array:", posts);
                 {/* Rest of the SVG code */}
                 </svg>
               <span>4</span>
+          </div>
 
           <CreateComment postID={post._id}/>
           <Comment />
