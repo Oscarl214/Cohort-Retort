@@ -36,7 +36,7 @@ console.log("Posts Array:", posts);
           <div key={post._id} className="">
             <div className="pl-20 pr-8">
               <p className="-mt-8 text-slate-400">{post.createdAt}</p>
-              <p className="mt-2 color-medblue text-sm">{post.postText}</p>fs
+              <p className="mt-2 color-medblue text-sm">{post.postText}</p>
             </div>
 
 
@@ -70,7 +70,7 @@ console.log("Posts Array:", posts);
           </div>
         </div>
 
-    </div>
+    
   </>
   ))}
 </div>
