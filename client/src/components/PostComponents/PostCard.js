@@ -65,7 +65,7 @@ console.log("Posts Array:", posts);
 
           <CreateComment postID={post._id}/>
 
-          <Comment />
+          <Comment postID={post._id} />
 
           </div>
         </div>
