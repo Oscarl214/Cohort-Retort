@@ -27,6 +27,14 @@ const PostHeader = (props) => {
 
   console.log("userInfo", userPost);
 
+  const firstName = userPost?.firstName || "";
+  const lastName = userPost?.lastName || "";
+  const email = userPost?.email || "";
+
+  if (!firstName || !lastName || !email) {
+    return <p>User not found.</p>;
+  }
+
   //   console.log("This is key", props.postID);
   // Map through the posts array to render each post card
   return (

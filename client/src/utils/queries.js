@@ -45,31 +45,6 @@ export const QUERY_USERS = gql`
   }
 `;
 
-// // Replace this query with the appropriate one for fetching all users
-// export const USERS_QUERY = gql`
-//   query GetAllUsers {
-//     user {
-//       _id
-//       firstName
-//       lastName
-//       email
-//       website
-//       linkedin
-//       github
-//       posts {
-//         _id
-//         postText
-//         createdAt
-//         comments {
-//           _id
-//           commentText
-//           createdAt
-//         }
-//       }
-//     }
-//   }
-// `;
-
 export const QUERY_POST = gql`
   query getPost($postID: ID!) {
     post(postID: $postID) {
@@ -101,6 +76,28 @@ export const QUERY_POSTS = gql`
       _id
       postText
       createdAt
+      comments {
+        _id
+        commentText
+        createdAt
+      }
+    }
+  }
+`;
+
+export const QUERY_COMMENTS = gql`
+  query {
+    comments {
+      _id
+      commentText
+      createdAt
+    }
+  }
+`;
+
+export const QUERY_COMMENTS_BY_POST = gql`
+  query getComments($postID: ID!) {
+    post(postID: $postID) {
       comments {
         _id
         commentText
