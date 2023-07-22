@@ -8,6 +8,11 @@ import PostHeader from "./PostComponents/PostHeader";
 
 const CreatePost = () => {
   const [postText, setPostText] = useState(""); //state use of post Text that will be provided
+  const [showInputBox, setShowInputBox] = useState(false);
+
+  // const { data } = useQuery(QUERY_USER); //using the user query
+
+  // const { user } = data || { user: { posts: [] } };
 
   const { loading, data: userData } = useQuery(QUERY_USER);
 
@@ -69,6 +74,7 @@ const CreatePost = () => {
             data: { posts: [addPost, ...posts] },
           });
 
+
           cache.writeQuery({
             query: QUERY_USER,
             data: {
@@ -82,6 +88,7 @@ const CreatePost = () => {
           console.error(e);
         }
       }
+
     },
   });
 
@@ -93,11 +100,24 @@ const CreatePost = () => {
           postText,
         },
       });
+
       const postId = data.addPost._id;
-      // Do something with 'data' if needed
+      
+      setPostText("");
+      setShowInputBox(false);
+
     } catch (err) {
       console.error(err);
     }
+  };
+  const handleAddPostClick = () => {
+    setShowInputBox(true);
+    setPostText(""); // Clear the text box
+  };
+
+  const handleCancelClick = () => {
+    setPostText(""); // Clear the text box
+    setShowInputBox(false);
   };
 
   if (loading) {
@@ -105,35 +125,51 @@ const CreatePost = () => {
   }
 
   return (
-    <div>
+    <div className="container mx-auto max-w-md px-4 py-8">
       {Auth.loggedIn() ? (
         <>
-          <form
-            className="flex-row justify-center justify-space-between-md align-center"
-            onSubmit={handleFormSubmit}
-          >
-            <div className="col-12 col-lg-9">
+          {showInputBox ? (
+            <form onSubmit={handleFormSubmit} className="w-full">
               <textarea
                 name="postText"
                 placeholder="Share your Post here..."
                 value={postText}
-                className="form-input w-100"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none"
                 style={{ lineHeight: "1.5", resize: "vertical" }}
                 onChange={(event) => setPostText(event.target.value)}
               ></textarea>
-            </div>
 
-            <div className="col-12 col-lg-3">
-              <button className="btn btn-primary btn-block py-3" type="submit">
-                Add Post
+              <div className="flex justify-between mt-4">
+                <button
+                  type="submit"
+                  className="text-bold background-darkBlue text-white py-2 px-4 rounded-lg hover:background-yellow hover:text-black"
+                >
+                  Add Post
+                </button>
+                <button
+                  type="button"
+                  className="text-bold px-4 py-2 background-medBlue text-white rounded-lg hover:background-yellow hover:text-black"
+                  onClick={handleCancelClick}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          ) : (
+            <div className="flex justify-center">
+              <button
+                className="background-darkBlue text-white py-2 px-4 rounded-lg hover:background-yellow hover:text-black text-bold"
+                onClick={handleAddPostClick}
+              >
+                Create Post
               </button>
             </div>
-            {error && (
-              <div className="col-12 my-3 bg-danger text-white p-3">
-                {error.message}
-              </div>
-            )}
-          </form>
+          )}
+          {error && (
+            <div className="mt-3 bg-danger text-white p-3">
+              {error.message}
+            </div>
+          )}
         </>
       ) : (
         <p>
