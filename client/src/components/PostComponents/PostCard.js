@@ -24,7 +24,6 @@ const PostCard = () => {
   return (
     <div>
       {posts.map((post) => (
-        <>
           <div
             key={post._id}
             className="post-card flex bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-56 max-w-md md:max-w-2xl"
@@ -40,7 +39,7 @@ const PostCard = () => {
             <p className="text-gray-700"></p>
             <p className="mt-3 text-gray-700 text-sm"></p>
             <div className="mt-4 flex items-center">
-              <div className="flex mr-2 text-gray-700 text-sm mr-3">
+              <div className="flex  text-gray-700 text-sm">
                 <svg
                   fill="none"
                   viewBox="0 0 24 24"
@@ -51,7 +50,7 @@ const PostCard = () => {
                 </svg>
                 <span>12</span>
               </div>
-              <div className="flex mr-2 text-gray-700 text-sm mr-8">
+              <div className="flex  text-gray-700 text-sm ">
                 <svg
                   fill="none"
                   viewBox="0 0 24 24"
@@ -62,11 +61,11 @@ const PostCard = () => {
                 </svg>
                 <span>8</span>
               </div>
-              <div className="flex mr-2 text-gray-700 text-sm mr-4">
+              <div className="flex mr-2 text-gray-700 text-sm">
                 <svg
                   fill="none"
                   viewBox="0 0 24 24"
-                  className="w-4 h-4 mr-1"
+                  className="w-4 h-4 "
                   stroke="currentColor"
                 >
                   {/* Rest of the SVG code */}
@@ -75,9 +74,8 @@ const PostCard = () => {
               </div>
             </div>
           <CreateComment postID={post._id}/>
-          <Comment />
+          <Comment postID={post._id}/>
           </div>
-        </>
       ))}
     </div>
   );
