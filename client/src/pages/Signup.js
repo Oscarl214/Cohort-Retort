@@ -178,7 +178,7 @@ function Signup(props) {
               className="background-yellow text-black py-2 px-4 rounded hover:background-darkBlue hover:text-white text-bold"
               type="submit"
             >
-              Sign In
+              Sign Up
             </button>
 
             {/* add navigation to back button */}
