@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-
+import { useQuery } from "@apollo/client";
 import { ADD_POST } from "../utils/mutations"; //Bringing in the add post mutation
 import { QUERY_POSTS, QUERY_USER } from "../utils/queries"; //Bringing in my post queries and my user query
 import Auth from "../utils/auth"; //bringing in my Auth middleware
 
 const CreatePost = () => {
   const [postText, setPostText] = useState(""); //state use of post Text that will be provided
+
+  // const { data } = useQuery(QUERY_USER); //using the user query
+
+  // const { user } = data || { user: { posts: [] } };
 
   const [addPost, { error }] = useMutation(ADD_POST, {
     //function created to execute ADD_POST mutation
@@ -29,6 +33,8 @@ const CreatePost = () => {
       }
 
       const { user } = cache.readQuery({ query: QUERY_USER });
+
+      console.log(user);
       //updates the user query that gets all the information and adds the post to their profile
       cache.writeQuery({
         query: QUERY_USER,
