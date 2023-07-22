@@ -29,6 +29,7 @@ console.log("Posts Array:", posts);
   return (
     <div className="flex bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6 " >
       {posts.map((post) => (
+
         <>
         <div className="">
          <PostHeader postID={post._id} />
@@ -49,6 +50,7 @@ console.log("Posts Array:", posts);
                 <svg fill="none" viewBox="0 0 24 24" class="color-dkblue w-4 h-4 mr-1" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
           {/* Rest of the SVG code */}
+
                 </svg>
               <span>63</span>
             </div>
@@ -62,10 +64,12 @@ console.log("Posts Array:", posts);
           </div>
 
           <CreateComment postID={post._id}/>
+
           <Comment />
 
           </div>
         </div>
+
     </div>
   </>
   ))}
