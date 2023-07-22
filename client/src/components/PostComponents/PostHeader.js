@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../utils/userContext";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 
 const PostHeader = (props) => {
   const { usersData } = useContext(UserContext);
@@ -12,18 +12,26 @@ const PostHeader = (props) => {
     return <p>Loading...</p>;
   }
 
-  // const userInfo = usersData.map((user) => user.posts.includes(props.postID));
+  const userPost = usersData.find((user) => user.posts.some((post)=> post._id === props.postID));
 
-  let userPost;
+  // if (!userPost) {
+  //   return <p>User not found.</p>
+  // }
 
-  const userInfo = usersData.map((user) => {
-    for (let i = 0; i < user.posts.length; i++) {
-      if (user.posts[i]._id === props.postID) {
-        userPost = user;
-        return userPost;
-      }
-    }
-  });
+  // console.log("userPost", userPost);
+
+  // const { firstName, lastName, email, github, linkedin } = userPost;
+
+  // let userPost;
+
+  // const userInfo = usersData.map((user) => {
+  //   for (let i = 0; i < user.posts.length; i++) {
+  //     if (user.posts[i]._id === props.postID) {
+  //       userPost = user;
+  //       return userPost;
+  //     }
+  //   }
+  // });
 
   console.log("userInfo", userPost);
 
