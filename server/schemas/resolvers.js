@@ -51,6 +51,9 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
+    comments: async (parent, args, context) => {
+      return Comment.find().sort({ createdAt: -1 });
+    },
   },
   Mutation: {
     addUser: async (parent, args) => {

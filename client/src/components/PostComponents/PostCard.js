@@ -2,6 +2,8 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_POSTS } from "../../utils/queries";
 import PostHeader from "./PostHeader";
+import CreateComment from "../CreateComment";
+import Comment from "../Comment";
 
 
 const PostCard = () => {
@@ -20,21 +22,22 @@ return <p>Error: {error.message}</p>;
 
 
 const posts = data.posts || [];
+  
+console.log("Posts Array:", posts);
 
 
-return (
-<div className="flex bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6 ">
-{posts.map((post) => (
-<>
-        <div className=" ">
-        <PostHeader postID={post._id} />
+  return (
+    <div className="flex bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6 " >
+      {posts.map((post) => (
+        <>
           <div
           key={post._id}
           className=""
-          >
+
+          <PostHeader postID={post._id} />
             <div className="pl-20 pr-8">
-            <p className="-mt-8 text-slate-400">{post.createdAt}</p>
-            <p className="mt-2 color-medblue text-sm">{post.postText}</p>
+              <p className="-mt-8 text-slate-400">{post.createdAt}</p>
+              <p className="mt-2 color-medblue text-sm">{post.postText}</p>fs
             </div>
 
 
@@ -58,6 +61,10 @@ return (
                 {/* Rest of the SVG code */}
                 </svg>
               <span>4</span>
+
+          <CreateComment postID={post._id}/>
+          <Comment />
+
           </div>
         </div>
     </div>
