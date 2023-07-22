@@ -14,7 +14,7 @@ const Header = ({ user }) => {
         
         <div className="flex flex-col items-center justify-center h-32 ">
           <Avatar user={user} />
-          <h3 className="text-2xl text-black font-bold">{firstName} {lastName}</h3>
+          <h3 className="text-2xl color-dkblue font-bold">{firstName} {lastName}</h3>
         </div>
       </div>
       <div className="h-24 bg-white"></div>
