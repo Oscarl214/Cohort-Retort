@@ -2,6 +2,8 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_POSTS } from "../../utils/queries";
 import PostHeader from "./PostHeader";
+import CreateComment from "../CreateComment";
+import Comment from "../Comment";
 
 const PostCard = () => {
   // Fetch all posts using the QUERY_POSTS query
@@ -21,11 +23,11 @@ const PostCard = () => {
     <div>
       {posts.map((post) => (
         <>
-          <PostHeader postID={post._id} />
           <div
             key={post._id}
             className="post-card flex bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-56 max-w-md md:max-w-2xl"
           >
+          <PostHeader postID={post._id} />
             <div>
               <p className="text-gray-700">{post.createdAt}</p>
               <p className="mt-3 text-gray-700 text-sm">{post.postText}</p>
@@ -70,6 +72,8 @@ const PostCard = () => {
                 <span>share</span>
               </div>
             </div>
+          <CreateComment postID={post._id}/>
+          <Comment />
           </div>
         </>
       ))}

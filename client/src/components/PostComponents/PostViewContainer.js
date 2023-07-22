@@ -20,16 +20,7 @@ const PostViewContainer = () => {
 
   return (
     <div className="">
-      {/* Render all posts using the PostCard component */}
-      {userLoading ? (
-        <p>Loading...</p>
-      ) : userError ? (
-        <p>Error: {userError.message}</p>
-      ) : usersData?.users?.length ? (
-        usersData.users.map((user) => <PostCard key={user._id} post={user} />)
-      ) : (
-        <p>No posts found.</p>
-      )}
+      <PostCard />
     </div>
   );
 };
