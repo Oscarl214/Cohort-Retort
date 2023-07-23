@@ -8,6 +8,8 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -51,3 +53,9 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
