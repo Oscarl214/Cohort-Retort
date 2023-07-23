@@ -61,10 +61,11 @@ console.log("Posts Array:", posts);
                 {/* Rest of the SVG code */}
                 </svg>
               <span>4</span>
+              
           </div>
 
-          <CreateComment postID={post._id}/>
 
+          <CreateComment  postID={post._id}/>
           <Comment postID={post._id} />
 
           </div>

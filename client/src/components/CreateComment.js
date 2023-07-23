@@ -75,31 +75,33 @@ const CreateComment = ({ postID }) => {
   };
 
   return (
-    <div>
+    <div className="flex mx-auto items-center justify-center  mt-2 mb-8">
       {Auth.loggedIn() ? (
         <>
           <form
-            className="flex-row justify-center justify-space-between-md align-center"
+            className="w-full max-w-xl items-stretch  rounded-lg pt-2 "
             onSubmit={handleFormSubmit}
           >
-            <div className="col-12 col-lg-9">
+            <div className="flex flex-wrap mb-6">
+              <div className="w-full md:w-full bg-white mt-2 rounded-lg border-2 p-3 border-indigo-100">
               <textarea
                 name="commentText"
-                placeholder="Share your Comment here..."
+                placeholder="Share your Comment here..." required
                 value={commentText}
-                className="form-input w-100"
-                style={{ lineHeight: "1.5", resize: "vertical" }}
+                className="w-full placeholder-gray-300 focus:outline-none focus:bg-white "
+                style={{ lineHeight: "1.6", resize: "vertical"}}
                 onChange={handleTextareaChange}
               ></textarea>
+              </div>
             </div>
 
-            <div className="col-12 col-lg-3">
-              <button className="btn btn-primary btn-block py-3" type="submit">
+            <div className="-pr-4 flex justify-end pb-4">
+              <button className=" btn background-darkBlue rounded-lg btn-primary text-white p-3 btn-block py-2 hover:text-black hover:background-yellow" type="submit">
                 Add Comment
               </button>
             </div>
             {error && (
-              <div className="col-12 my-3 bg-danger text-white p-3">
+              <div className="">
                 {error.message}
               </div>
             )}
