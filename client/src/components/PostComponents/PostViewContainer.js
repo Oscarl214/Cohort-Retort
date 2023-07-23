@@ -6,17 +6,17 @@ import PostCard from "./PostCard";
 const PostViewContainer = () => {
   // Fetch all posts using the QUERY_POSTS query
   const {
-    data: usersData,
+    data: postData,
     loading: userLoading,
     error: userError,
-  } = useQuery(QUERY_USERS);
-  const { setUsersData } = useContext(UserContext);
+  } = useQuery(QUERY_POSTS);
+  const { setPostsData } = useContext(UserContext);
   useEffect(() => {
-    if (usersData) {
-      setUsersData(usersData.users);
+    if (postData) {
+      setPostsData(postData.users);
     }
-  }, [usersData, setUsersData]);
-  console.log("usersData", usersData);
+  }, [postData, setPostsData]);
+  console.log("usersData", postData);
 
   return (
     <div className="">

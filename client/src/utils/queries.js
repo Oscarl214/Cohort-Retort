@@ -25,8 +25,7 @@ export const QUERY_USER = gql`
 export const QUERY_USERS = gql`
   {
     users {
-      firstName
-      lastName
+      username
       email
       website
       linkedin
@@ -35,10 +34,16 @@ export const QUERY_USERS = gql`
         _id
         postText
         createdAt
+        username
         comments {
           _id
           commentText
           createdAt
+          username
+          likes {
+            createdAt
+            username
+          }
         }
       }
     }
@@ -51,6 +56,7 @@ export const QUERY_POST = gql`
       _id
       postText
       createdAt
+      username
       comments {
         _id
         commentText
@@ -76,10 +82,17 @@ export const QUERY_POSTS = gql`
       _id
       postText
       createdAt
+      username
       comments {
         _id
         commentText
         createdAt
+        username
+        likes {
+          _id
+          createdAt
+          username
+        }
       }
     }
   }

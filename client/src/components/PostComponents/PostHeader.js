@@ -1,18 +1,38 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../utils/userContext";
+import { QUERY_POST } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
 // import { useState, useEffect } from "react";
 
 const PostHeader = (props) => {
   const { usersData } = useContext(UserContext);
 
+  const { data, loading, error } = useQuery(QUERY_POST);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  const username = data.username;
+
+  console.log("header username", username);
+
   console.log("usersData", usersData);
   console.log("postID", props.postID);
+
+  // HEADER WILL GET POST ID --> QUERY POST (POST_ID) FOR USERNAME --> QUERY USER (USERNAME)
 
   if (!usersData) {
     return <p>Loading...</p>;
   }
 
-  const userPost = usersData.find((user) => user.posts.some((post)=> post._id === props.postID));
+  const userPost = usersData.find((user) =>
+    user.posts.some((post) => post._id === props.postID)
+  );
 
   // if (!userPost) {
   //   return <p>User not found.</p>
