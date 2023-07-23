@@ -4,7 +4,6 @@ import { useMutation, useQuery } from "@apollo/client";
 import { ADD_POST } from "../utils/mutations"; //Bringing in the add post mutation
 import { QUERY_POSTS, QUERY_USER } from "../utils/queries"; //Bringing in my post queries and my user query
 import Auth from "../utils/auth"; //bringing in my Auth middleware
-import PostHeader from "./PostComponents/PostHeader";
 
 const CreatePost = () => {
   const [postText, setPostText] = useState(""); //state use of post Text that will be provided
@@ -74,7 +73,6 @@ const CreatePost = () => {
             data: { posts: [addPost, ...posts] },
           });
 
-
           cache.writeQuery({
             query: QUERY_USER,
             data: {
@@ -88,7 +86,6 @@ const CreatePost = () => {
           console.error(e);
         }
       }
-
     },
   });
 
@@ -102,10 +99,9 @@ const CreatePost = () => {
       });
 
       const postId = data.addPost._id;
-      
+
       setPostText("");
       setShowInputBox(false);
-
     } catch (err) {
       console.error(err);
     }
@@ -166,9 +162,7 @@ const CreatePost = () => {
             </div>
           )}
           {error && (
-            <div className="mt-3 bg-danger text-white p-3">
-              {error.message}
-            </div>
+            <div className="mt-3 bg-danger text-white p-3">{error.message}</div>
           )}
         </>
       ) : (

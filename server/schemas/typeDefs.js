@@ -18,6 +18,7 @@ const typeDefs = gql`
     postText: String!
     createdAt: String!
     username: String!
+    user: User
     comments: [Comment]!
     likes: [Like]!
   }
@@ -29,7 +30,6 @@ const typeDefs = gql`
     website: String
     linkedin: String
     github: String
-    posts: [Post]
   }
 
   type Auth {

@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
-
 const userSchema = new Schema(
   {
     username: {
@@ -36,12 +35,6 @@ const userSchema = new Schema(
       required: false,
       trim: true,
     },
-    posts: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Post",
-      },
-    ],
   },
   {
     toJSON: {
