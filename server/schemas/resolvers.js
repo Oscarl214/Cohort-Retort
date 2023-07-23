@@ -41,7 +41,16 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     posts: async (parent, args, context) => {
-      return Post.find().sort({ createdAt: -1 }).populate("comments");
+      try {
+        const posts = await Post.find()
+          .sort({ createdAt: -1 })
+          .populate("comments")
+          .populate("user"); // Populate the user field
+        return posts;
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+        return [];
+      }
     },
     comment: async (parent, { commentId }, context) => {
       //query dedicated to targeting specific comments that user creates to be able to execute mutations
@@ -163,27 +172,25 @@ const resolvers = {
       if (context.user) {
         const { username } = context.user;
 
-        
-          // Create a new comment object with the commentText and username
-          const newComment = {
-            commentText,
-            username,
-            createdAt: new Date().toISOString(),
-          };
+        // Create a new comment object with the commentText and username
+        const newComment = {
+          commentText,
+          username,
+          createdAt: new Date().toISOString(),
+        };
 
-          // Find the post by ID and update the comments array by pushing the new comment object
-          const updatedPost = await Post.findByIdAndUpdate(
-            postId,
-            { $push: { comments: newComment } },
-            { new: true }
-          ).populate("comments");
+        // Find the post by ID and update the comments array by pushing the new comment object
+        const updatedPost = await Post.findByIdAndUpdate(
+          postId,
+          { $push: { comments: newComment } },
+          { new: true }
+        ).populate("comments");
 
-          if (!updatedPost) {
-            throw new Error("Post not found");
-          }
+        if (!updatedPost) {
+          throw new Error("Post not found");
+        }
 
-          return updatedPost;
-        
+        return updatedPost;
       }
 
       throw new AuthenticationError("Not logged in");

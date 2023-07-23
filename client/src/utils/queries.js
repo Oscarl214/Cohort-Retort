@@ -77,12 +77,20 @@ export const QUERY_COMMENT = gql`
 `;
 
 export const QUERY_POSTS = gql`
-  query {
+  query GetPosts {
     posts {
       _id
       postText
       createdAt
       username
+      user {
+        _id
+        username
+        email
+        website
+        linkedin
+        github
+      }
       comments {
         _id
         commentText
@@ -93,6 +101,11 @@ export const QUERY_POSTS = gql`
           createdAt
           username
         }
+      }
+      likes {
+        _id
+        createdAt
+        username
       }
     }
   }
