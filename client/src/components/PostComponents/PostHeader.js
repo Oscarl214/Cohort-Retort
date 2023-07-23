@@ -68,7 +68,7 @@ const PostHeader = (props) => {
               )}
             </div>
           </div>
-          <small className="text-sm text-gray-700 mt-1">{props.createdAt}</small>
+          {/* <small className="text-sm text-gray-700 mt-1">{props.createdAt}</small> */}
         </div>
       </div>
       <div className="relative">
