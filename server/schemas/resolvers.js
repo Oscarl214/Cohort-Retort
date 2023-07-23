@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Post, Comment } = require("../models");
+const { User, Post } = require("../models");
 const { signToken } = require("../utils/auth");
 // const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -90,11 +90,25 @@ const resolvers = {
       return { token, user };
     },
     addPost: async (parent, { postText }, context) => {
+      const user = context.user;
       //Works via GraphQL
+      // if (body.trim() === '') {
+      //   throw new Error('Post body must not be empty');
+      // }
 
       if (context.user) {
         //create our post
-        const post = await Post.create({ postText });
+        const newPost = new Post({
+          postText,
+          user: user._id,
+          username: user.username,
+          email: user.email,
+          github: user.github,
+          linkedin: user.linkedin,
+          website: user.website,
+        });
+
+        const post = await newPost.save();
 
         //we update our User that is logged in to add the post they just created to their account
 
@@ -109,24 +123,72 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
+    // addComment: async (parent, { postId, commentText }, context) => {
+    //   if (context.user) {
+    //     const comment = await Comment.create({ commentText });
+
+    //     const updatedPost = await Post.findByIdAndUpdate(
+    //       postId,
+    //       { $push: { comments: comment._id } },
+    //       { new: true }
+    //     ).populate("comments");
+
+    //     if (!updatedPost) {
+    //       throw new Error("Post not found");
+    //     }
+
+    //     return comment;
+    //   }
+    //   throw new AuthenticationError("Not logged in");
+    // },
+
+    // addComment: async (parent, { postId, commentText }, context) => {
+    //   const { username } = context.user;
+    //   if (context.user) {
+    //     const updatedPost = await Post.findByIdAndUpdate(
+    //       postId,
+    //       { $push: { comments: commentText, username } },
+    //       { new: true }
+    //     ).populate("comments");
+
+    //     if (!updatedPost) {
+    //       throw new Error("Post not found");
+    //     }
+
+    //     return updatedPost;
+    //   }
+    //   throw new AuthenticationError("Not logged in");
+    // },
     addComment: async (parent, { postId, commentText }, context) => {
       if (context.user) {
-        const comment = await Comment.create({ commentText });
+        const { username } = context.user;
 
-        const updatedPost = await Post.findByIdAndUpdate(
-          postId,
-          { $push: { comments: comment._id } },
-          { new: true }
-        ).populate("comments");
+        
+          // Create a new comment object with the commentText and username
+          const newComment = {
+            commentText,
+            username,
+            createdAt: new Date().toISOString(),
+          };
 
-        if (!updatedPost) {
-          throw new Error("Post not found");
-        }
+          // Find the post by ID and update the comments array by pushing the new comment object
+          const updatedPost = await Post.findByIdAndUpdate(
+            postId,
+            { $push: { comments: newComment } },
+            { new: true }
+          ).populate("comments");
 
-        return comment;
+          if (!updatedPost) {
+            throw new Error("Post not found");
+          }
+
+          return updatedPost;
+        
       }
+
       throw new AuthenticationError("Not logged in");
     },
+
     removePost: async (parent, { postId }, context) => {
       if (context.user) {
         const deletedPost = await Post.deleteOne({ _id: postId });
