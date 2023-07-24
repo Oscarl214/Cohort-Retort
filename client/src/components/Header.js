@@ -5,20 +5,20 @@ import Nav from "./Nav";
 import Avatar from "./Avatar";
 
 
-const Header = () => {
+const Header = (user) => {
 
-  const { data, loading, error } = useQuery(QUERY_USER);
+  // const { data, loading, error } = useQuery(QUERY_USER);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  // if (loading) {
+  //   return <p>Loading...</p>;
+  // }
 
-  if (error) {
-    return <p>Error: {error.message}</p>;
-  }
+  // if (error) {
+  //   return <p>Error: {error.message}</p>;
+  // }
 
-  console.log("datainheader", data);
-  const username = data.user.username;
+  // console.log("datainheader", data);
+  // const username = data.user.username;
 
 
 
@@ -29,9 +29,9 @@ const Header = () => {
         <Nav />
         <div className="h-32 pt-14 hero relative">
           <div className="flex flex-col items-center justify-center h-32 ">
-            <Avatar userImg={""} />
-            <h3 className="text-2xl color-dkblue font-bold">
-              {username}
+            <Avatar />
+            <h3 className="text-2xl color-dkblue font-bold">Placeholder
+              {/* {username} */}
             </h3>
           </div>
         </div>
