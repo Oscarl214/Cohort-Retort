@@ -9,7 +9,6 @@ import { useQuery } from "@apollo/client";
 import { QUERY_USER, QUERY_POSTS } from "../utils/queries";
 
 const CommunityContainer = () => {
-  
   const { loading, error, data } = useQuery(QUERY_USER);
 
   console.log("data", data);
@@ -18,14 +17,14 @@ const CommunityContainer = () => {
   if (error) return <p>Error fetching user: {error.message}</p>;
 
   const user = data?.user;
- 
+
   console.log("loggedin userdata", user);
 
   return (
     <div>
       {Auth.loggedIn() ? (
         <>
-          {user? <CreatePost user={user}/> : null}
+          {user ? <CreatePost user={user} /> : null}
           <PostCard />
         </>
       ) : (
