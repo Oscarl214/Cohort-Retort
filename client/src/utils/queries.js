@@ -77,6 +77,7 @@ export const QUERY_POST = gql`
         _id
         commentText
         createdAt
+        userId
       }
     }
   }
@@ -123,6 +124,43 @@ export const QUERY_POSTS = gql`
         _id
         createdAt
         username
+      }
+    }
+  }
+`;
+
+export const POST_BY_USER = gql`
+  query getPostsByUser($userId: ID!) {
+    getPostsByUser(userId: $userId) {
+      posts {
+        _id
+        postText
+        createdAt
+        username
+        user {
+          _id
+          username
+          email
+          linkedin
+          github
+          website
+        }
+        comments {
+          _id
+          commentText
+          createdAt
+          username
+          likes {
+            _id
+            createdAt
+            username
+          }
+        }
+        likes {
+          _id
+          createdAt
+          username
+        }
       }
     }
   }

@@ -19,7 +19,7 @@ const PostHeader = ({ userId }) => {
   // const handleDeletePost = useCallback(() => {
   //   // Insert logic for deleting post here
   // }, []);
-console.log("userid from PostCard", userId);
+  console.log("userid from PostCard", userId);
 
   const { loading, data, error } = useQuery(USER_BY_ID, {
     variables: { userId },
