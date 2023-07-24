@@ -1,20 +1,12 @@
-import React, { useState, useContext } from "react";
-import { useQuery } from "@apollo/client";
-import { QUERY_USER } from "../utils/queries";
-import PostHeader from "./PostComponents/PostHeader";
+import React, { useState } from "react";
 import CreateComment from "../components/CreateComment";
 import Comment from "../components/Comment";
-import { UserContext } from "../utils/userContext";
 
-const UserInfo = () => {
-  // const { data, loading, error } = useQuery(QUERY_USER);
-  const { loading, data, error } = useQuery(QUERY_USER);
+
+const UserInfo = ({user}) => {
+  
   const [showComments, setShowComments] = useState(false); // State to show/hide comments
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error fetching posts: {error.message}</p>;
-
-  const { user } = data; // Assuming the user object is returned from the query
 
   return (
     <div className="bg-gray-200 min-h-screen">
