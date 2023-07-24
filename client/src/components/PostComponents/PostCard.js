@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_POSTS, USER_BY_ID } from "../../utils/queries";
 import CreateComment from "../CreateComment";
@@ -6,16 +6,13 @@ import Comment from "../Comment";
 import PostHeader from "./PostHeader";
 
 const PostCard = () => {
-
-  const {loading, data, error} = useQuery(QUERY_POSTS);
+  const { loading, data, error } = useQuery(QUERY_POSTS);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error fetching posts: {error.message}</p>;
 
   const posts = data?.posts || [];
 
   console.log("postsData", posts);
-
-  
 
   return (
     <div>
@@ -27,26 +24,33 @@ const PostCard = () => {
 };
 
 const PostCardItem = ({ post }) => {
-  const [showComments, setShowComments] = React.useState(false);
+  const [showComments, setShowComments] = useState(false);
 
   const handleShowComments = () => {
     setShowComments(!showComments);
   };
 
+  console.log("Post from card item", post);
+  console.log("Post.user from card item", post.user);
+  console.log("Post.user._id from card item", post.user._id);
+
   return (
     <div className="bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6">
-      <PostHeader postID={post.user._id} />
+      <PostHeader userId={post.user._id} />
       <div key={post._id} className="">
-        <p className="-mt-8 text-slate-400 text-xs pl-4 pt-2">Posted an update: {post.createdAt}</p>
+        <p className="-mt-8 text-slate-400 text-xs pl-4 pt-2">
+          Posted an update: {post.createdAt}
+        </p>
         <div className="pl-20 pr-8">
           <p className="mt-2 color-medblue text-xl">{post.postText}</p>
         </div>
-        <div className="">
-          {/* Rest of the component code */}
-        </div>
+        <div className="">{/* Rest of the component code */}</div>
       </div>
       <div className="grid justify-items-end pr-5 pb-2">
-        <button onClick={handleShowComments} className="flex text-gray-700 text-sm bg-white rounded">
+        <button
+          onClick={handleShowComments}
+          className="flex text-gray-700 text-sm bg-white rounded"
+        >
           <svg
             fill="none"
             viewBox="0 0 24 24"

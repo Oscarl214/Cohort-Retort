@@ -1,33 +1,39 @@
 
-import React from "react";
+import React, {useState, useCallback, useContext, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { USER_BY_ID } from "../../utils/queries";
 
 
+
 const PostHeader = ({ userId }) => {
-const { loading, data, error } = useQuery(USER_BY_ID, {
-    variables: { userId },
-  });
-
-  if (loading) return <p>Loading user data...</p>;
-  if (error) return <p>Error fetching user data: {error.message}</p>;
-
-  const user = data?.userById;
-
-  console.log("UserbyidDetails", user);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleDropdownToggle = useCallback(() => {
     setShowDropdown(!showDropdown);
   }, [showDropdown]);
 
-  const handleEditPost = useCallback(() => {
-    // Insert logic for editing post here
-  }, []);
+  // const handleEditPost = useCallback(() => {
+  //   // Insert logic for editing post here
+  // }, []);
 
-  const handleDeletePost = useCallback(() => {
-    // Insert logic for deleting post here
-  }, []);
+  // const handleDeletePost = useCallback(() => {
+  //   // Insert logic for deleting post here
+  // }, []);
+console.log("userid from PostCard", userId);
+
+  const { loading, data, error } = useQuery(USER_BY_ID, {
+    variables: { userId },
+  });
+
+  // console.log("UserbyidDetails", user);
+
+  if (loading) return <p>Loading user data...</p>;
+  if (error) return <p>Error fetching user data: {error.message}</p>;
+
+  const user = data?.userById;
+
+
+ 
   
 
   return (
@@ -42,7 +48,7 @@ const { loading, data, error } = useQuery(USER_BY_ID, {
               <a href={`mailto:${user.email}`} className="ml-2 text-gray-500 hover:text-darkBlue">
                 <i className="far fa-envelope"></i>
               </a>
-              {userPost.linkedin && (
+              {user.linkedin && (
                 <a
                   href={user.linkedin}
                   target="_blank"
@@ -52,7 +58,7 @@ const { loading, data, error } = useQuery(USER_BY_ID, {
                   <i className="fab fa-linkedin"></i>
                 </a>
               )}
-              {userPost.github && (
+              {user.github && (
                 <a
                   href={user.github}
                   target="_blank"
@@ -93,7 +99,7 @@ const { loading, data, error } = useQuery(USER_BY_ID, {
               <li>
                 <button
                   className="block text-white py-2 px-4 rounded hover:bg-yellow-500 hover:text-black font-bold w-full text-left"
-                  onClick={handleEditPost}
+                  // onClick={handleEditPost}
                 >
                   Edit Post
                 </button>
@@ -101,7 +107,7 @@ const { loading, data, error } = useQuery(USER_BY_ID, {
               <li>
                 <button
                   className="block text-white py-2 px-4 rounded hover:bg-yellow-500 hover:text-black font-bold w-full text-left"
-                  onClick={handleDeletePost}
+                  // onClick={handleDeletePost}
                 >
                   Delete Post
                 </button>

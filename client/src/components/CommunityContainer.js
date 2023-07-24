@@ -6,11 +6,10 @@ import Auth from "../utils/auth"; // Bring in your Auth middleware
 import { Link } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
-import { UserContext } from "../utils/userContext";
 import { QUERY_USER, QUERY_POSTS } from "../utils/queries";
 
 const CommunityContainer = () => {
-  // const { data: usersData } = useQuery(QUERY_USERS);
+  
   const { loading, error, data } = useQuery(QUERY_USER);
 
   console.log("data", data);
