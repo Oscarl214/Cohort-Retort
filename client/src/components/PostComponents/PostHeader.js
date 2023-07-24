@@ -1,38 +1,40 @@
-import React, { useContext, useState, useCallback } from "react";
-import { UserContext } from "../../utils/userContext";
 
-const PostHeader = (props) => {
-  const { usersData } = useContext(UserContext);
+import React, {useState, useCallback, useContext, useEffect } from "react";
+import { useQuery } from "@apollo/client";
+import { USER_BY_ID } from "../../utils/queries";
 
+
+
+const PostHeader = ({ userId }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleDropdownToggle = useCallback(() => {
     setShowDropdown(!showDropdown);
   }, [showDropdown]);
 
-  const handleEditPost = useCallback(() => {
-    // Insert logic for editing post here
-  }, []);
+  // const handleEditPost = useCallback(() => {
+  //   // Insert logic for editing post here
+  // }, []);
 
-  const handleDeletePost = useCallback(() => {
-    // Insert logic for deleting post here
-  }, []);
+  // const handleDeletePost = useCallback(() => {
+  //   // Insert logic for deleting post here
+  // }, []);
+console.log("userid from PostCard", userId);
 
-  if (!usersData) {
-    return <p>Loading...</p>;
-  }
+  const { loading, data, error } = useQuery(USER_BY_ID, {
+    variables: { userId },
+  });
 
-  const userPost = usersData.find((user) =>
-    user.posts.some((post) => post._id === props.postID)
-  );
+  // console.log("UserbyidDetails", user);
 
-  const firstName = userPost?.firstName || "";
-  const lastName = userPost?.lastName || "";
-  const email = userPost?.email || "";
+  if (loading) return <p>Loading user data...</p>;
+  if (error) return <p>Error fetching user data: {error.message}</p>;
 
-  if (!firstName || !lastName || !email) {
-    return <p>User not found.</p>;
-  }
+  const user = data?.userById;
+
+
+ 
+  
 
   return (
     <div className="flex items-start px-2 py-4 rounded-t-lg bg-white border-t-4 border-b-0 justify-between">
@@ -40,15 +42,15 @@ const PostHeader = (props) => {
         <div className="flex flex-col justify-between ml-2">
           <div className="flex items-end justify-between">
             <h2 className="text-l color-dkblue font-bold">
-              {firstName} {lastName}
+              {user.username}
             </h2>
             <div>
-              <a href={`mailto:${email}`} className="ml-2 text-gray-500 hover:text-darkBlue">
+              <a href={`mailto:${user.email}`} className="ml-2 text-gray-500 hover:text-darkBlue">
                 <i className="far fa-envelope"></i>
               </a>
-              {userPost.linkedin && (
+              {user.linkedin && (
                 <a
-                  href={userPost.linkedin}
+                  href={user.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ml-2 text-gray-500 hover:text-darkBlue"
@@ -56,9 +58,9 @@ const PostHeader = (props) => {
                   <i className="fab fa-linkedin"></i>
                 </a>
               )}
-              {userPost.github && (
+              {user.github && (
                 <a
-                  href={userPost.github}
+                  href={user.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ml-2 text-gray-500 hover:text-darkBlue"
@@ -68,7 +70,6 @@ const PostHeader = (props) => {
               )}
             </div>
           </div>
-          {/* <small className="text-sm text-gray-700 mt-1">{props.createdAt}</small> */}
         </div>
       </div>
       <div className="relative">
@@ -98,7 +99,7 @@ const PostHeader = (props) => {
               <li>
                 <button
                   className="block text-white py-2 px-4 rounded hover:bg-yellow-500 hover:text-black font-bold w-full text-left"
-                  onClick={handleEditPost}
+                  // onClick={handleEditPost}
                 >
                   Edit Post
                 </button>
@@ -106,7 +107,7 @@ const PostHeader = (props) => {
               <li>
                 <button
                   className="block text-white py-2 px-4 rounded hover:bg-yellow-500 hover:text-black font-bold w-full text-left"
-                  onClick={handleDeletePost}
+                  // onClick={handleDeletePost}
                 >
                   Delete Post
                 </button>
