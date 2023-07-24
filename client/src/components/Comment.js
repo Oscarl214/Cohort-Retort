@@ -41,7 +41,7 @@ const Comment = (props) => {
             <div key={comment._id} className="">
             <PostHeader userId={userId} />
               <div>
-                <p className="pl-4 -mt-7 text-slate-400 text-xs pt-1 pb-6">Created on: {comment.createdAt}</p>
+                <p className="pl-4 -mt-7 text-slate-400 text-xs pt-3 pb-6">Created on: {comment.createdAt}</p>
                 <p className="color-medblue text-l pl-4 pr-4">{comment.commentText}</p>
               </div>
             </div>

@@ -85,6 +85,16 @@ const PostHeader = ({ userId, postId }) => {
                   <i className="fab fa-github"></i>
                 </a>
               )}
+              {user.website && (
+  <a
+    href={user.website}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="ml-2 text-gray-500 hover:text-darkBlue"
+  >
+    <i className="fas fa-globe"></i> {/* You can choose your preferred icon */}
+  </a>
+)}
             </div>
           </div>
         </div>
@@ -117,7 +127,7 @@ const PostHeader = ({ userId, postId }) => {
             <ul>
               <li>
                 <button
-                  className="block text-white py-2 px-4 rounded hover:bg-yellow-500 hover:text-black font-bold w-full text-left"
+                  className="block text-white py-2 px-4 rounded hover:bg-yellow-500 hover:text-black w-full text-center"
                   // onClick={handleEditPost}
                 >
                   Edit Post
@@ -125,7 +135,7 @@ const PostHeader = ({ userId, postId }) => {
               </li>
               <li>
                 <button
-                  className="block text-white py-2 px-4 rounded hover:bg-yellow-500 hover:text-black font-bold w-full text-left"
+                  className="block text-white py-2 px-4 rounded hover:bg-yellow-500 hover:text-black w-full text-center"
                   onClick={handleDeletePost}
                 >
                   Delete Post
