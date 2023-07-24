@@ -77,7 +77,6 @@ export const QUERY_POST = gql`
         _id
         commentText
         createdAt
-        userId
       }
     }
   }

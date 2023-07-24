@@ -77,7 +77,6 @@ export const ADD_COMMENT = gql`
         commentText
         username
         createdAt
-        userId
       }
     }
   }

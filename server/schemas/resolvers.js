@@ -167,7 +167,6 @@ const resolvers = {
         const newComment = {
           commentText,
           username,
-          userId,
           createdAt: new Date().toISOString(),
         };
 
