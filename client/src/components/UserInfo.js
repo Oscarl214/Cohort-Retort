@@ -8,29 +8,13 @@ import { UserContext } from "../utils/userContext";
 
 const UserInfo = () => {
   // const { data, loading, error } = useQuery(QUERY_USER);
-  const [showComments, setShowComments] = useState(false); // State to control showing comments
+  const { loading, data, error } = useQuery(QUERY_USER);
+  const [showComments, setShowComments] = useState(false); // State to show/hide comments
 
-  const { usersData } = useContext(UserContext); // Use the UserContext here
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error fetching posts: {error.message}</p>;
 
-  console.log("User logged in", usersData); // Check if the user data is available
-
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
-
-  // if (error) {
-  //   return <p>Error: {error.message}</p>;
-  // }
-
-  // const { user } = data;
-  // const { posts } = user;
-
-  const { user } = useContext();
-  console.log(user);
-
-  const handleShowComments = () => {
-    setShowComments(!showComments);
-  };
+  const { user } = data; // Assuming the user object is returned from the query
 
   return (
     <div className="bg-gray-200 min-h-screen">
@@ -39,7 +23,7 @@ const UserInfo = () => {
         <div className="bg-gray rounded-lg flex justify-center pt-20 max-h-96">
           <div className="bg-white rounded-[5rem] max-w-2xl container relative py-10">
             <p className="text-blue-900 text-center text-3xl font-bold">
-              {user.firstName} {user.lastName}
+              {user.username}
             </p>
             <p className="text-blue-900 text-center">
               <strong>Email:</strong>
@@ -66,7 +50,15 @@ const UserInfo = () => {
               key={post._id}
               className="bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6"
             >
-              <PostHeader userID={user._id} />
+              <div className="h-32 pt-14 hero relative">
+                <div className="flex flex-col items-center justify-center h-32 ">
+                  <h3 className="text-2xl color-dkblue font-bold">
+                    {user.username}
+                    {user.email}
+                  </h3>
+                </div>
+              </div>
+              <div className="h-24 bg-white"></div>
               <div key={post._id} className="">
                 <p className="-mt-8 text-slate-400 text-xs pl-4 pt-2">
                   Posted an update: {post.createdAt}
@@ -78,7 +70,7 @@ const UserInfo = () => {
               </div>
               <div className="grid justify-items-end pr-5 pb-2">
                 <button
-                  onClick={handleShowComments}
+                  // onClick={handleShowComments}
                   className="flex text-gray-700 text-sm bg-white rounded"
                 >
                   <svg
