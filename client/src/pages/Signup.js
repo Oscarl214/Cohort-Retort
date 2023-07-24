@@ -49,7 +49,7 @@ function Signup(props) {
         <form className="mt-4" onSubmit={handleFormSubmit}>
           <div className="flex flex-col mb-4">
             <input
-              placeholder="UserName"
+              placeholder="UserName" required
               name="username"
               type="username"
               id="username"
@@ -66,7 +66,7 @@ function Signup(props) {
           </div>
           <div className="flex flex-col mb-4">
             <input
-              placeholder="youremail@test.com"
+              placeholder="youremail@test.com" required
               name="email"
               type="email"
               id="email"
@@ -83,7 +83,7 @@ function Signup(props) {
           </div>
           <div className="flex flex-col mb-4">
             <input
-              placeholder="******"
+              placeholder="******" required
               name="password"
               type="password"
               id="password"
