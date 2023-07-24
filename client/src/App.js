@@ -8,13 +8,14 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import '@fortawesome/fontawesome-free/css/all.min.css';
-
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup"
+import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
+
+import { UserProvider } from "./utils/userContext";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -38,24 +39,20 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <div>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/profile" element={<Profile />} />
-          </Routes>
-        </div>
-      </Router>
+      <UserProvider>
+        <Router>
+          <div>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/profile" element={<Profile />} />
+            </Routes>
+          </div>
+        </Router>
+      </UserProvider>
     </ApolloProvider>
   );
 }
 
 export default App;
-
-
-
-
-
-
