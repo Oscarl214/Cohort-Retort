@@ -3,11 +3,28 @@ import { gql } from "@apollo/client";
 export const QUERY_USER = gql`
   query getUser {
     user {
+      _id
       username
       email
       linkedin
       github
       website
+      posts {
+        _id
+        postText
+        createdAt
+        username
+        comments {
+          _id
+          commentText
+          createdAt
+          username
+          likes {
+            createdAt
+            username
+          }
+        }
+      }
     }
   }
 `;
