@@ -11,7 +11,6 @@ const typeDefs = gql`
     commentText: String!
     createdAt: String!
     username: String!
-    userId: ID!
     likes: [Like]
   }
   type Post {
