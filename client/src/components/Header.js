@@ -1,26 +1,20 @@
-import React from "react";
-import { useQuery } from "@apollo/client";
-import { QUERY_USER } from "../utils/queries";
+import React, { useContext } from "react";
 import Nav from "./Nav";
 import Avatar from "./Avatar";
+import { UserContext } from "../utils/userContext";
 
 
 const Header = (user) => {
+  
+  const userData = useContext(UserContext);
 
-  // const { data, loading, error } = useQuery(QUERY_USER);
+  console.log("userDATAinHeader",userData.usersData);
 
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
-
-  // if (error) {
-  //   return <p>Error: {error.message}</p>;
-  // }
-
-  // console.log("datainheader", data);
-  // const username = data.user.username;
+  const data = userData.usersData;
+  const username = data ? data.username : null
 
 
+  console.log("datainheader", username);
 
 
   return (
@@ -30,8 +24,8 @@ const Header = (user) => {
         <div className="h-32 pt-14 hero relative">
           <div className="flex flex-col items-center justify-center h-32 ">
             <Avatar />
-            <h3 className="text-2xl color-dkblue font-bold">Placeholder
-              {/* {username} */}
+            <h3 className="text-2xl color-dkblue font-bold">
+              {username ? username: "Welcome to Cohort Retort!"}
             </h3>
           </div>
         </div>
