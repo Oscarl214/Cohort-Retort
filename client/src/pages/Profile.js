@@ -10,7 +10,7 @@ const Profile = () => {
   console.log("userInfo on profile", user);
 
   return (
-    <div>
+    <div className="bg-gray-200 min-h-screen">
       <Header />
       <UserInfo user={user}/>
       <Footer />
