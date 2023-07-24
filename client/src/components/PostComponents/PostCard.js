@@ -43,7 +43,7 @@ const PostCardItem = ({ post }) => {
     <div className="bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6">
       <PostHeader userId={post.user._id} postId={post._id} />
       <div key={post._id} className="">
-        <p className="-mt-8 text-slate-400 text-xs pl-4 pt-2">
+        <p className="-mt-8 text-slate-400 text-xs pl-4 pt-3">
           Created on: {post.createdAt}
         </p>
         <div className="pl-20 pr-8">
