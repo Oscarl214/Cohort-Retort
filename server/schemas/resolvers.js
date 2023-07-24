@@ -8,17 +8,55 @@ const resolvers = {
     user: async (parent, args, context) => {
       //dedicated for our profile page, allows us populate posts based on user that is logged in on the profile page
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: "posts",
-          populate: {
-            path: "comments",
-            model: "Comment",
-          },
-        });
+        const user = await User.findById(context.user._id)
+        // .populate({
+        //   path: "posts",
+        //   populate: {
+        //     path: "comments",
+        //     model: "Comment",
+        //   },
+        // })
+        ;
         return user;
       }
       throw new AuthenticationError("Not logged in");
     },
+    userByPost: async (parent, { postId }) => {
+      try {
+        // Find the post by its ID
+        const post = await Post.findById(postId);
+
+        if (!post) {
+          throw new Error("Post not found");
+        }
+
+        // Retrieve the user associated with the post
+        const user = await User.findById(post.user);
+
+        if (!user) {
+          throw new Error("User not found");
+        }
+
+        return user;
+      } catch (err) {
+        throw new Error(err.message);
+      }
+    },
+
+    userById: async (parent, { userId }) => {
+      try {
+        const user = await User.findById(userId);
+
+        if (!user) {
+          throw new Error("User not found");
+        }
+
+        return user;
+      } catch (err) {
+        throw new Error(err.message);
+      }
+    },
+
     users: async (parent, args, context) => {
       //dedicated for our home page, allows us to populate all the posts+comments in the database, only if user is logged in
       if (context.user) {
@@ -35,7 +73,9 @@ const resolvers = {
     },
     post: async (parent, { postID }, context) => {
       if (context.user) {
-        const post = await Post.findById(postID).populate("comments");
+        const post = await Post.findById(postID)
+          .populate("comments")
+          .populate("user");
         return post;
       }
       throw new AuthenticationError("Not logged in");
@@ -44,8 +84,9 @@ const resolvers = {
       try {
         const posts = await Post.find()
           .sort({ createdAt: -1 })
-          .populate("comments")
-          .populate("user"); // Populate the user field
+          .populate("user") // Populate the user field
+          // .populate("comments")
+          ;
         return posts;
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -55,7 +96,7 @@ const resolvers = {
     comment: async (parent, { commentId }, context) => {
       //query dedicated to targeting specific comments that user creates to be able to execute mutations
       if (context.user) {
-        const comment = await Comment.findById(commentId);
+        const comment = await Comment.findById(commentId).populate("user");
         return comment;
       }
       throw new AuthenticationError("Not logged in");
@@ -100,21 +141,13 @@ const resolvers = {
     },
     addPost: async (parent, { postText }, context) => {
       const user = context.user;
-      //Works via GraphQL
-      // if (body.trim() === '') {
-      //   throw new Error('Post body must not be empty');
-      // }
 
       if (context.user) {
         //create our post
         const newPost = new Post({
           postText,
-          user: user._id,
-          username: user.username,
-          email: user.email,
-          github: user.github,
-          linkedin: user.linkedin,
-          website: user.website,
+          user: context.user._id,
+          username: context.user.username,
         });
 
         const post = await newPost.save();
@@ -184,7 +217,9 @@ const resolvers = {
           postId,
           { $push: { comments: newComment } },
           { new: true }
-        ).populate("comments");
+        )
+          .populate("comments")
+          .populate("user");
 
         if (!updatedPost) {
           throw new Error("Post not found");

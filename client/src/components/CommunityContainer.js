@@ -1,16 +1,33 @@
 import React, { useEffect, useContext } from "react";
 import CreatePost from "./CreatePost";
 import PostViewContainer from "../components/PostComponents/PostViewContainer";
+import PostCard from "./PostComponents/PostCard";
 import Auth from "../utils/auth"; // Bring in your Auth middleware
 import { Link } from "react-router-dom";
 
+import { useQuery } from "@apollo/client";
+import { UserContext } from "../utils/userContext";
+import { QUERY_USER, QUERY_POSTS } from "../utils/queries";
+
 const CommunityContainer = () => {
+  // const { data: usersData } = useQuery(QUERY_USERS);
+  const { loading, error, data } = useQuery(QUERY_USER);
+
+  console.log("data", data);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error fetching user: {error.message}</p>;
+
+  const user = data?.user;
+ 
+  console.log("loggedin userdata", user);
+
   return (
     <div>
       {Auth.loggedIn() ? (
         <>
-          <CreatePost />
-          <PostViewContainer />
+          {user? <CreatePost user={user}/> : null}
+          <PostCard />
         </>
       ) : (
         <p>
