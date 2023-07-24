@@ -3,13 +3,15 @@ import { QUERY_POSTS, USER_BY_ID } from "../../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
 import { REMOVE_POST } from "../../utils/mutations";
 import { UserContext } from "../../utils/userContext";
+
 const PostHeader = ({ userId, postId }) => {
+  
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const { usersData } = useContext(UserContext); // Use the UserContext here
+  const userData = useContext(UserContext);
+  const Data = userData.usersData;
+  const UserData = Data._id;
 
-  console.log(usersData);
-  // console.log(Auth);
   const handleDropdownToggle = useCallback(() => {
     setShowDropdown(!showDropdown);
   }, [showDropdown]);
@@ -88,7 +90,7 @@ const PostHeader = ({ userId, postId }) => {
         </div>
       </div>
       <div className="relative">
-        {usersData._id === userId && postId && (
+        {UserData === userId && postId && (
           <button
             onClick={handleDropdownToggle}
             className="focus:outline-none"

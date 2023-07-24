@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
+import UserDataLoader from "./components/UserDataLoader";
 
 import { UserProvider } from "./utils/userContext";
 
@@ -40,16 +41,18 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <UserProvider>
-        <Router>
-          <div>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
-          </div>
-        </Router>
+        <UserDataLoader>
+          <Router>
+            <div>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/profile" element={<Profile />} />
+              </Routes>
+            </div>
+          </Router>
+        </UserDataLoader>
       </UserProvider>
     </ApolloProvider>
   );

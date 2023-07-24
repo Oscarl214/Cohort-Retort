@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import UserInfo from "../components/UserInfo";
+import { UserContext } from "../utils/userContext";
 
 const Profile = () => {
+  const userData = useContext(UserContext);
+  const user = userData.usersData;
+  console.log("userInfo on profile", user);
+
   return (
     <div>
       <Header />
-      <UserInfo />
+      <UserInfo user={user}/>
       <Footer />
     </div>
   );
