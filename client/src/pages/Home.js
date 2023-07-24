@@ -20,7 +20,7 @@ const Home = () => {
   }, [userData, setUsersData]);
 
   return (
-    <div>
+    <div className="bg-gray-200 min-h-screen">
       <Header />
       <CommunityContainer />
       <Footer />
