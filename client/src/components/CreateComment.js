@@ -8,7 +8,7 @@ import Auth from "../utils/auth"; //bringing in my Auth middleware
 const CreateComment = ({ postID }) => {
   //state use of comment Text that will be provided
   const [commentText, setCommentText] = useState("");
-  // console.log("postID", postID);
+  console.log("postID", postID);
 
   const { data } = useQuery(QUERY_POST, {
     variables: { postID },
@@ -16,6 +16,7 @@ const CreateComment = ({ postID }) => {
 
   const { post } = data || { post: { comments: [] } };
 
+  console.log("userDatafrom post", post);
   const [addComment, { error }] = useMutation(ADD_COMMENT, {
     update(cache, { data: { addComment } }) {
       // Only update cache if 'addComment' data is available
@@ -58,11 +59,11 @@ const CreateComment = ({ postID }) => {
         //executes once commentText has been provided
         variables: {
           postId: postID,
-          //if successful the data variable will contain the return information
           commentText,
         },
       });
-      // console.log("Add comment mutation result:", data);
+      setCommentText("");
+      console.log("Add comment mutation result:", data);
     } catch (err) {
       console.error(err);
     }
@@ -71,7 +72,7 @@ const CreateComment = ({ postID }) => {
     // Update the commentText state when the textarea value changes
     setCommentText(event.target.value);
     // Add a console.log to see the updated commentText
-    // console.log("Updated Comment Text:", event.target.value);
+    console.log("Updated Comment Text:", event.target.value);
   };
 
   return (

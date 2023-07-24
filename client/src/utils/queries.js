@@ -3,21 +3,37 @@ import { gql } from "@apollo/client";
 export const QUERY_USER = gql`
   query getUser {
     user {
-      firstName
-      lastName
+      username
       email
       linkedin
       github
-      posts {
-        _id
-        postText
-        createdAt
-        comments {
-          _id
-          commentText
-          createdAt
-        }
-      }
+      website
+    }
+  }
+`;
+
+export const USER_BY_POST = gql`
+  query getUserByPostId($postId: ID!) {
+    getUserByPostId(postId: $postId) {
+      _id
+      username
+      email
+      linkedin
+      website
+      github
+    }
+  }
+`;
+
+export const USER_BY_ID = gql`
+  query UserById($userId: ID!) {
+    userById(userId: $userId) {
+      _id
+      username
+      email
+      linkedin
+      website
+      github
     }
   }
 `;
@@ -72,12 +88,13 @@ export const QUERY_COMMENT = gql`
       _id
       commentText
       createdAt
+      username
     }
   }
 `;
 
 export const QUERY_POSTS = gql`
-  query GetPosts {
+  query getPosts {
     posts {
       _id
       postText
@@ -87,9 +104,9 @@ export const QUERY_POSTS = gql`
         _id
         username
         email
-        website
         linkedin
         github
+        website
       }
       comments {
         _id
@@ -117,6 +134,7 @@ export const QUERY_COMMENTS = gql`
       _id
       commentText
       createdAt
+      username
     }
   }
 `;

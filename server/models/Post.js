@@ -18,6 +18,14 @@ const commentSchema = new Schema({
     type: String,
     required: true,
   },
+  commentId: {
+    type: Schema.Types.ObjectId,
+    default: () => new Types.ObjectId(),
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   likes: [
     {
       username: {
@@ -31,11 +39,7 @@ const commentSchema = new Schema({
       },
     },
   ],
-
-})
-
-
-
+});
 
 //TODO: see description naming (should it be postText?)
 const postSchema = new Schema(

@@ -55,11 +55,7 @@ export const ADD_POST = gql`
       _id
       postText
       createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
+      username
     }
   }
 `;
@@ -78,6 +74,12 @@ export const ADD_COMMENT = gql`
       _id
       commentText
       createdAt
+      username
+      likes {
+        _id
+        createdAt
+        username
+      }
     }
   }
 `;
