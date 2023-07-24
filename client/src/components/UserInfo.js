@@ -50,14 +50,13 @@ const UserInfo = () => {
               key={post._id}
               className="bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6"
             >
-              <div className="h-32 pt-14 hero relative">
+              {/* <div className="h-32 pt-14 hero relative">
                 <div className="flex flex-col items-center justify-center h-32 ">
                   <h3 className="text-2xl color-dkblue font-bold">
-                    {user.username}
-                    {user.email}
+                    {user.username}{user.email}
                   </h3>
-                </div>
-              </div>
+                </div> */}
+
               <div className="h-24 bg-white"></div>
               <div key={post._id} className="">
                 <p className="-mt-8 text-slate-400 text-xs pl-4 pt-2">
