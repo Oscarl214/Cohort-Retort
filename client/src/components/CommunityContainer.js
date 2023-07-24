@@ -8,8 +8,7 @@ import { UserContext } from "../utils/userContext";
 const CommunityContainer = () => {
 
   const userData = useContext(UserContext);
-  const data = userData.usersData;
-  const user = data?.user;
+  const data = userData?.usersData;
 
   if (data === null) return <p className="text-md italic font-semibold text-center ">Please Login if you have an account, or Signup if you don't!</p>;
 
@@ -18,7 +17,7 @@ const CommunityContainer = () => {
     <div>
       {Auth.loggedIn() ? (
         <>
-          {user ? <CreatePost user={user} /> : null}
+         <CreatePost/>
           <PostCard />
         </>
       ) : (
