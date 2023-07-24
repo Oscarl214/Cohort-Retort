@@ -30,6 +30,7 @@ const typeDefs = gql`
     website: String
     linkedin: String
     github: String
+    posts: [Post]
   }
 
   type Auth {

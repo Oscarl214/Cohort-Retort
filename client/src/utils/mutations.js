@@ -31,8 +31,6 @@ export const ADD_USER = gql`
       token
       user {
         _id
-        firstName
-        email
       }
     }
   }
@@ -62,11 +60,9 @@ export const ADD_POST = gql`
 
 export const REMOVE_POST = gql`
   mutation removePost($postId: ID!) {
-    removePost(postId: $postId) {
-      _id
-    }
+    removePost(postId: $postId)
   }
-`; //need to return a response
+`;
 
 export const ADD_COMMENT = gql`
   mutation addComment($postId: ID!, $commentText: String!) {

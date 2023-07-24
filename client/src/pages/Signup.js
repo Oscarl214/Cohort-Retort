@@ -16,7 +16,6 @@ function Signup(props) {
       [name]: value,
     });
   };
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log("form state", formState);
@@ -27,24 +26,10 @@ function Signup(props) {
       });
 
       Auth.login(data.addUser.token);
+      window.location.href = "/";
     } catch (e) {
       console.error(e);
     }
-
-    // const mutationResponse = await addUser({
-    //   variables: {
-    //     email: formState.email,
-    //     password: formState.password,
-    //     firstName: formState.firstName,
-    //     lastName: formState.lastName,
-    //     linkedin: formState.linkedin,
-    //     github: formState.github,
-    //     userWebsite: formState.userWebsite,
-    //   },
-    // });
-    // const token = mutationResponse.data.addUser.token;
-    // Auth.login(token);
-    window.location.href = "/";
   };
 
   return (
@@ -64,36 +49,19 @@ function Signup(props) {
         <form className="mt-4" onSubmit={handleFormSubmit}>
           <div className="flex flex-col mb-4">
             <input
-              placeholder="First"
-              name="firstName"
-              type="firstName"
-              id="firstName"
-              value={formState.firstName}
+              placeholder="UserName"
+              name="username"
+              type="username"
+              id="username"
+              value={formState.username}
               onChange={handleChange}
               className="border border-blue-300 p-2 mt-2 rounded-md "
             />
             <label
               className="text-white text-lg after:content-['*'] after:ml-0.5 after:text-red-500"
-              htmlFor="firstName"
+              htmlFor="UserName"
             >
-              First Name
-            </label>
-          </div>
-          <div className="flex flex-col mb-4">
-            <input
-              placeholder="Last"
-              name="lastName"
-              type="lastName"
-              id="lastName"
-              value={formState.lastName}
-              onChange={handleChange}
-              className="border border-blue-300 p-2 mt-2 rounded-md"
-            />
-            <label
-              className="text-white text-lg after:content-['*'] after:ml-0.5 after:text-red-500"
-              htmlFor="lastName"
-            >
-              Last Name
+              UserName
             </label>
           </div>
           <div className="flex flex-col mb-4">
