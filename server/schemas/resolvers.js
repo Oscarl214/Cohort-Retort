@@ -6,9 +6,7 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     user: async (parent, args, context) => {
-    
       if (context.user) {
-
         const user = await User.findById(context.user._id).populate({
           path: "posts",
           populate: {
@@ -104,8 +102,8 @@ const resolvers = {
     },
   },
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
       const token = signToken(user);
       return { user, token };
     },
@@ -163,7 +161,7 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-   
+
     addComment: async (parent, { postId, commentText }, context) => {
       if (context.user) {
         const { username, _id: userId } = context.user;
@@ -195,16 +193,16 @@ const resolvers = {
     likePost: async (parent, { postId }, context) => {
       if (context.user) {
         const { username } = context.user;
-    
+
         const post = await Post.findById(postId);
         if (!post) {
           throw new Error("Post not found");
         }
-    
+
         const alreadyLiked = post.likes.some(
           (like) => like.username === username
         );
-    
+
         if (alreadyLiked) {
           post.likes = post.likes.filter((like) => like.username !== username);
         } else {
@@ -213,14 +211,13 @@ const resolvers = {
             createdAt: new Date().toISOString(),
           });
         }
-    
+
         const updatedPost = await post.save();
         return updatedPost;
       }
-    
+
       throw new AuthenticationError("Not logged in");
     },
-    
 
     removePost: async (parent, { postId }, context) => {
       if (context.user) {
