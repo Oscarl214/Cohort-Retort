@@ -10,45 +10,56 @@ const CreateComment = ({ postID }) => {
   const [commentText, setCommentText] = useState("");
   console.log("postID", postID);
 
-  const { data } = useQuery(QUERY_POST, {
-    variables: { postID },
-  });
+  // const [addComment, { error }] = useMutation(ADD_COMMENT, {
+  //   update(cache, { data: { addComment } }) {
+  //     if (addComment) {
+  //       try {
+  //         const { comments } = cache.readQuery({
+  //           query: QUERY_COMMENTS,
+  //         }) || { comments: [] };
+  //         // Read the existing comments from the query that gets all comments
 
-  const { post } = data || { post: { comments: [] } };
+  //         cache.writeQuery({
+  //           query: QUERY_COMMENTS,
+  //           data: { comments: [addComment, ...comments] },
+  //         });
 
-  console.log("userDatafrom post", post);
+  //         const { post } = cache.readQuery({
+  //           query: QUERY_POST,
+  //           variables: { postID },
+  //         });
+  //         // Read the specific post query using the 'postID'
+
+  //         cache.writeQuery({
+  //           query: QUERY_POST,
+  //           variables: { postId: postID },
+  //           data: {
+  //             post: { ...post, comments: [...post.comments, addComment] },
+  //           },
+  //         });
+  //       } catch (e) {
+  //         console.error(e);
+  //       }
+  //     }
+  //   },
+  // });
+
   const [addComment, { error }] = useMutation(ADD_COMMENT, {
     update(cache, { data: { addComment } }) {
-      // Only update cache if 'addComment' data is available
-      if (addComment) {
-        try {
-          const { comments } = cache.readQuery({
-            query: QUERY_COMMENTS,
-          }) || { comments: [] };
-          // Read the existing comments from the query that gets all comments
-
-          cache.writeQuery({
-            query: QUERY_COMMENTS,
-            data: { comments: [addComment, ...comments] },
-          });
-
-          const { post } = cache.readQuery({
-            query: QUERY_POST,
-            variables: { postID },
-          });
-          // Read the specific post query using the 'postID'
-
-          cache.writeQuery({
-            query: QUERY_POST,
-            variables: { postId: postID },
-            data: {
-              post: { ...post, comments: [...post.comments, addComment] },
-            },
-          });
-        } catch (e) {
-          console.error(e);
-        }
-      }
+      const { post } = cache.readQuery({
+        query: QUERY_POST,
+        variables: { postID },
+      });
+      cache.writeQuery({
+        query: QUERY_POST,
+        variables: { postID },
+        data: {
+          posts: {
+            ...post,
+            comments: [...post.comments, addComment],
+          },
+        },
+      });
     },
   });
 
@@ -85,27 +96,27 @@ const CreateComment = ({ postID }) => {
           >
             <div className="flex flex-wrap mb-6">
               <div className="w-full md:w-full bg-white mt-2 rounded-lg border-2 p-3 border-indigo-100">
-              <textarea
-                name="commentText"
-                placeholder="Share your Comment here..." required
-                value={commentText}
-                className="w-full placeholder-gray-300 focus:outline-none focus:bg-white "
-                style={{ lineHeight: "1.6", resize: "vertical"}}
-                onChange={handleTextareaChange}
-              ></textarea>
+                <textarea
+                  name="commentText"
+                  placeholder="Share your Comment here..."
+                  required
+                  value={commentText}
+                  className="w-full placeholder-gray-300 focus:outline-none focus:bg-white "
+                  style={{ lineHeight: "1.6", resize: "vertical" }}
+                  onChange={handleTextareaChange}
+                ></textarea>
               </div>
             </div>
 
             <div className="-pr-4 flex justify-end pb-4">
-              <button className=" btn background-darkBlue rounded-lg btn-primary text-white p-3 btn-block py-2 hover:text-black hover:background-yellow" type="submit">
+              <button
+                className=" btn background-darkBlue rounded-lg btn-primary text-white p-3 btn-block py-2 hover:text-black hover:background-yellow"
+                type="submit"
+              >
                 Add Comment
               </button>
             </div>
-            {error && (
-              <div className="">
-                {error.message}
-              </div>
-            )}
+            {error && <div className="">{error.message}</div>}
           </form>
         </>
       ) : (
