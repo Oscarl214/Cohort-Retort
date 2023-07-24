@@ -8,6 +8,22 @@ export const QUERY_USER = gql`
       linkedin
       github
       website
+      posts {
+        _id
+        postText
+        createdAt
+        username
+        comments {
+          _id
+          commentText
+          createdAt
+          username
+          likes {
+            createdAt
+            username
+          }
+        }
+      }
     }
   }
 `;
