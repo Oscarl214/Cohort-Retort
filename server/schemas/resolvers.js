@@ -8,7 +8,7 @@ const resolvers = {
     user: async (parent, args, context) => {
       //dedicated for our profile page, allows us populate posts based on user that is logged in on the profile page
       if (context.user) {
-        const user = await User.findById(context.user._id)
+        const user = await User.findById(context.user._id);
         // .populate({
         //   path: "posts",
         //   populate: {
@@ -16,7 +16,6 @@ const resolvers = {
         //     model: "Comment",
         //   },
         // })
-        ;
         return user;
       }
       throw new AuthenticationError("Not logged in");
@@ -84,9 +83,8 @@ const resolvers = {
       try {
         const posts = await Post.find()
           .sort({ createdAt: -1 })
-          .populate("user") // Populate the user field
-          // .populate("comments")
-          ;
+          .populate("user"); // Populate the user field
+        // .populate("comments")
         return posts;
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -230,25 +228,37 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-
     removePost: async (parent, { postId }, context) => {
       if (context.user) {
-        const deletedPost = await Post.deleteOne({ _id: postId });
+        try {
+          const post = await Post.findById(postId);
+          if (!post) {
+            throw new ApolloError("Post not found", "NOT_FOUND");
+          }
 
-        if (deletedPost.deletedCount === 1) {
-          //deletedCount comes from Mongo when performing delete operations
+          // Check if the currently logged-in user is the creator of the post
+          if (post.user.toString() !== context.user._id.toString()) {
+            throw new AuthenticationError("Not authorized to remove this post");
+          }
 
-          await User.findByIdAndUpdate(
-            context.user._id,
-            { $pull: { posts: postId } },
-            { new: true }
-          );
-          return "Post deleted Successfully";
-        } else {
-          throw new Error("Post not found");
+          const deletedPost = await Post.deleteOne({ _id: postId });
+
+          if (deletedPost.deletedCount === 1) {
+            await User.findByIdAndUpdate(
+              context.user._id,
+              { $pull: { posts: postId } },
+              { new: true }
+            );
+            return "Post deleted successfully";
+          } else {
+            throw new ApolloError("Post not found", "NOT_FOUND");
+          }
+        } catch (error) {
+          throw new ApolloError("Error deleting post", "INTERNAL_SERVER_ERROR");
         }
+      } else {
+        throw new AuthenticationError("Not logged in");
       }
-      throw new AuthenticationError("Not logged in");
     },
     removeComment: async (parent, { commentId }, context) => {
       if (context.user) {

@@ -36,7 +36,7 @@ const PostCardItem = ({ post }) => {
 
   return (
     <div className="bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6">
-      <PostHeader userId={post.user._id} />
+      <PostHeader userId={post.user._id} postId={post._id} />
       <div key={post._id} className="">
         <p className="-mt-8 text-slate-400 text-xs pl-4 pt-2">
           Posted an update: {post.createdAt}
