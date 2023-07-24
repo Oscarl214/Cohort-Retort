@@ -8,14 +8,13 @@ const resolvers = {
     user: async (parent, args, context) => {
       //dedicated for our profile page, allows us populate posts based on user that is logged in on the profile page
       if (context.user) {
-        const user = await User.findById(context.user._id);
-        // .populate({
-        //   path: "posts",
-        //   populate: {
-        //     path: "comments",
-        //     model: "Comment",
-        //   },
-        // })
+        const user = await User.findById(context.user._id).populate({
+          path: "posts",
+          populate: {
+            path: "comments",
+            model: "Comment",
+          },
+        });
         return user;
       }
       throw new AuthenticationError("Not logged in");

@@ -2,11 +2,14 @@ import React, { useState, useCallback, useContext, useEffect } from "react";
 import { QUERY_POSTS, USER_BY_ID } from "../../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
 import { REMOVE_POST } from "../../utils/mutations";
-import Auth from "../../utils/auth";
+import { UserContext } from "../../utils/userContext";
 const PostHeader = ({ userId, postId }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
-  console.log(Auth);
+  const { usersData } = useContext(UserContext); // Use the UserContext here
+
+  console.log(usersData);
+  // console.log(Auth);
   const handleDropdownToggle = useCallback(() => {
     setShowDropdown(!showDropdown);
   }, [showDropdown]);
@@ -85,26 +88,28 @@ const PostHeader = ({ userId, postId }) => {
         </div>
       </div>
       <div className="relative">
-        <button
-          onClick={handleDropdownToggle}
-          className="focus:outline-none"
-          aria-label="Dropdown Menu"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="darkBlue"
-            viewBox="0 0 24 24"
-            className="w-3 h-6"
-            stroke="currentColor"
+        {usersData._id === userId && postId && (
+          <button
+            onClick={handleDropdownToggle}
+            className="focus:outline-none"
+            aria-label="Dropdown Menu"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 4c1.657 0 3 1.343 3 3 0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3zM12 12c1.657 0 3 1.343 3 3 0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3zM12 20c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3z"
-            ></path>
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="darkBlue"
+              viewBox="0 0 24 24"
+              className="w-3 h-6"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 4c1.657 0 3 1.343 3 3 0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3zM12 12c1.657 0 3 1.343 3 3 0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3zM12 20c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3z"
+              ></path>
+            </svg>
+          </button>
+        )}
         {showDropdown && (
           <div className="absolute right-0 mt-2 w-36 background-medBlue rounded-lg shadow-lg">
             <ul>
