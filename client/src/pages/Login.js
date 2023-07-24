@@ -39,7 +39,7 @@ function Login(props) {
           <div className="flex flex-col mb-4">
             
             <input
-              placeholder="youremail@test.com"
+              placeholder="youremail@test.com" required
               name="email"
               type="email"
               id="email"
@@ -53,7 +53,7 @@ function Login(props) {
           <div className="flex flex-col mb-4">
 
             <input
-              placeholder="******"
+              placeholder="******" required
               name="password"
               type="password"
               id="pwd"
