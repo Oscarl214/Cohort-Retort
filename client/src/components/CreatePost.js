@@ -8,6 +8,7 @@ import Auth from "../utils/auth"; //bringing in my Auth middleware
 const CreatePost = () => {
   const [postText, setPostText] = useState(""); //state use of post Text that will be provided
   const [showInputBox, setShowInputBox] = useState(false);
+  
   const [addPost, {error}] = useMutation(ADD_POST, {
     update(cache, {data: {addPost}}) {
       const {posts} = cache.readQuery({ query: QUERY_POSTS});

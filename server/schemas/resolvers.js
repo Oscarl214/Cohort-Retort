@@ -6,8 +6,9 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     user: async (parent, args, context) => {
-      //dedicated for our profile page, allows us populate posts based on user that is logged in on the profile page
+    
       if (context.user) {
+
         const user = await User.findById(context.user._id).populate({
           path: "posts",
           populate: {
@@ -162,45 +163,10 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-    // addComment: async (parent, { postId, commentText }, context) => {
-    //   if (context.user) {
-    //     const comment = await Comment.create({ commentText });
-
-    //     const updatedPost = await Post.findByIdAndUpdate(
-    //       postId,
-    //       { $push: { comments: comment._id } },
-    //       { new: true }
-    //     ).populate("comments");
-
-    //     if (!updatedPost) {
-    //       throw new Error("Post not found");
-    //     }
-
-    //     return comment;
-    //   }
-    //   throw new AuthenticationError("Not logged in");
-    // },
-
-    // addComment: async (parent, { postId, commentText }, context) => {
-    //   const { username } = context.user;
-    //   if (context.user) {
-    //     const updatedPost = await Post.findByIdAndUpdate(
-    //       postId,
-    //       { $push: { comments: commentText, username } },
-    //       { new: true }
-    //     ).populate("comments");
-
-    //     if (!updatedPost) {
-    //       throw new Error("Post not found");
-    //     }
-
-    //     return updatedPost;
-    //   }
-    //   throw new AuthenticationError("Not logged in");
-    // },
+   
     addComment: async (parent, { postId, commentText }, context) => {
       if (context.user) {
-        const { username } = context.user;
+        const { username, _id: userId } = context.user;
 
         // Create a new comment object with the commentText and username
         const newComment = {
@@ -214,9 +180,7 @@ const resolvers = {
           postId,
           { $push: { comments: newComment } },
           { new: true }
-        )
-          .populate("comments")
-          .populate("user");
+        );
 
         if (!updatedPost) {
           throw new Error("Post not found");
@@ -227,6 +191,37 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
+
+    likePost: async (parent, { postId }, context) => {
+      if (context.user) {
+        const { username } = context.user;
+    
+        const post = await Post.findById(postId);
+        if (!post) {
+          throw new Error("Post not found");
+        }
+    
+        const alreadyLiked = post.likes.some(
+          (like) => like.username === username
+        );
+    
+        if (alreadyLiked) {
+          post.likes = post.likes.filter((like) => like.username !== username);
+        } else {
+          post.likes.push({
+            username,
+            createdAt: new Date().toISOString(),
+          });
+        }
+    
+        const updatedPost = await post.save();
+        return updatedPost;
+      }
+    
+      throw new AuthenticationError("Not logged in");
+    },
+    
+
     removePost: async (parent, { postId }, context) => {
       if (context.user) {
         try {

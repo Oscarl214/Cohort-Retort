@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");
 
-// const Comment = require("./Comment");
 
 const commentSchema = new Schema({
   commentText: {
@@ -22,7 +21,7 @@ const commentSchema = new Schema({
     type: Schema.Types.ObjectId,
     default: () => new Types.ObjectId(),
   },
-  user: {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: "User",
   },
@@ -41,7 +40,6 @@ const commentSchema = new Schema({
   ],
 });
 
-//TODO: see description naming (should it be postText?)
 const postSchema = new Schema(
   {
     postText: {
