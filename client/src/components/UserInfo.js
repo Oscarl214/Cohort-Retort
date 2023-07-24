@@ -4,10 +4,15 @@ import { QUERY_USER } from "../utils/queries";
 import PostHeader from "./PostComponents/PostHeader";
 import CreateComment from "../components/CreateComment";
 import Comment from "../components/Comment";
+import { UserContext } from "../utils/userContext";
 
 const UserInfo = () => {
   // const { data, loading, error } = useQuery(QUERY_USER);
   const [showComments, setShowComments] = useState(false); // State to control showing comments
+
+  const { usersData } = useContext(UserContext); // Use the UserContext here
+
+  console.log("User logged in", usersData); // Check if the user data is available
 
   // if (loading) {
   //   return <p>Loading...</p>;
@@ -20,8 +25,8 @@ const UserInfo = () => {
   // const { user } = data;
   // const { posts } = user;
 
-  const {user} = useContext();
-  console.log(user)
+  const { user } = useContext();
+  console.log(user);
 
   const handleShowComments = () => {
     setShowComments(!showComments);
@@ -57,19 +62,25 @@ const UserInfo = () => {
         {/* Posts */}
         <div>
           {user.posts.map((post) => (
-            <div key={post._id} className="bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6">
-              <PostHeader userID={user._id}/>
+            <div
+              key={post._id}
+              className="bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6"
+            >
+              <PostHeader userID={user._id} />
               <div key={post._id} className="">
-                <p className="-mt-8 text-slate-400 text-xs pl-4 pt-2">Posted an update: {post.createdAt}</p>
+                <p className="-mt-8 text-slate-400 text-xs pl-4 pt-2">
+                  Posted an update: {post.createdAt}
+                </p>
                 <div className="pl-20 pr-8">
                   <p className="mt-2 color-medblue text-xl">{post.postText}</p>
                 </div>
-                <div className="">
-                  {/* Rest of the component code */}
-                </div>
+                <div className="">{/* Rest of the component code */}</div>
               </div>
               <div className="grid justify-items-end pr-5 pb-2">
-                <button onClick={handleShowComments} className="flex text-gray-700 text-sm bg-white rounded">
+                <button
+                  onClick={handleShowComments}
+                  className="flex text-gray-700 text-sm bg-white rounded"
+                >
                   <svg
                     fill="none"
                     viewBox="0 0 24 24"

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import Nav from "../components/Nav";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -7,28 +7,25 @@ import Auth from "../utils/auth";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../utils/userContext";
 import { useQuery } from "@apollo/client";
-import { QUERY_USER} from "../utils/queries";
-
+import { QUERY_USER } from "../utils/queries";
 
 const Home = () => {
   const { data: userData } = useQuery(QUERY_USER);
-  const { setUserData } = useContext(UserContext);
-  
-  
+  const { usersData, setUsersData } = useContext(UserContext); // Use usersData instead of userData
+
   useEffect(() => {
     if (userData) {
-      setUserData(userData.user);
+      setUsersData(userData.user);
     }
-  }, [userData, setUserData]);
+  }, [userData, setUsersData]);
+
   return (
     <div>
-      
       <Header />
-      <CommunityContainer/>
+      <CommunityContainer />
       <Footer />
     </div>
   );
 };
-
 
 export default Home;
