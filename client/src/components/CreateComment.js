@@ -16,6 +16,7 @@ const CreateComment = ({ postID }) => {
 
   const { post } = data || { post: { comments: [] } };
 
+  console.log("userDatafrom post", post);
   const [addComment, { error }] = useMutation(ADD_COMMENT, {
     update(cache, { data: { addComment } }) {
       // Only update cache if 'addComment' data is available
@@ -58,10 +59,10 @@ const CreateComment = ({ postID }) => {
         //executes once commentText has been provided
         variables: {
           postId: postID,
-          //if successful the data variable will contain the return information
           commentText,
         },
       });
+      setCommentText("");
       console.log("Add comment mutation result:", data);
     } catch (err) {
       console.error(err);

@@ -3,21 +3,37 @@ import { gql } from "@apollo/client";
 export const QUERY_USER = gql`
   query getUser {
     user {
-      firstName
-      lastName
+      username
       email
       linkedin
       github
-      posts {
-        _id
-        postText
-        createdAt
-        comments {
-          _id
-          commentText
-          createdAt
-        }
-      }
+      website
+    }
+  }
+`;
+
+export const USER_BY_POST = gql`
+  query getUserByPostId($postId: ID!) {
+    getUserByPostId(postId: $postId) {
+      _id
+      username
+      email
+      linkedin
+      website
+      github
+    }
+  }
+`;
+
+export const USER_BY_ID = gql`
+  query UserById($userId: ID!) {
+    userById(userId: $userId) {
+      _id
+      username
+      email
+      linkedin
+      website
+      github
     }
   }
 `;
@@ -25,8 +41,7 @@ export const QUERY_USER = gql`
 export const QUERY_USERS = gql`
   {
     users {
-      firstName
-      lastName
+      username
       email
       website
       linkedin
@@ -35,10 +50,16 @@ export const QUERY_USERS = gql`
         _id
         postText
         createdAt
+        username
         comments {
           _id
           commentText
           createdAt
+          username
+          likes {
+            createdAt
+            username
+          }
         }
       }
     }
@@ -51,6 +72,7 @@ export const QUERY_POST = gql`
       _id
       postText
       createdAt
+      username
       comments {
         _id
         commentText
@@ -66,20 +88,41 @@ export const QUERY_COMMENT = gql`
       _id
       commentText
       createdAt
+      username
     }
   }
 `;
 
 export const QUERY_POSTS = gql`
-  query {
+  query getPosts {
     posts {
       _id
       postText
       createdAt
+      username
+      user {
+        _id
+        username
+        email
+        linkedin
+        github
+        website
+      }
       comments {
         _id
         commentText
         createdAt
+        username
+        likes {
+          _id
+          createdAt
+          username
+        }
+      }
+      likes {
+        _id
+        createdAt
+        username
       }
     }
   }
@@ -91,6 +134,7 @@ export const QUERY_COMMENTS = gql`
       _id
       commentText
       createdAt
+      username
     }
   }
 `;

@@ -2,16 +2,10 @@ const mongoose = require("mongoose");
 
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
-const Post = require("./Post");
 
 const userSchema = new Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    lastName: {
+    username: {
       type: String,
       required: true,
       trim: true,
@@ -46,7 +40,7 @@ const userSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: "Post",
       },
-    ], // Amount of Posts User has, references post schema,
+    ],
   },
   {
     toJSON: {
@@ -74,12 +68,12 @@ userSchema.virtual("postCount").get(function () {
   return this.posts.length;
 });
 
-userSchema
-  .virtual("fullName")
-  // Getter
-  .get(function () {
-    return `${this.firstName} ${this.lastName}`;
-  });
+// userSchema
+//   .virtual("fullName")
+//   // Getter
+//   .get(function () {
+//     return `${this.firstName} ${this.lastName}`;
+//   });
 
 const User = mongoose.model("User", userSchema);
 

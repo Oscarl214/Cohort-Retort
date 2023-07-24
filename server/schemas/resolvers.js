@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Post, Comment } = require("../models");
+const { User, Post } = require("../models");
 const { signToken } = require("../utils/auth");
 // const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -8,17 +8,55 @@ const resolvers = {
     user: async (parent, args, context) => {
       //dedicated for our profile page, allows us populate posts based on user that is logged in on the profile page
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: "posts",
-          populate: {
-            path: "comments",
-            model: "Comment",
-          },
-        });
+        const user = await User.findById(context.user._id)
+        // .populate({
+        //   path: "posts",
+        //   populate: {
+        //     path: "comments",
+        //     model: "Comment",
+        //   },
+        // })
+        ;
         return user;
       }
       throw new AuthenticationError("Not logged in");
     },
+    userByPost: async (parent, { postId }) => {
+      try {
+        // Find the post by its ID
+        const post = await Post.findById(postId);
+
+        if (!post) {
+          throw new Error("Post not found");
+        }
+
+        // Retrieve the user associated with the post
+        const user = await User.findById(post.user);
+
+        if (!user) {
+          throw new Error("User not found");
+        }
+
+        return user;
+      } catch (err) {
+        throw new Error(err.message);
+      }
+    },
+
+    userById: async (parent, { userId }) => {
+      try {
+        const user = await User.findById(userId);
+
+        if (!user) {
+          throw new Error("User not found");
+        }
+
+        return user;
+      } catch (err) {
+        throw new Error(err.message);
+      }
+    },
+
     users: async (parent, args, context) => {
       //dedicated for our home page, allows us to populate all the posts+comments in the database, only if user is logged in
       if (context.user) {
@@ -35,18 +73,30 @@ const resolvers = {
     },
     post: async (parent, { postID }, context) => {
       if (context.user) {
-        const post = await Post.findById(postID).populate("comments");
+        const post = await Post.findById(postID)
+          .populate("comments")
+          .populate("user");
         return post;
       }
       throw new AuthenticationError("Not logged in");
     },
     posts: async (parent, args, context) => {
-      return Post.find().sort({ createdAt: -1 }).populate("comments");
+      try {
+        const posts = await Post.find()
+          .sort({ createdAt: -1 })
+          .populate("user") // Populate the user field
+          // .populate("comments")
+          ;
+        return posts;
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+        return [];
+      }
     },
     comment: async (parent, { commentId }, context) => {
       //query dedicated to targeting specific comments that user creates to be able to execute mutations
       if (context.user) {
-        const comment = await Comment.findById(commentId);
+        const comment = await Comment.findById(commentId).populate("user");
         return comment;
       }
       throw new AuthenticationError("Not logged in");
@@ -90,11 +140,17 @@ const resolvers = {
       return { token, user };
     },
     addPost: async (parent, { postText }, context) => {
-      //Works via GraphQL
+      const user = context.user;
 
       if (context.user) {
         //create our post
-        const post = await Post.create({ postText });
+        const newPost = new Post({
+          postText,
+          user: context.user._id,
+          username: context.user.username,
+        });
+
+        const post = await newPost.save();
 
         //we update our User that is logged in to add the post they just created to their account
 
@@ -109,24 +165,72 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
+    // addComment: async (parent, { postId, commentText }, context) => {
+    //   if (context.user) {
+    //     const comment = await Comment.create({ commentText });
+
+    //     const updatedPost = await Post.findByIdAndUpdate(
+    //       postId,
+    //       { $push: { comments: comment._id } },
+    //       { new: true }
+    //     ).populate("comments");
+
+    //     if (!updatedPost) {
+    //       throw new Error("Post not found");
+    //     }
+
+    //     return comment;
+    //   }
+    //   throw new AuthenticationError("Not logged in");
+    // },
+
+    // addComment: async (parent, { postId, commentText }, context) => {
+    //   const { username } = context.user;
+    //   if (context.user) {
+    //     const updatedPost = await Post.findByIdAndUpdate(
+    //       postId,
+    //       { $push: { comments: commentText, username } },
+    //       { new: true }
+    //     ).populate("comments");
+
+    //     if (!updatedPost) {
+    //       throw new Error("Post not found");
+    //     }
+
+    //     return updatedPost;
+    //   }
+    //   throw new AuthenticationError("Not logged in");
+    // },
     addComment: async (parent, { postId, commentText }, context) => {
       if (context.user) {
-        const comment = await Comment.create({ commentText });
+        const { username } = context.user;
 
+        // Create a new comment object with the commentText and username
+        const newComment = {
+          commentText,
+          username,
+          createdAt: new Date().toISOString(),
+        };
+
+        // Find the post by ID and update the comments array by pushing the new comment object
         const updatedPost = await Post.findByIdAndUpdate(
           postId,
-          { $push: { comments: comment._id } },
+          { $push: { comments: newComment } },
           { new: true }
-        ).populate("comments");
+        )
+          .populate("comments")
+          .populate("user");
 
         if (!updatedPost) {
           throw new Error("Post not found");
         }
 
-        return comment;
+        return updatedPost;
       }
+
       throw new AuthenticationError("Not logged in");
     },
+
     removePost: async (parent, { postId }, context) => {
       if (context.user) {
         const deletedPost = await Post.deleteOne({ _id: postId });
