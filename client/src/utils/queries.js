@@ -9,6 +9,7 @@ export const QUERY_USER = gql`
       linkedin
       github
       website
+      profilePicUrl
       posts {
         _id
         postText
@@ -51,6 +52,7 @@ export const USER_BY_ID = gql`
       linkedin
       website
       github
+      profilePicUrl
     }
   }
 `;

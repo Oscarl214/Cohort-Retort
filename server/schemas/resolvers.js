@@ -105,14 +105,34 @@ const resolvers = {
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
-      return { user, token };
+      return { args, token };
     },
     //Works via GraphQL
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, {
-          new: true,
-        });
+        const loggedInUserId = context.user._id;
+
+        // Only allow updating specific fields (e.g., username, linkedin, github, website)
+        const allowedFields = {
+          username: args.username,
+          linkedin: args.linkedin,
+          github: args.github,
+          website: args.website,
+          profilePicUrl: args.profilePicUrl,
+          // Add other allowed fields here
+        };
+
+        // Find the user in the database and check if the user ID matches the logged-in user ID
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: loggedInUserId },
+          allowedFields,
+          { new: true }
+        );
+
+        if (!updatedUser) {
+          throw new Error("User not found"); // Optional error handling if the user is not found
+        }
+        return updatedUser;
       }
       throw new AuthenticationError("Not logged in");
     },

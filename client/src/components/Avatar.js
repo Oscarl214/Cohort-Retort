@@ -1,13 +1,26 @@
 import React from "react";
 
 const Avatar = ({ user }) => {
-  const firstName = user?.firstName || "John";
-  const lastName = user?.lastName || "Doe";
+  const firstName = user?.username || "John";
+
+  const profilePicUrl = user.profilePicUrl;
+
+  if (!profilePicUrl) {
+    const firstLetter = firstName.charAt(0).toUpperCase();
+    return (
+      <div className="rounded-full w-36 h-36 bg-gray-500 flex justify-center items-center">
+        <span className="text-white text-5xl">{firstLetter}</span>
+      </div>
+    );
+  }
 
   return (
-    <div className="w-24 h-24 bg-white color-dkblue rounded-full flex items-center justify-center text-2xl font-bold border">
-      {firstName.charAt(0)}
-      {lastName.charAt(0)}
+    <div>
+      <img
+        class="rounded-full w-36 h-36"
+        src={profilePicUrl}
+        alt="Extra large avatar"
+      />
     </div>
   );
 };

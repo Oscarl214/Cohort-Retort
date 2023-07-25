@@ -1,28 +1,48 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import AWS from "aws-sdk";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { ADD_USER } from "../utils/mutations";
 
 function Signup(props) {
-  const [formState, setFormState] = useState({ email: "", password: "" });
+  const [formState, setFormState] = useState({
+    email: "",
+    password: "",
+    profilePicUrl: "",
+    // Add other form fields here
+  });
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormState({
       ...formState,
       [name]: value,
     });
   };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log("form state", formState);
 
     try {
+      const response = await handleImageUpload(selectedFile);
+
       const { data } = await addUser({
-        variables: { ...formState },
+        variables: {
+          ...formState,
+          profilePicUrl: response.Location,
+        },
       });
 
       Auth.login(data.addUser.token);
@@ -32,6 +52,47 @@ function Signup(props) {
     }
   };
 
+  const handleImageUpload = async (file) => {
+    // AWS S3 Configuration
+    const bucketName = process.env.REACT_APP_AWS_BUCKET_NAME;
+    const region = process.env.REACT_APP_AWS_BUCKET_REGION;
+    const accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY;
+    const secretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
+
+    console.log(bucketName);
+    AWS.config.update({
+      region,
+      accessKeyId,
+      secretAccessKey,
+    });
+
+    const s3 = new AWS.S3();
+
+    const params = {
+      Bucket: bucketName,
+      Key: file.name,
+      Body: file,
+    };
+
+    try {
+      const response = await s3.upload(params).promise();
+      console.log("Upload successful:", response.Location);
+
+      return response;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      throw error;
+    }
+  };
+
+  const handleUpload = async () => {
+    if (!selectedFile) {
+      alert("Please select an image to upload.");
+      return;
+    }
+
+    await handleImageUpload(selectedFile);
+  };
   return (
     <div className="flex flex-col items-center justify-center  background-darkBlue">
       <h1 className="display: inline text-7xl font-bold text-center mb-2 mt-20 color-yellow">
@@ -49,7 +110,8 @@ function Signup(props) {
         <form className="mt-4" onSubmit={handleFormSubmit}>
           <div className="flex flex-col mb-4">
             <input
-              placeholder="UserName" required
+              placeholder="UserName"
+              required
               name="username"
               type="username"
               id="username"
@@ -66,7 +128,8 @@ function Signup(props) {
           </div>
           <div className="flex flex-col mb-4">
             <input
-              placeholder="youremail@test.com" required
+              placeholder="youremail@test.com"
+              required
               name="email"
               type="email"
               id="email"
@@ -83,7 +146,8 @@ function Signup(props) {
           </div>
           <div className="flex flex-col mb-4">
             <input
-              placeholder="******" required
+              placeholder="******"
+              required
               name="password"
               type="password"
               id="password"
@@ -139,6 +203,29 @@ function Signup(props) {
             <label className="text-white text-lg" htmlFor="website">
               Personal Website
             </label>
+            <div>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                name="profilePicUrl"
+              />
+              {selectedFile && (
+                <div>
+                  <img
+                    src={URL.createObjectURL(selectedFile)}
+                    alt="Selected"
+                    style={{ width: "300px", height: "auto" }}
+                  />
+                </div>
+              )}
+              {uploadProgress > 0 && (
+                <div>Upload Progress: {uploadProgress}%</div>
+              )}
+              <button type="button" onClick={handleUpload}>
+                Upload Image
+              </button>
+            </div>
           </div>
 
           <div className="flex justify-between items-center mt-4">

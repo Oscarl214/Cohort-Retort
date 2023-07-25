@@ -19,6 +19,7 @@ export const ADD_USER = gql`
     $github: String
     $website: String
     $linkedin: String
+    $profilePicUrl: String
   ) {
     addUser(
       username: $username
@@ -27,6 +28,7 @@ export const ADD_USER = gql`
       github: $github
       website: $website
       linkedin: $linkedin
+      profilePicUrl: $profilePicUrl
     ) {
       token
       user {
@@ -37,8 +39,24 @@ export const ADD_USER = gql`
 `;
 // TODO: Double check update user mutation
 export const UPDATE_USER = gql`
-  mutation updateUser {
-    updateUser(username: $username, email: $email, password: $password) {
+  mutation updateUser(
+    $username: String!
+    $email: String!
+    $password: String!
+    $linkedin: String
+    $github: String
+    $website: String
+    $profilePicUrl: String
+  ) {
+    updateUser(
+      username: $username
+      email: $email
+      password: $password
+      linkedin: $linkedin
+      github: $github
+      website: $website
+      profilePicUrl: $profilePicUrl
+    ) {
       token
       user {
         _id
@@ -85,3 +103,17 @@ export const REMOVE_COMMENT = gql`
     }
   }
 `;
+
+// export const UPLOAD_PROFILE_PIC = gql`
+//   mutation UploadProfilePic {
+//     uploadProfilePic {
+//       _id
+//       username
+//       email
+//       website
+//       linkedin
+//       github
+//       profilePicUrl
+//     }
+//   }
+// `;

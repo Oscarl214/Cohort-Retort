@@ -96,7 +96,9 @@ const UserInfo = () => {
                   Created on: {post.createdAt}
                 </p>
                 <div className="pl-12 pr-10">
-                  <p className="mt-2 color-medblue text-l pb-6">{post.postText}</p>
+                  <p className="mt-2 color-medblue text-l pb-6">
+                    {post.postText}
+                  </p>
                 </div>
               </div>
               <div className="grid justify-items-end pr-5 pb-8">
