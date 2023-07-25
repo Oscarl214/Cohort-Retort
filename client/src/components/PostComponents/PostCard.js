@@ -69,7 +69,7 @@ const PostCardItem = ({ post }) => {
     >
       <PostHeader userId={post.user._id} postId={post._id} />
       <div key={post._id} className="">
-        <p className="-mt-8 text-slate-400 text-xs pl-12 pt-3">
+        <p className="-mt-8 text-slate-400 text-xs pl-12 pt-6">
           Created on: {post.createdAt}
         </p>
 

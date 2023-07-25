@@ -69,7 +69,7 @@ const PostHeader = ({ userId, postId }) => {
               </div>
             )}
 
-            <h2 className="text-l color-dkblue font-bold">{user.username}</h2>
+            <h2 className="text-l color-dkblue font-bold pl-2">{user.username}</h2>
             <div>
               <a
                 href={`mailto:${user.email}`}
