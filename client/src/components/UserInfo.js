@@ -35,11 +35,11 @@ const UserInfo = () => {
   console.log("userdata in UserInfo", user);
 
   return (
-    <div className="min-h-screen pl-32 pr-16">
+    <div className="min-h-screen md:pl-32 md:pr-4 mx-4">
       <div className="mx-auto grid md:grid-cols-2 gap-4">
         {/* User Information */}
         <div className="pt-6">
-          <div className="bg-white flex justify-center rounded-xl rounded-t-xl border-t-4 border-blue-900 max-w-2xl container relative py-8 shadow-md shadow-slate-400">
+          <div className="bg-white flex pr-4 justify-center rounded-xl rounded-t-xl border-t-4 border-blue-900 max-w-2xl container relative py-8 shadow-md shadow-slate-400">
           <div>
           <div className="container mx-auto px-4"></div>
             <p className="text-blue-900 text-center text-3xl font-bold pb-6">
