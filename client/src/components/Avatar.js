@@ -8,8 +8,8 @@ const Avatar = ({ user }) => {
   if (!profilePicUrl) {
     const firstLetter = firstName.charAt(0).toUpperCase();
     return (
-      <div className="rounded-full w-36 h-36 bg-gray-500 flex justify-center items-center">
-        <span className="text-white text-5xl">{firstLetter}</span>
+      <div className="rounded-full w-36 h-36 bg-gray-200 flex justify-center items-center">
+        <span className="color-dkblue text-5xl">{firstLetter}</span>
       </div>
     );
   }
