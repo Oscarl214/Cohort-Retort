@@ -5,8 +5,7 @@ import { ADD_COMMENT } from "../utils/mutations"; //Bringing in the add comment 
 import { QUERY_COMMENTS, QUERY_POST } from "../utils/queries"; //Bringing in my comment queries and my user query
 import Auth from "../utils/auth"; //bringing in my Auth middleware
 
-
-const CreateComment = ({ postID, showcomments }) => {
+const CreateComment = ({ postID }) => {
   //state use of comment Text that will be provided
   const [commentText, setCommentText] = useState("");
   console.log("postID", postID);
@@ -57,8 +56,6 @@ const CreateComment = ({ postID, showcomments }) => {
     // Add a console.log to see the updated commentText
     console.log("Updated Comment Text:", event.target.value);
   };
-
-  
 
   return (
     <div className="flex mx-auto items-center justify-center mt-2 mb-8">
