@@ -94,7 +94,7 @@ function Signup(props) {
     await handleImageUpload(selectedFile);
   };
   return (
-    <div className="flex flex-col items-center justify-center h-screen background-darkBlue">
+    <div className="flex flex-col items-center justify-center h-full lg:h-screen background-darkBlue">
       <h1 className="display: inline text-7xl font-bold text-center mb-2 mt-20 color-yellow">
         COHORT RETORT
       </h1>
@@ -205,7 +205,7 @@ function Signup(props) {
             </label>
           </div>
 
-            <div className="pt-4 text-white ">
+            <div className="pt-4 text-white after:content-['*'] after:ml-0.5 after:text-red-500">
               <input
                 type="file"
                 accept="image/*"
