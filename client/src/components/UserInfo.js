@@ -41,7 +41,7 @@ const UserInfo = ({ user }) => {
               <strong>GitHub:</strong>
             </p>
             <p className="text-gray-700 text-center">{user.github}</p>
-            <div className="flex justify-center pt-16">
+            <div className="flex justify-center pt-6">
               <UpdateUserInfo user={user} />
             </div>
           </div>
