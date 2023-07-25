@@ -203,32 +203,35 @@ function Signup(props) {
             <label className="text-white text-lg" htmlFor="website">
               Personal Website
             </label>
-            <div>
+          </div>
+
+            <div className="pt-4 text-white ">
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleFileChange}
                 name="profilePicUrl"
+                className="grid justify-items-end"
               />
               {selectedFile && (
-                <div>
+                <div className="mt-2">
                   <img
                     src={URL.createObjectURL(selectedFile)}
                     alt="Selected"
-                    style={{ width: "300px", height: "auto" }}
+                    style={{ width: "100px", height: "auto" }}
                   />
                 </div>
               )}
               {uploadProgress > 0 && (
                 <div>Upload Progress: {uploadProgress}%</div>
               )}
-              <button type="button" onClick={handleUpload}>
+              <button className="background-darkBlue text-white py-2 mt-2 px-4 rounded hover:background-yellow hover:text-black text-bold" type="button" onClick={handleUpload}>
                 Upload Image
               </button>
             </div>
-          </div>
+         
 
-          <div className="flex justify-between items-center mt-4">
+          <div className="flex justify-between items-center mt-8">
             <button
               className="background-yellow text-black py-2 px-4 rounded hover:background-darkBlue hover:text-white text-bold"
               type="submit"

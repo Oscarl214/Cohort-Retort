@@ -48,7 +48,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="mx-4 md:mx-auto md:max-w-2xl my-6">
+    <div className="mx-4 md:mx-auto md:max-w-2xl my-6 ">
       {Auth.loggedIn() ? (
         <>
           {showInputBox ? (
