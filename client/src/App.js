@@ -14,7 +14,6 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
-import UserDataLoader from "./components/UserDataLoader";
 
 import { UserProvider } from "./utils/userContext";
 
@@ -41,7 +40,6 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <UserProvider>
-        <UserDataLoader>
           <Router>
             <div>
               <Routes>
@@ -52,7 +50,6 @@ function App() {
               </Routes>
             </div>
           </Router>
-        </UserDataLoader>
       </UserProvider>
     </ApolloProvider>
   );

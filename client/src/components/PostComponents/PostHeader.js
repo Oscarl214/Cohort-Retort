@@ -8,9 +8,8 @@ const PostHeader = ({ userId, postId }) => {
   
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const userData = useContext(UserContext);
-  const Data = userData.usersData;
-  const UserData = Data._id;
+  const { usersData } = useContext(UserContext);
+  console.log(usersData);
 
   const handleDropdownToggle = useCallback(() => {
     setShowDropdown(!showDropdown);
@@ -99,8 +98,8 @@ const PostHeader = ({ userId, postId }) => {
           </div>
         </div>
       </div>
-      <div className="relative pr-8">
-        {UserData === userId && postId && (
+      <div className="relative">
+        {usersData._id === userId && postId && (
           <button
             onClick={handleDropdownToggle}
             className="focus:outline-none"
