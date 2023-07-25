@@ -7,7 +7,6 @@ const UpdateUserInfo = ({ user }) => {
   const [formState, setFormState] = useState({
     username: user.username,
     email: user.email,
-    password: "",
     linkedin: user.linkedin,
     github: user.github,
     website: user.website,
@@ -33,7 +32,6 @@ const UpdateUserInfo = ({ user }) => {
         variables: {
           username: formState.username,
           email: formState.email,
-          password: formState.password,
           linkedin: formState.linkedin,
           github: formState.github,
           website: formState.website,
@@ -57,7 +55,6 @@ const UpdateUserInfo = ({ user }) => {
     setFormState({
       username: user.username,
       email: user.email,
-      password: "",
       linkedin: user.linkedin,
       github: user.github,
       website: user.website,
@@ -78,7 +75,7 @@ const UpdateUserInfo = ({ user }) => {
         className="modal-container modal background-medBlue mt-6" // Apply the styles for the modal
         overlayClassName="overlay" // Apply the styles for the overlay
       >
-        <h2 className="text-3xl font-bold text-center mb-4 color-yellow">
+        <h2 className="text-3xl font-bold sm:text-center mb-4 color-yellow">
           Update User Information
         </h2>
         <form className="mt-4" onSubmit={handleFormSubmit}>
@@ -93,13 +90,13 @@ const UpdateUserInfo = ({ user }) => {
               className="border border-blue-300 p-2 mt-2 rounded-md"
             />
             <label
-              className="text-white text-lg after:content-['*'] after:ml-0.5 after:text-red-500"
+              className="text-white text-lg after:ml-0.5 "
               htmlFor="UserName"
             >
               UserName
             </label>
           </div>
-          <div className="flex flex-col mb-4">
+          {/* <div className="flex flex-col mb-4">
             <input
               placeholder="youremail@test.com"
               name="email"
@@ -115,8 +112,8 @@ const UpdateUserInfo = ({ user }) => {
             >
               Email
             </label>
-          </div>
-          <div className="flex flex-col mb-4">
+          </div> */}
+          {/* <div className="flex flex-col mb-4">
             <input
               placeholder="******"
               name="password"
@@ -132,7 +129,7 @@ const UpdateUserInfo = ({ user }) => {
             >
               Password
             </label>
-          </div>
+          </div> */}
           <div className="flex flex-col mb-4">
             <input
               placeholder="Linkedin URL"
