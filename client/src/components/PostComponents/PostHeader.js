@@ -138,14 +138,14 @@ const PostHeader = ({ userId, postId }) => {
         {showDropdown && (
           <div className="absolute right-0 mt-2 w-36 background-medBlue rounded-lg shadow-lg">
             <ul>
-              <li>
+              {/* <li>
                 <button
                   className="block text-white py-2 px-4 rounded hover:bg-yellow-500 hover:text-black w-full text-center"
                   // onClick={handleEditPost}
                 >
                   Edit Post
                 </button>
-              </li>
+              </li> */}
               <li>
                 <button
                   className="block text-white py-2 px-4 rounded hover:bg-yellow-500 hover:text-black w-full text-center"
