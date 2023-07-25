@@ -5,7 +5,6 @@ import { REMOVE_POST } from "../../utils/mutations";
 import { UserContext } from "../../utils/userContext";
 
 const PostHeader = ({ userId, postId }) => {
-  
   const [showDropdown, setShowDropdown] = useState(false);
 
   const { usersData } = useContext(UserContext);
@@ -52,7 +51,7 @@ const PostHeader = ({ userId, postId }) => {
   const user = data?.userById;
 
   return (
-    <div className="flex items-start px-2 py-4 pt-8 rounded-t-xl border-t-4 border-blue-900 justify-between">
+    <div className="flex items-start px-2 py-4 pt-6 rounded-t-xl border-t-4 border-blue-900 justify-between">
       <div className="flex items-start">
         <div className="flex flex-col justify-between ml-2">
           <div className="flex pl-8 items-end justify-between">
@@ -85,15 +84,16 @@ const PostHeader = ({ userId, postId }) => {
                 </a>
               )}
               {user.website && (
-  <a
-    href={user.website}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="ml-2 text-gray-500 hover:text-darkBlue"
-  >
-    <i className="fas fa-globe"></i> {/* You can choose your preferred icon */}
-  </a>
-)}
+                <a
+                  href={user.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-2 text-gray-500 hover:text-darkBlue"
+                >
+                  <i className="fas fa-globe"></i>{" "}
+                  {/* You can choose your preferred icon */}
+                </a>
+              )}
             </div>
           </div>
         </div>

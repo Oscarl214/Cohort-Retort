@@ -19,9 +19,12 @@ const Home = () => {
     }
   }, [userData, setUsersData]);
 
+  if (!Auth.loggedIn()) {
+    return <Navigate to="/login" />;
+  }
   return (
     <div className="bg-gray-200 min-h-screen">
-      <Header />
+      <div className="fixed top-0 left-0 right-0 z-50"><Header /></div>
       <CommunityContainer />
       <Footer />
     </div>

@@ -164,13 +164,13 @@ const resolvers = {
 
     addComment: async (parent, { postId, commentText }, context) => {
       if (context.user) {
-        const { username, _id: userId } = context.user;
 
         // Create a new comment object with the commentText and username
         const newComment = {
           commentText,
-          username,
+          username: context.user.username,
           createdAt: new Date().toISOString(),
+          userId: context.user._id,
         };
 
         // Find the post by ID and update the comments array by pushing the new comment object

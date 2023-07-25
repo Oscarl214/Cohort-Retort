@@ -22,6 +22,7 @@ const CreatePost = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
+      setShowInputBox(false);
       const { data } = await addPost({
         variables: {
           postText,
@@ -47,16 +48,17 @@ const CreatePost = () => {
 
 
   return (
-    <div className="container mx-auto max-w-md px-4 py-8">
+
+    <div className="mx-4 md:mx-auto md:max-w-2xl my-6">
       {Auth.loggedIn() ? (
         <>
           {showInputBox ? (
-            <form onSubmit={handleFormSubmit} className="w-full">
+            <form onSubmit={handleFormSubmit} className="px-2 py-4 pt-8 rounded-xl border-t-4 border-blue-900 shadow-slate-400 bg-white">
               <textarea
                 name="postText"
                 placeholder="Share your Post here..."
                 value={postText}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none"
+                className="w-full p-5 px-4 py-2 border border-gray-300 rounded-lg resize-none"
                 style={{ lineHeight: "1.5", resize: "vertical" }}
                 onChange={(event) => setPostText(event.target.value)}
               ></textarea>
