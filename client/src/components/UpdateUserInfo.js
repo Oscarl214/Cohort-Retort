@@ -5,7 +5,7 @@ import { UPDATE_USER } from "../utils/mutations";
 import Modal from "react-modal";
 
 const UpdateUserInfo = ({ user }) => {
-  const [showModal, setShowModal] = useState(false); // State to show/hide the modal
+  const [showModal, setShowModal] = useState(false);
   const [formState, setFormState] = useState({
     username: user.username,
     email: user.email,
