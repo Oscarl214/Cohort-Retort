@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
 import { UPDATE_USER } from "../utils/mutations";
 import Modal from "react-modal";
 const UpdateUserInfo = ({ user }) => {
@@ -31,11 +30,19 @@ const UpdateUserInfo = ({ user }) => {
     console.log("form state", formState);
     try {
       const { data } = await updateUser({
-        variables: { ...formState },
+        variables: {
+          username: formState.username,
+          email: formState.email,
+          password: formState.password,
+          linkedin: formState.linkedin,
+          github: formState.github,
+          website: formState.website,
+        },
       });
       // You may want to handle the update success logic here
       // Close the modal after submission
       setShowModal(false);
+      window.location.reload();
     } catch (e) {
       console.error(e);
     }
@@ -168,7 +175,7 @@ const UpdateUserInfo = ({ user }) => {
               Personal Website
             </label>
           </div>
-          <div className="flex flex-col mb-4">
+          {/* <div className="flex flex-col mb-4">
             <input
               type="file"
               accept="image/*"
@@ -177,12 +184,13 @@ const UpdateUserInfo = ({ user }) => {
             <label className="text-white text-lg" htmlFor="profilePic">
               Profile Picture
             </label>
-          </div>
+          </div> */}
+
           <div className="flex justify-between items-center mt-4">
             <button
               className="background-yellow text-black py-2 px-4 rounded hover:background-darkBlue hover:text-white text-bold"
               type="submit"
-              form="updateForm" // Add the form ID to connect the button with the form
+              // form="updateForm" // Add the form ID to connect the button with the form
             >
               Save
             </button>
