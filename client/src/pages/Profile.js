@@ -36,7 +36,7 @@ const user = data.user;
   return (
     <div className="bg-gray-200 min-h-screen">
       <div className="fixed top-0 left-0 right-0 z-50"><Header /></div>
-      <div className="pt-80"><UserInfo/></div>
+      <div className="lg:pt-80 md:pt-80 pt-20"><UserInfo/></div>
       <Footer />
     </div>
   );
