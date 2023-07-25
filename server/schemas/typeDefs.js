@@ -32,6 +32,7 @@ const typeDefs = gql`
     linkedin: String
     github: String
     posts: [Post]
+    profilePicUrl: String
   }
 
   type Auth {
@@ -59,6 +60,7 @@ const typeDefs = gql`
       website: String
       linkedin: String
       github: String
+      profilePicUrl: String
     ): Auth
     updateUser(
       username: String
@@ -67,6 +69,7 @@ const typeDefs = gql`
       website: String
       linkedin: String
       github: String
+      profilePicUrl: String
     ): Auth
 
     login(email: String!, password: String!): Auth

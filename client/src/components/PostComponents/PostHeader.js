@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useContext, useEffect } from "react";
-import { QUERY_POSTS, USER_BY_ID } from "../../utils/queries";
+import { QUERY_POSTS, USER_BY_ID, QUERY_USER } from "../../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
 import { REMOVE_POST } from "../../utils/mutations";
 import { UserContext } from "../../utils/userContext";
@@ -25,12 +25,9 @@ const PostHeader = ({ userId, postId }) => {
       await removePost({
         variables: { postId }, //passed in PostID from PostCard
         update(cache, { data: { removePost } }) {
-          //read current posts
           const { posts } = cache.readQuery({ query: QUERY_POSTS });
 
-          // Filter out the deleted post from the posts array
           const updatedPosts = posts.filter((post) => post._id !== postId);
-
           // Write the updated posts array back to the cache
           cache.writeQuery({
             query: QUERY_POSTS,
@@ -55,6 +52,12 @@ const PostHeader = ({ userId, postId }) => {
       <div className="flex items-start">
         <div className="flex flex-col justify-between ml-2">
           <div className="flex pl-8 items-end justify-between">
+            <img
+              class="w-10 h-10 p-1 rounded-full "
+              src={user.profilePicUrl}
+              alt="Bordered avatar"
+            />
+
             <h2 className="text-l color-dkblue font-bold">{user.username}</h2>
             <div>
               <a

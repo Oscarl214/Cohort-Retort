@@ -4,6 +4,7 @@ import { QUERY_POSTS, USER_BY_ID } from "../../utils/queries";
 import CreateComment from "../CreateComment";
 import Comment from "../Comment";
 import PostHeader from "./PostHeader";
+import Linkify from "react-linkify";
 
 const PostCard = () => {
   const { loading, data, error } = useQuery(QUERY_POSTS);
@@ -53,26 +54,42 @@ const PostCardItem = ({ post }) => {
   console.log("Post.user from card item", post.user);
   console.log("Post.user._id from card item", post.user._id);
 
-
   const props = {
     postID: post._id,
     userId: post.user._id,
-  }
+  };
 
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
 
   return (
-    <div ref={wrapperRef} className="bg-white shadow-md shadow-slate-400 rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6">
-
+    <div
+      ref={wrapperRef}
+      className="bg-white shadow-md shadow-slate-400 rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6"
+    >
       <PostHeader userId={post.user._id} postId={post._id} />
       <div key={post._id} className="">
         <p className="-mt-8 text-slate-400 text-xs pl-12 pt-3">
           Created on: {post.createdAt}
         </p>
+
         <div className="pl-12 pr-10">
-          <p className="mt-2 color-medblue text-l pb-6">{post.postText}</p>
+          <Linkify
+            componentDecorator={(decoratedHref, decoratedText, key) => (
+              <a
+                href={decoratedHref}
+                key={key}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {decoratedText}
+              </a>
+            )}
+          >
+            <p className="mt-2 color-medblue text-l pb-6">{post.postText}</p>
+          </Linkify>
         </div>
+
         <div className="">{/* Rest of the component code */}</div>
       </div>
       <div className="grid justify-items-end pr-5 pb-8">
@@ -99,10 +116,8 @@ const PostCardItem = ({ post }) => {
           <div className="w-full flex-col items-start text-gray-700 text-sm pl-5">
             {/* Render CreateComment and Comment components if showComments is true */}
 
-
             <CreateComment postID={post._id} />
             <Comment postID={post._id} userId={post.user._id} />
-
           </div>
         )}
       </div>
