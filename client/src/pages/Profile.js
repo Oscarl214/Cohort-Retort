@@ -23,7 +23,7 @@ const user = data?.user;
  console.log("user in profile", user);
 
   return (
-    <div>
+    <div className="bg-gray-200 min-h-screen">
       <Header />
       <UserInfo user={user}/>
       <Footer />
