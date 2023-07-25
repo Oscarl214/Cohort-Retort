@@ -88,7 +88,6 @@ const UpdateUserInfo = ({ user }) => {
           Update User Information
         </h2>
         <form className="mt-4" onSubmit={handleFormSubmit}>
-          {/* ... (rest of the form fields) ... */}
           <div className="flex flex-col mb-4">
             <input
               placeholder="UserName"
