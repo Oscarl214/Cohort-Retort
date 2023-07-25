@@ -36,7 +36,7 @@ const Footer = () => {
                   className="hover:text-white"
                   style={{color: '#F0D258'}} // same as .color-yellow
                 >
-                  tbd
+                  sth0067@gmail.com
                 </a>                
               </div>
               <div className="mb-2">
@@ -46,7 +46,7 @@ const Footer = () => {
                   className="hover:text-white"
                   style={{color: '#F0D258'}} // same as .color-yellow
                 >
-                  tbd
+                  lealoscar56@gmail.com
                 </a>                
               </div>
               <div className="mb-2">
@@ -56,7 +56,7 @@ const Footer = () => {
                   className="hover:text-white"
                   style={{color: '#F0D258'}} // same as .color-yellow
                 >
-                  tbd
+                  Michaelformico@gmail.com
                 </a>                
               </div>
               <div className="mb-2">
@@ -66,7 +66,7 @@ const Footer = () => {
                   className="hover:text-white"
                   style={{color: '#F0D258'}} // same as .color-yellow
                 >
-                  tbd
+                  Whitney.white15@yahoo.com
                 </a>                
               </div>
               <div className="mb-2">
