@@ -35,7 +35,7 @@ const UserInfo = () => {
   console.log("userdata in UserInfo", user);
 
   return (
-    <div className="min-h-screen md:pl-32 md:pr-4 mx-4">
+    <div className="min-h-screen md:pl-6 md:pr-6 mx-4">
       <div className="mx-auto grid md:grid-cols-2 gap-4">
         {/* User Information */}
         <div className="pt-6">
@@ -89,7 +89,7 @@ const UserInfo = () => {
           {user.posts.map((post) => (
             <div
               key={post._id}
-              className="bg-white shadow-md shadow-slate-400 rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6"
+              className="bg-white shadow-md shadow-slate-400 rounded-xl  md:mx-auto max-w-md md:max-w-2xl my-6"
             >
               <PostHeader userId={user._id} postId={post._id} />
               <div key={post._id} className="">
