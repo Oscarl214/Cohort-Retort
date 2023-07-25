@@ -41,32 +41,54 @@ const user = data?.user
         {/* User Information */}
         <div className="bg-gray rounded-lg flex justify-center pt-6 max-h-96">
           <div className="bg-white rounded-xl rounded-t-xl border-t-4 border-blue-900 max-w-2xl container relative py-8 shadow-md shadow-slate-400">
-            <p className="text-blue-900 text-center text-3xl font-bold">
+
+            <p className="text-blue-900 text-center text-3xl font-bold pb-6">
               {user.username}
             </p>
+
+            <div className="grid justify-items-center color-dkblue">
+            <i className="far fa-envelope"></i>
             <p className="text-blue-900 text-center">
               <strong>Email:</strong>
             </p>
-            <p className="text-gray-700 text-center">{user.email}</p>
+            <p className="text-gray-700 text-center pb-4">{user.email}</p>
+            </div>
+
+            <div className="grid justify-items-center color-dkblue">
+            <i className="fas fa-globe"></i>
             <p className="text-blue-900 text-center">
               <strong>Website:</strong>
             </p>
-            <p className="text-gray-700 text-center">{user.website}</p>
+            <p className="text-gray-700 text-center pb-4">{user.website}</p>
+            </div>
+
+            <div className="grid justify-items-center color-dkblue">
+            <i className="fab fa-linkedin"></i> 
             <p className="text-blue-900 text-center">
               <strong>LinkedIn:</strong>
             </p>
-            <p className="text-gray-700 text-center">{user.linkedin}</p>
+            <p className="text-gray-700 text-center pb-4">{user.linkedin}</p>
+            </div>
+
+            <div className="grid justify-items-center color-dkblue">
+            <i className="fab fa-github"></i>
             <p className="text-blue-900 text-center">
               <strong>GitHub:</strong>
             </p>
-            <p className="text-gray-700 text-center">{user.github}</p>
+
+            <p className="text-gray-700 text-center pb-4">{user.github}</p>
             <div className="flex justify-center pt-6">
               <UpdateUserInfo user={user} />
+
             </div>
+
+            
           </div>
         </div>
         {/* Posts */}
+
         <div className="">
+          
           {user.posts.map((post) => (
             <div
               key={post._id}
@@ -117,3 +139,4 @@ const user = data?.user
 };
 
 export default UserInfo;
+
