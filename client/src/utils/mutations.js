@@ -40,22 +40,20 @@ export const ADD_USER = gql`
 // TODO: Double check update user mutation
 export const UPDATE_USER = gql`
   mutation updateUser(
-    $username: String!
-    $email: String!
-    $password: String!
-    $linkedin: String
+    $username: String
+    $email: String
+    $password: String
     $github: String
     $website: String
-    $profilePicUrl: String
+    $linkedin: String
   ) {
     updateUser(
       username: $username
       email: $email
       password: $password
-      linkedin: $linkedin
       github: $github
       website: $website
-      profilePicUrl: $profilePicUrl
+      linkedin: $linkedin
     ) {
       token
       user {
