@@ -17,6 +17,7 @@ import Profile from "./pages/Profile";
 
 import { UserProvider } from "./utils/userContext";
 
+
 const httpLink = createHttpLink({
   uri: "/graphql",
 });

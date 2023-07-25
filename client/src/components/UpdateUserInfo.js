@@ -81,7 +81,7 @@ const UpdateUserInfo = ({ user }) => {
         isOpen={showModal}
         onRequestClose={() => setShowModal(false)}
         contentLabel="Update User Info Modal"
-        className="rounded-xl modal-container modal background-medBlue" // Apply the styles for the modal
+        className="modal-container modal background-medBlue mt-6" // Apply the styles for the modal
         overlayClassName="overlay" // Apply the styles for the overlay
       >
         <h2 className="text-3xl font-bold text-center mb-4 color-yellow">
