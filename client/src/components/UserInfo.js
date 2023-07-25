@@ -58,6 +58,7 @@ const UserInfo = ({ user }) => {
             <p className="text-gray-700 text-center pb-4">{user.github}</p>
             </div>
 
+            
           </div>
         </div>
         {/* Posts */}

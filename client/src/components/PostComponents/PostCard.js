@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_POSTS, USER_BY_ID } from "../../utils/queries";
 import CreateComment from "../CreateComment";
@@ -24,6 +24,25 @@ const PostCard = () => {
 };
 
 const PostCardItem = ({ post }) => {
+  function useOutsideAlerter(ref) {
+    useEffect(() => {
+      /**
+       * Alert if clicked on outside of element
+       */
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setShowComments(false);
+        }
+      }
+      // Bind the event listener
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
+
   const [showComments, setShowComments] = useState(false);
 
   const handleShowComments = () => {
@@ -38,9 +57,12 @@ const PostCardItem = ({ post }) => {
     postID: post._id,
     userId: post.user._id,
   }
-  
+
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
+
   return (
-    <div className="bg-white shadow-md shadow-slate-400 rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6">
+    <div ref={wrapperRef} className="bg-white shadow-md shadow-slate-400 rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6">
       <PostHeader userId={post.user._id} postId={post._id} />
       <div key={post._id} className="">
         <p className="-mt-8 text-slate-400 text-xs pl-12 pt-3">
@@ -74,7 +96,7 @@ const PostCardItem = ({ post }) => {
         {showComments && (
           <div className="w-full flex-col items-start text-gray-700 text-sm pl-5">
             {/* Render CreateComment and Comment components if showComments is true */}
-            <CreateComment postID={post._id} />
+            <CreateComment postID={post._id}/>
             <Comment props={props} />
           </div>
         )}
