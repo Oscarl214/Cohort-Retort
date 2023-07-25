@@ -54,11 +54,11 @@ const CreatePost = () => {
         <>
           {showInputBox ? (
             <form onSubmit={handleFormSubmit} className="px-2 py-4 pt-8 rounded-xl border-t-4 border-blue-900 shadow-slate-400 bg-white">
-              <textarea className="p-5"
+              <textarea
                 name="postText"
                 placeholder="Share your Post here..."
                 value={postText}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none"
+                className="w-full p-5 px-4 py-2 border border-gray-300 rounded-lg resize-none"
                 style={{ lineHeight: "1.5", resize: "vertical" }}
                 onChange={(event) => setPostText(event.target.value)}
               ></textarea>
