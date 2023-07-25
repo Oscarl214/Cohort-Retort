@@ -57,11 +57,16 @@ const UserInfo = ({ user }) => {
             </p>
             <p className="text-gray-700 text-center pb-4">{user.github}</p>
             </div>
+           
+            <div className="flex justify-center pt-6">
+              <UpdateUserInfo user={user} />
+            
 
           </div>
         </div>
         {/* Posts */}
-        <div>
+        <div className="">
+
           {user.posts.map((post) => (
             <div
               key={post._id}
