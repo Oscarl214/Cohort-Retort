@@ -4,6 +4,7 @@ import { QUERY_USER_BY_ID, QUERY_USER } from "../utils/queries";
 import CreateComment from "../components/CreateComment";
 import Comment from "../components/Comment";
 import PostHeader from "./PostComponents/PostHeader";
+import UpdateUserInfo from "./UpdateUserInfo";
 
 const UserInfo = () => {
   const [expandedPosts, setExpandedPosts] = useState({});
