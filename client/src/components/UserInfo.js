@@ -35,7 +35,7 @@ const UserInfo = () => {
   console.log("userdata in UserInfo", user);
 
   return (
-    <div className="min-h-screen pl-16 pr-16">
+    <div className="min-h-screen pl-32 pr-16">
       <div className="mx-auto grid md:grid-cols-2 gap-4">
         {/* User Information */}
         <div className="pt-6">
