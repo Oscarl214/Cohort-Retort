@@ -8,9 +8,8 @@ const PostHeader = ({ userId, postId }) => {
   
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const userData = useContext(UserContext);
-  const Data = userData.usersData;
-  const UserData = Data._id;
+  const { usersData } = useContext(UserContext);
+  console.log(usersData);
 
   const handleDropdownToggle = useCallback(() => {
     setShowDropdown(!showDropdown);
@@ -53,7 +52,7 @@ const PostHeader = ({ userId, postId }) => {
   const user = data?.userById;
 
   return (
-    <div className="flex items-start px-2 py-4 pt-8 rounded-t-xl border-t-4 border-blue-900 justify-between">
+    <div className="flex items-start px-2 py-4 pt-6 rounded-t-xl border-t-4 border-blue-900 justify-between">
       <div className="flex items-start">
         <div className="flex flex-col justify-between ml-2">
           <div className="flex pl-8 items-end justify-between">
@@ -99,8 +98,8 @@ const PostHeader = ({ userId, postId }) => {
           </div>
         </div>
       </div>
-      <div className="relative pr-8">
-        {UserData === userId && postId && (
+      <div className="relative">
+        {usersData._id === userId && postId && (
           <button
             onClick={handleDropdownToggle}
             className="focus:outline-none"
