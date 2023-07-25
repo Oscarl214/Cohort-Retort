@@ -40,21 +40,21 @@ const PostCardItem = ({ post }) => {
   }
   
   return (
-    <div className="bg-white shadow-lg shadow-gray-500 rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6">
+    <div className="bg-white shadow-md shadow-slate-400 rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6">
       <PostHeader userId={post.user._id} postId={post._id} />
       <div key={post._id} className="">
-        <p className="-mt-8 text-slate-400 text-xs pl-4 pt-3">
+        <p className="-mt-8 text-slate-400 text-xs pl-12 pt-3">
           Created on: {post.createdAt}
         </p>
-        <div className="pl-20 pr-8">
-          <p className="mt-2 color-medblue text-xl">{post.postText}</p>
+        <div className="pl-12 pr-10">
+          <p className="mt-2 color-medblue text-l pb-6">{post.postText}</p>
         </div>
         <div className="">{/* Rest of the component code */}</div>
       </div>
-      <div className="grid justify-items-end pr-5 pb-2">
+      <div className="grid justify-items-end pr-5 pb-8">
         <button
           onClick={handleShowComments}
-          className="flex text-gray-700 text-sm bg-white rounded"
+          className="flex text-gray-700 text-sm pr-8 rounded"
         >
           <svg
             fill="none"
