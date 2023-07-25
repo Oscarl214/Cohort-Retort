@@ -38,7 +38,7 @@
   }
   
   .modal-container {
-    height: 85%; /* Or a specific value */
+    height: 65%; /* Or a specific value */
     overflow-y: auto; /* Enable vertical scrollbar */
     scrollbar-width: none; /* Firefox */
   }

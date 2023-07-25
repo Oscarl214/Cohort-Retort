@@ -53,7 +53,7 @@ const PostHeader = ({ userId, postId }) => {
         <div className="flex flex-col justify-between ml-2">
           <div className="flex pl-8 items-end justify-between">
             <img
-              class="w-10 h-10 p-1 rounded-full "
+              className="w-10 h-10 p-1 rounded-full "
               src={user.profilePicUrl}
               alt="Bordered avatar"
             />
