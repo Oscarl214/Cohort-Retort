@@ -42,7 +42,6 @@ export const UPDATE_USER = gql`
   mutation updateUser(
     $username: String
     $email: String
-    $password: String
     $github: String
     $website: String
     $linkedin: String
@@ -50,7 +49,6 @@ export const UPDATE_USER = gql`
     updateUser(
       username: $username
       email: $email
-      password: $password
       github: $github
       website: $website
       linkedin: $linkedin

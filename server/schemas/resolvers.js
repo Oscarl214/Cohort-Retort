@@ -118,8 +118,6 @@ const resolvers = {
           linkedin: args.linkedin,
           github: args.github,
           website: args.website,
-          profilePicUrl: args.profilePicUrl,
-          // Add other allowed fields here
         };
 
         // Find the user in the database and check if the user ID matches the logged-in user ID
