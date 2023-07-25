@@ -3,7 +3,6 @@ import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { UPDATE_USER } from "../utils/mutations";
 import Modal from "react-modal";
-
 const UpdateUserInfo = ({ user }) => {
   const [showModal, setShowModal] = useState(false);
   const [formState, setFormState] = useState({
@@ -14,48 +13,37 @@ const UpdateUserInfo = ({ user }) => {
     github: user.github,
     website: user.website,
   });
-
   const [selectedProfilePic, setSelectedProfilePic] = useState(null);
-
   const [updateUser, { error, data }] = useMutation(UPDATE_USER);
-
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormState({
       ...formState,
       [name]: value,
     });
   };
-
   const handleProfilePicChange = (event) => {
     const file = event.target.files[0];
     setSelectedProfilePic(file);
   };
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log("form state", formState);
-
     try {
       const { data } = await updateUser({
         variables: { ...formState },
       });
-
       // You may want to handle the update success logic here
-
       // Close the modal after submission
       setShowModal(false);
     } catch (e) {
       console.error(e);
     }
   };
-
   const handleUpdateClick = () => {
     // Open the modal when the "Update Info" button is clicked
     setShowModal(true);
   };
-
   const handleCancelClick = () => {
     // Handle the "Cancel" button click here to close the modal and reset form fields
     setShowModal(false);
@@ -68,7 +56,6 @@ const UpdateUserInfo = ({ user }) => {
       website: user.website,
     });
   };
-
   return (
     <div>
       <button
@@ -191,7 +178,6 @@ const UpdateUserInfo = ({ user }) => {
               Profile Picture
             </label>
           </div>
-
           <div className="flex justify-between items-center mt-4">
             <button
               className="background-yellow text-black py-2 px-4 rounded hover:background-darkBlue hover:text-white text-bold"
@@ -214,5 +200,4 @@ const UpdateUserInfo = ({ user }) => {
     </div>
   );
 };
-
 export default UpdateUserInfo;
