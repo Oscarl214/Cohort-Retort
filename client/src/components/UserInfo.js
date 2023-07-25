@@ -4,6 +4,7 @@ import { QUERY_USER_BY_ID } from "../utils/queries";
 import CreateComment from "../components/CreateComment";
 import Comment from "../components/Comment";
 import PostHeader from "./PostComponents/PostHeader";
+import UpdateUserInfo from "./UpdateUserInfo";
 
 const UserInfo = ({ user }) => {
   const [expandedPosts, setExpandedPosts] = useState({}); // State to track expanded posts
@@ -40,10 +41,13 @@ const UserInfo = ({ user }) => {
               <strong>GitHub:</strong>
             </p>
             <p className="text-gray-700 text-center">{user.github}</p>
+            <div className="flex justify-center pt-6">
+              <UpdateUserInfo user={user} />
+            </div>
           </div>
         </div>
         {/* Posts */}
-        <div>
+        <div className="">
           {user.posts.map((post) => (
             <div
               key={post._id}
@@ -95,4 +99,3 @@ const UserInfo = ({ user }) => {
 };
 
 export default UserInfo;
-
