@@ -34,10 +34,6 @@ const PostCardItem = ({ post }) => {
   console.log("Post.user from card item", post.user);
   console.log("Post.user._id from card item", post.user._id);
 
-  const props = {
-    postID: post._id,
-    userId: post.user._id,
-  }
   
   return (
     <div className="bg-white shadow-md shadow-slate-400 rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl mb-6">
@@ -75,7 +71,7 @@ const PostCardItem = ({ post }) => {
           <div className="w-full flex-col items-start text-gray-700 text-sm pl-5">
             {/* Render CreateComment and Comment components if showComments is true */}
             <CreateComment postID={post._id} />
-            <Comment props={props} />
+            <Comment postID={post._id} userId={post.user._id} />
           </div>
         )}
       </div>
