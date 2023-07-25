@@ -35,6 +35,11 @@ const userSchema = new Schema(
       required: false,
       trim: true,
     },
+    profilePicUrl: {
+      type: String,
+      required: false,
+      maxlength: 500,
+    },
     posts: [
       {
         type: Schema.Types.ObjectId,
