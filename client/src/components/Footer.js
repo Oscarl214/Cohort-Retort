@@ -21,7 +21,7 @@ const Footer = () => {
 
           {showModal && (
             <div
-              className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-opacity-50 bg-black"
+              className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-opacity-50 bg-black z-50"
               onClick={toggleModal}
             >
               <div
