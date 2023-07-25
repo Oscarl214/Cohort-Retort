@@ -47,7 +47,7 @@ const UserInfo = ({ user }) => {
           </div>
         </div>
         {/* Posts */}
-        <div className="pt-12">
+        <div className="">
           {user.posts.map((post) => (
             <div
               key={post._id}

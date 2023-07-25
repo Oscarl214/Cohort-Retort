@@ -52,7 +52,7 @@ const PostHeader = ({ userId, postId }) => {
   const user = data?.userById;
 
   return (
-    <div className="flex items-start px-2 py-4 pt-8 rounded-t-xl border-t-4 border-blue-900 justify-between">
+    <div className="flex items-start px-2 py-4 pt-6 rounded-t-xl border-t-4 border-blue-900 justify-between">
       <div className="flex items-start">
         <div className="flex flex-col justify-between ml-2">
           <div className="flex pl-8 items-end justify-between">
