@@ -1,12 +1,23 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
-import { ADD_USER } from "../utils/mutations";
+import { UPDATE_USER } from "../utils/mutations";
+import Modal from "react-modal";
 
-function Signup(props) {
-  const [formState, setFormState] = useState({ email: "", password: "" });
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+const UpdateUserInfo = ({ user }) => {
+  const [showModal, setShowModal] = useState(false); // State to show/hide the modal
+  const [formState, setFormState] = useState({
+    username: user.username,
+    email: user.email,
+    password: "",
+    linkedin: user.linkedin,
+    github: user.github,
+    website: user.website,
+  });
+
+  const [selectedProfilePic, setSelectedProfilePic] = useState(null);
+
+  const [updateUser, { error, data }] = useMutation(UPDATE_USER);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -16,46 +27,77 @@ function Signup(props) {
       [name]: value,
     });
   };
+
+  const handleProfilePicChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedProfilePic(file);
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log("form state", formState);
 
     try {
-      const { data } = await addUser({
+      const { data } = await updateUser({
         variables: { ...formState },
       });
 
-      Auth.login(data.addUser.token);
-      window.location.href = "/";
+      // You may want to handle the update success logic here
+
+      // Close the modal after submission
+      setShowModal(false);
     } catch (e) {
       console.error(e);
     }
   };
 
+  const handleUpdateClick = () => {
+    // Open the modal when the "Update Info" button is clicked
+    setShowModal(true);
+  };
+
+  const handleCancelClick = () => {
+    // Handle the "Cancel" button click here to close the modal and reset form fields
+    setShowModal(false);
+    setFormState({
+      username: user.username,
+      email: user.email,
+      password: "",
+      linkedin: user.linkedin,
+      github: user.github,
+      website: user.website,
+    });
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center  background-darkBlue">
-      <h1 className="display: inline text-7xl font-bold text-center mb-2 mt-20 color-yellow">
-        COHORT RETORT
-      </h1>
-
-      <p className="display: inline; text-2xl tenxt-center mb-10 text-white">
-        Connect with your classmates
-      </p>
-
-      <div
-        className="container w-full max-w-md background-medBlue p-5 mb-32
-   rounded-lg shrink-1 "
+    <div>
+      <button
+        className="background-darkBlue text-white py-2 px-4 rounded hover:background-yellow hover:text-black text-bold flex-1"
+        onClick={handleUpdateClick}
       >
+        Update Info
+      </button>
+      <Modal
+        isOpen={showModal}
+        onRequestClose={() => setShowModal(false)}
+        contentLabel="Update User Info Modal"
+        className="rounded-xl modal-container modal background-medBlue" // Apply the styles for the modal
+        overlayClassName="overlay" // Apply the styles for the overlay
+      >
+        <h2 className="text-3xl font-bold text-center mb-4 color-yellow">
+          Update User Information
+        </h2>
         <form className="mt-4" onSubmit={handleFormSubmit}>
+          {/* ... (rest of the form fields) ... */}
           <div className="flex flex-col mb-4">
             <input
-              placeholder="UserName" required
+              placeholder="UserName"
               name="username"
               type="username"
               id="username"
               value={formState.username}
               onChange={handleChange}
-              className="border border-blue-300 p-2 mt-2 rounded-md "
+              className="border border-blue-300 p-2 mt-2 rounded-md"
             />
             <label
               className="text-white text-lg after:content-['*'] after:ml-0.5 after:text-red-500"
@@ -66,7 +108,7 @@ function Signup(props) {
           </div>
           <div className="flex flex-col mb-4">
             <input
-              placeholder="youremail@test.com" required
+              placeholder="youremail@test.com"
               name="email"
               type="email"
               id="email"
@@ -83,7 +125,7 @@ function Signup(props) {
           </div>
           <div className="flex flex-col mb-4">
             <input
-              placeholder="******" required
+              placeholder="******"
               name="password"
               type="password"
               id="password"
@@ -140,38 +182,38 @@ function Signup(props) {
               Personal Website
             </label>
           </div>
+          <div className="flex flex-col mb-4">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleProfilePicChange}
+            />
+            <label className="text-white text-lg" htmlFor="profilePic">
+              Profile Picture
+            </label>
+          </div>
 
           <div className="flex justify-between items-center mt-4">
             <button
               className="background-yellow text-black py-2 px-4 rounded hover:background-darkBlue hover:text-white text-bold"
               type="submit"
+              form="updateForm" // Add the form ID to connect the button with the form
             >
-              Sign Up
+              Save
             </button>
-
-            {/* add navigation to back button */}
-            <Link
-              to="/login"
+            {/* Add "Cancel" button to close the modal */}
+            <button
               className="background-yellow text-black py-2 px-4 rounded hover:background-darkBlue hover:text-white text-bold"
+              type="button"
+              onClick={handleCancelClick}
             >
-              Back
-            </Link>
-          </div>
-          <div className="">
-            <p className="text-m text-white flex items-center justify-center mt-6">
-              Have an account?&nbsp;&nbsp;
-              <Link
-                to="/login"
-                className="color-yellow hover:color-dkblue focus:text-sky-400"
-              >
-                Log In
-              </Link>
-            </p>
+              Cancel
+            </button>
           </div>
         </form>
-      </div>
+      </Modal>
     </div>
   );
-}
+};
 
-export default Signup;
+export default UpdateUserInfo;

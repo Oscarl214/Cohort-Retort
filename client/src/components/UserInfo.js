@@ -1,19 +1,27 @@
 import React, { useState } from "react";
+import { useQuery } from "@apollo/client";
+import { QUERY_USER_BY_ID } from "../utils/queries";
 import CreateComment from "../components/CreateComment";
 import Comment from "../components/Comment";
+import PostHeader from "./PostComponents/PostHeader";
+import UpdateUserInfo from "./UpdateUserInfo";
 
+const UserInfo = ({ user }) => {
+  const [expandedPosts, setExpandedPosts] = useState({}); // State to track expanded posts
 
-const UserInfo = ({user}) => {
-  
-  const [showComments, setShowComments] = useState(false); // State to show/hide comments
-
+  const handleShowComments = (postId) => {
+    setExpandedPosts((prevExpandedPosts) => ({
+      ...prevExpandedPosts,
+      [postId]: !prevExpandedPosts[postId] || false,
+    }));
+  };
 
   return (
-    <div className="bg-gray-200 min-h-screen">
+    <div className="min-h-screen">
       <div className="mx-auto grid md:grid-cols-2 gap-4">
         {/* User Information */}
-        <div className="bg-gray rounded-lg flex justify-center pt-20 max-h-96">
-          <div className="bg-white rounded-[5rem] max-w-2xl container relative py-10">
+        <div className="bg-gray rounded-lg flex justify-center pt-6 max-h-96">
+          <div className="bg-white rounded-xl rounded-t-xl border-t-4 border-blue-900 max-w-2xl container relative py-8 shadow-md shadow-slate-400">
             <p className="text-blue-900 text-center text-3xl font-bold">
               {user.username}
             </p>
@@ -33,36 +41,31 @@ const UserInfo = ({user}) => {
               <strong>GitHub:</strong>
             </p>
             <p className="text-gray-700 text-center">{user.github}</p>
+            <div className="flex justify-center pt-16">
+              <UpdateUserInfo user={user} />
+            </div>
           </div>
         </div>
         {/* Posts */}
-        <div>
+        <div className="pt-12">
           {user.posts.map((post) => (
             <div
               key={post._id}
-              className="bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6"
+              className="bg-white shadow-md shadow-slate-400 rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6"
             >
-              {/* <div className="h-32 pt-14 hero relative">
-                <div className="flex flex-col items-center justify-center h-32 ">
-                  <h3 className="text-2xl color-dkblue font-bold">
-                    {user.username}{user.email}
-                  </h3>
-                </div> */}
-
-              <div className="h-24 bg-white"></div>
+              <PostHeader userId={user._id} postId={post._id} />
               <div key={post._id} className="">
-                <p className="-mt-8 text-slate-400 text-xs pl-4 pt-2">
-                  Posted an update: {post.createdAt}
+                <p className="-mt-8 text-slate-400 text-xs pl-12 pt-3">
+                  Created on: {post.createdAt}
                 </p>
-                <div className="pl-20 pr-8">
-                  <p className="mt-2 color-medblue text-xl">{post.postText}</p>
+                <div className="pl-12 pr-10">
+                  <p className="mt-2 color-medblue text-l pb-6">{post.postText}</p>
                 </div>
-                <div className="">{/* Rest of the component code */}</div>
               </div>
-              <div className="grid justify-items-end pr-5 pb-2">
+              <div className="grid justify-items-end pr-5 pb-8">
                 <button
-                  // onClick={handleShowComments}
-                  className="flex text-gray-700 text-sm bg-white rounded"
+                  onClick={() => handleShowComments(post._id)}
+                  className="flex text-gray-700 text-sm pr-8 rounded"
                 >
                   <svg
                     fill="none"
@@ -79,11 +82,11 @@ const UserInfo = ({user}) => {
                   </svg>
                   <span>Comment</span>
                 </button>
-                {showComments && (
-                  <div className="w-full flex flex-col items-start mr-2 text-gray-700 text-sm mr-8">
+                {expandedPosts[post._id] && (
+                  <div className="w-full flex-col items-start text-gray-700 text-sm pl-5 p-3">
                     {/* Render CreateComment and Comment components if showComments is true */}
                     <CreateComment postID={post._id} />
-                    <Comment postID={post._id} />
+                    <Comment props={{ postID: post._id, userId: user._id }} />
                   </div>
                 )}
               </div>
