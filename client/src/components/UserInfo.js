@@ -35,11 +35,12 @@ const UserInfo = () => {
   console.log("userdata in UserInfo", user);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pl-16 pr-16">
       <div className="mx-auto grid md:grid-cols-2 gap-4">
         {/* User Information */}
-        <div className="bg-gray rounded-lg flex justify-center pt-6 max-h-96">
-          <div className="bg-white rounded-xl rounded-t-xl border-t-4 border-blue-900 max-w-2xl container relative py-8 shadow-md shadow-slate-400">
+        <div className="pt-6">
+          <div className="bg-white flex justify-center rounded-xl rounded-t-xl border-t-4 border-blue-900 max-w-2xl container relative py-8 shadow-md shadow-slate-400">
+          <div>
           <div className="container mx-auto px-4"></div>
             <p className="text-blue-900 text-center text-3xl font-bold pb-6">
               {user.username}
@@ -78,7 +79,7 @@ const UserInfo = () => {
               <p className="text-gray-700 text-center pb-4">{user.github}</p>
               <div className="flex justify-center pt-6">
                 <UpdateUserInfo user={user} />
-
+              </div>
               </div>
             </div>
           </div>
