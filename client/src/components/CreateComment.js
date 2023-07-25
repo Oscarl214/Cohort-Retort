@@ -10,58 +10,28 @@ const CreateComment = ({ postID, showcomments }) => {
   //state use of comment Text that will be provided
   const [commentText, setCommentText] = useState("");
   console.log("postID", postID);
-  
-  
-  // const [addComment, { error }] = useMutation(ADD_COMMENT, {
-  //   update(cache, { data: { addComment } }) {
-  //     if (addComment) {
-  //       try {
-  //         const { comments } = cache.readQuery({
-  //           query: QUERY_COMMENTS,
-  //         }) || { comments: [] };
-  //         // Read the existing comments from the query that gets all comments
-
-  //         cache.writeQuery({
-  //           query: QUERY_COMMENTS,
-  //           data: { comments: [addComment, ...comments] },
-  //         });
-
-  //         const { post } = cache.readQuery({
-  //           query: QUERY_POST,
-  //           variables: { postID },
-  //         });
-  //         // Read the specific post query using the 'postID'
-
-  //         cache.writeQuery({
-  //           query: QUERY_POST,
-  //           variables: { postId: postID },
-  //           data: {
-  //             post: { ...post, comments: [...post.comments, addComment] },
-  //           },
-  //         });
-  //       } catch (e) {
-  //         console.error(e);
-  //       }
-  //     }
-  //   },
-  // });
 
   const [addComment, { error }] = useMutation(ADD_COMMENT, {
     update(cache, { data: { addComment } }) {
-      const { post } = cache.readQuery({
-        query: QUERY_POST,
-        variables: { postID },
-      });
-      cache.writeQuery({
-        query: QUERY_POST,
-        variables: { postID },
-        data: {
-          posts: {
-            ...post,
-            comments: [...post.comments, addComment],
-          },
-        },
-      });
+      if (addComment) {
+        try {
+          const { post } = cache.readQuery({
+            query: QUERY_POST,
+            variables: { postID },
+          });
+          // Read the specific post query using the 'postID'
+
+          cache.writeQuery({
+            query: QUERY_POST,
+            variables: { postID },
+            data: {
+              post: { ...post, comments: [...post.comments, addComment] },
+            },
+          });
+        } catch (e) {
+          console.error(e);
+        }
+      }
     },
   });
 

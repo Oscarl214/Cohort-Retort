@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { QUERY_USER_BY_ID } from "../utils/queries";
+import { QUERY_USER_BY_ID, QUERY_USER } from "../utils/queries";
 import CreateComment from "../components/CreateComment";
 import Comment from "../components/Comment";
 import PostHeader from "./PostComponents/PostHeader";
 
-const UserInfo = ({ user }) => {
-  const [expandedPosts, setExpandedPosts] = useState({}); // State to track expanded posts
+const UserInfo = () => {
+  const [expandedPosts, setExpandedPosts] = useState({});
 
   const handleShowComments = (postId) => {
     setExpandedPosts((prevExpandedPosts) => ({
@@ -14,6 +14,25 @@ const UserInfo = ({ user }) => {
       [postId]: !prevExpandedPosts[postId] || false,
     }));
   };
+
+  const { data, loading, error, refetch } = useQuery(QUERY_USER);
+
+  useEffect(() => {
+    
+    refetch();
+  }, [refetch]);
+
+  if (loading) {
+  return <p>Loading...</p>;
+}
+
+if (error) {
+  return <p>Error: {error.message}</p>;
+}
+
+const user = data?.user
+
+  console.log("userdata in UserInfo", user);
 
   return (
     <div className="min-h-screen">
@@ -55,14 +74,20 @@ const UserInfo = ({ user }) => {
             <p className="text-blue-900 text-center">
               <strong>GitHub:</strong>
             </p>
+
             <p className="text-gray-700 text-center pb-4">{user.github}</p>
+            <div className="flex justify-center pt-6">
+              <UpdateUserInfo user={user} />
+
             </div>
 
             
           </div>
         </div>
         {/* Posts */}
-        <div>
+
+        <div className="">
+          
           {user.posts.map((post) => (
             <div
               key={post._id}
@@ -78,7 +103,7 @@ const UserInfo = ({ user }) => {
                 </div>
               </div>
               <div className="grid justify-items-end pr-5 pb-8">
-                <button
+                {/* <button
                   onClick={() => handleShowComments(post._id)}
                   className="flex text-gray-700 text-sm pr-8 rounded"
                 >
@@ -96,12 +121,11 @@ const UserInfo = ({ user }) => {
                     />
                   </svg>
                   <span>Comment</span>
-                </button>
+                </button> */}
                 {expandedPosts[post._id] && (
                   <div className="w-full flex-col items-start text-gray-700 text-sm pl-5 p-3">
                     {/* Render CreateComment and Comment components if showComments is true */}
-                    <CreateComment postID={post._id} />
-                    <Comment props={{ postID: post._id, userId: user._id }} />
+                    {/* Add new component here to show comments by postID */}
                   </div>
                 )}
               </div>
