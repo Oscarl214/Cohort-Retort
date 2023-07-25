@@ -35,14 +35,14 @@ const Comment = (props) => {
 
 
   return (
-    <div className="w-full max-w-xl items-stretch rounded-lg pt-1 p-3 mb-12 space-y-9">
+    <div className="w-full items-stretch rounded-lg pt-1 p-6 mb-12 space-y-9">
       {comments.length > 0
         ? comments.map((comment) => (
-            <div key={comment._id} className="">
+            <div key={comment._id} className="-pr-6">
             <PostHeader userId={userId} />
               <div>
                 <p className="pl-4 -mt-7 text-slate-400 text-xs pt-3 pb-6">Created on: {comment.createdAt}</p>
-                <p className="color-medblue text-l pl-4 pr-4">{comment.commentText}</p>
+                <p className="color-medblue text-l pl-4 ">{comment.commentText}</p>
               </div>
             </div>
           ))

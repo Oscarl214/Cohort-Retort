@@ -19,8 +19,8 @@ const UserInfo = ({ user }) => {
     <div className="min-h-screen">
       <div className="mx-auto grid md:grid-cols-2 gap-4">
         {/* User Information */}
-        <div className="bg-gray rounded-lg flex justify-center pt-20 max-h-96">
-          <div className="bg-white rounded-[5rem] max-w-2xl container relative py-10">
+        <div className="bg-gray rounded-lg flex justify-center pt-6 max-h-96">
+          <div className="bg-white rounded-xl rounded-t-xl border-t-4 border-blue-900 max-w-2xl container relative py-8 shadow-md shadow-slate-400">
             <p className="text-blue-900 text-center text-3xl font-bold">
               {user.username}
             </p>
@@ -47,21 +47,21 @@ const UserInfo = ({ user }) => {
           {user.posts.map((post) => (
             <div
               key={post._id}
-              className="bg-white shadow-lg rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6"
+              className="bg-white shadow-md shadow-slate-400 rounded-xl mx-4 md:mx-auto max-w-md md:max-w-2xl my-6"
             >
               <PostHeader userId={user._id} postId={post._id} />
               <div key={post._id} className="">
-                <p className="-mt-8 text-slate-400 text-xs pl-4 pt-2">
+                <p className="-mt-8 text-slate-400 text-xs pl-12 pt-3">
                   Created on: {post.createdAt}
                 </p>
-                <div className="pl-20 pr-8">
-                  <p className="mt-2 color-medblue text-xl">{post.postText}</p>
+                <div className="pl-12 pr-10">
+                  <p className="mt-2 color-medblue text-l pb-6">{post.postText}</p>
                 </div>
               </div>
-              <div className="grid justify-items-end pr-5 pb-2">
+              <div className="grid justify-items-end pr-5 pb-8">
                 <button
                   onClick={() => handleShowComments(post._id)}
-                  className="flex text-gray-700 text-sm bg-white rounded"
+                  className="flex text-gray-700 text-sm pr-8 rounded"
                 >
                   <svg
                     fill="none"
@@ -79,7 +79,7 @@ const UserInfo = ({ user }) => {
                   <span>Comment</span>
                 </button>
                 {expandedPosts[post._id] && (
-                  <div className="w-full flex-col items-start text-gray-700 text-sm pl-5">
+                  <div className="w-full flex-col items-start text-gray-700 text-sm pl-5 p-3">
                     {/* Render CreateComment and Comment components if showComments is true */}
                     <CreateComment postID={post._id} />
                     <Comment props={{ postID: post._id, userId: user._id }} />

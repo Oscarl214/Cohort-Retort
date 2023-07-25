@@ -87,14 +87,14 @@ const CreateComment = ({ postID }) => {
   };
 
   return (
-    <div className="flex mx-auto items-center justify-center  mt-2 mb-8">
+    <div className="flex mx-auto items-center justify-center mt-2 mb-8">
       {Auth.loggedIn() ? (
         <>
           <form
-            className="w-full max-w-xl items-stretch  rounded-lg pt-2 "
+            className="w-full max-w-xl items-stretch rounded-lg pt-2 "
             onSubmit={handleFormSubmit}
           >
-            <div className="flex flex-wrap mb-6">
+            <div className="flex flex-wrap mb-6 ">
               <div className="w-full md:w-full bg-white mt-2 rounded-lg border-2 p-3 border-indigo-100">
                 <textarea
                   name="commentText"

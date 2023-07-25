@@ -53,10 +53,10 @@ const PostHeader = ({ userId, postId }) => {
   const user = data?.userById;
 
   return (
-    <div className="flex items-start px-2 py-4 rounded-t-lg bg-white border-t-4 border-b-0 justify-between">
+    <div className="flex items-start px-2 py-4 pt-8 rounded-t-xl border-t-4 border-blue-900 justify-between">
       <div className="flex items-start">
         <div className="flex flex-col justify-between ml-2">
-          <div className="flex items-end justify-between">
+          <div className="flex pl-8 items-end justify-between">
             <h2 className="text-l color-dkblue font-bold">{user.username}</h2>
             <div>
               <a
@@ -99,7 +99,7 @@ const PostHeader = ({ userId, postId }) => {
           </div>
         </div>
       </div>
-      <div className="relative">
+      <div className="relative pr-8">
         {UserData === userId && postId && (
           <button
             onClick={handleDropdownToggle}
