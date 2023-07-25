@@ -16,7 +16,7 @@ const PostCard = () => {
   console.log("postsData", posts);
 
   return (
-    <div>
+    <div className="">
       {posts.map((post) => (
         <PostCardItem key={post._id} post={post} />
       ))}
