@@ -22,6 +22,9 @@ const Home = () => {
   if (!Auth.loggedIn()) {
     return <Navigate to="/login" />;
   }
+
+  // console.log(process.env.REACT_APP_AWS_ACCESS_KEY);
+  // console.log(process.env.REACT_APP_AWS_BUCKET_REGION);
   return (
     <div className="bg-gray-200 min-h-screen">
       <div className="fixed top-0 left-0 right-0 z-50">
