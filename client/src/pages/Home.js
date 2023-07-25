@@ -27,7 +27,7 @@ const Home = () => {
       <div className="fixed top-0 left-0 right-0 z-50">
         <Header />
       </div>
-      <CommunityContainer />
+      <CommunityContainer className="mt-6"/>
       <Footer />
     </div>
   );

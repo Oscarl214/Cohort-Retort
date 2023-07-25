@@ -29,12 +29,12 @@ const CommunityContainer = () => {
   console.log("userDATAincontainer",user);
 
   return (
-    <div className="pt-80 bg-gray-200">
+    <div className="md:pt-80 lg:pt-80 sm:pt-20 bg-gray-200 top-5 md:top-0 lg:top-0">
       {Auth.loggedIn() ? (
         <>
-         <div className="fixed left-0 right-0 z-50 top-72 min-w-full bg-gray-200">
+         <div className="md:fixed lg:fixed left-0 right-0 z-50 top-72 min-w-full bg-gray-200">
           <CreatePost /></div>
-          <div className="pt-24"><PostCard /></div>
+          <div className="lg:pt-24"><PostCard /></div>
         </>
       ) : (
         <p>

@@ -185,7 +185,7 @@ const UpdateUserInfo = ({ user }) => {
 
           <div className="flex justify-between items-center mt-4">
             <button
-              className="background-yellow text-black py-2 px-4 rounded hover:background-darkBlue hover:text-white text-bold"
+              className="background-yellow text-black lg:py-2 lg:px-4 py-1 px-3 sm rounded hover:background-darkBlue hover:text-white text-bold"
               type="submit"
               // form="updateForm" // Add the form ID to connect the button with the form
             >
@@ -193,7 +193,7 @@ const UpdateUserInfo = ({ user }) => {
             </button>
             {/* Add "Cancel" button to close the modal */}
             <button
-              className="background-yellow text-black py-2 px-4 rounded hover:background-darkBlue hover:text-white text-bold"
+              className="background-yellow text-black lg:py-2 lg:px-4 py-1 px-3 rounded hover:background-darkBlue hover:text-white text-bold"
               type="button"
               onClick={handleCancelClick}
             >
