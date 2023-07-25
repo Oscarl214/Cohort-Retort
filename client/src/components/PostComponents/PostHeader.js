@@ -1,6 +1,6 @@
-import React, { useState, useCallback, useContext, useEffect } from "react";
-import { QUERY_POSTS, USER_BY_ID, QUERY_USER } from "../../utils/queries";
+import React, { useState, useCallback, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
+import { QUERY_POSTS, USER_BY_ID } from "../../utils/queries";
 import { REMOVE_POST } from "../../utils/mutations";
 import { UserContext } from "../../utils/userContext";
 
@@ -47,16 +47,27 @@ const PostHeader = ({ userId, postId }) => {
 
   const user = data?.userById;
 
+  const firstName = user?.username || "John";
+
+  const profilePicUrl = user.profilePicUrl;
+  const firstLetter = firstName.charAt(0).toUpperCase();
+
   return (
     <div className="flex items-start px-2 py-4 pt-6 rounded-t-xl border-t-4 border-blue-900 justify-between">
       <div className="flex items-start">
         <div className="flex flex-col justify-between ml-2">
           <div className="flex pl-8 items-end justify-between">
-            <img
-              className="w-10 h-10 p-1 rounded-full "
-              src={user.profilePicUrl}
-              alt="Bordered avatar"
-            />
+            {profilePicUrl ? (
+              <img
+                className="w-10 h-10 p-1 rounded-full"
+                src={profilePicUrl}
+                alt="Bordered avatar"
+              />
+            ) : (
+              <div className="rounded-full w-10 h-10 bg-gray-200 flex justify-center items-center">
+                <span className="color-dkblue text-2xl">{firstLetter}</span>
+              </div>
+            )}
 
             <h2 className="text-l color-dkblue font-bold">{user.username}</h2>
             <div>

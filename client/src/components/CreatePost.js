@@ -58,7 +58,7 @@ const CreatePost = () => {
             >
               <textarea
                 name="postText"
-                placeholder="Share your Post here..."
+                placeholder="Share your Post here..." required
                 value={postText}
                 className="w-full p-5 px-4 py-2 border border-gray-300 rounded-lg resize-none"
                 style={{ lineHeight: "1.5", resize: "vertical" }}
