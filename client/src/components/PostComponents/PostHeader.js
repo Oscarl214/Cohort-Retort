@@ -5,7 +5,6 @@ import { REMOVE_POST } from "../../utils/mutations";
 import { UserContext } from "../../utils/userContext";
 
 const PostHeader = ({ userId, postId }) => {
-  
   const [showDropdown, setShowDropdown] = useState(false);
 
   const { usersData } = useContext(UserContext);
@@ -85,15 +84,16 @@ const PostHeader = ({ userId, postId }) => {
                 </a>
               )}
               {user.website && (
-  <a
-    href={user.website}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="ml-2 text-gray-500 hover:text-darkBlue"
-  >
-    <i className="fas fa-globe"></i> {/* You can choose your preferred icon */}
-  </a>
-)}
+                <a
+                  href={user.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-2 text-gray-500 hover:text-darkBlue"
+                >
+                  <i className="fas fa-globe"></i>{" "}
+                  {/* You can choose your preferred icon */}
+                </a>
+              )}
             </div>
           </div>
         </div>

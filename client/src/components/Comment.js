@@ -3,13 +3,9 @@ import { useQuery } from "@apollo/client";
 import { QUERY_POST } from "../utils/queries";
 import PostHeader from "./PostComponents/PostHeader";
 
-const Comment = (props) => {
+const Comment = ({postID, userId}) => {
   
-  console.log("props to comment", props);
   const [comments, setComments] = useState([]);
-
-  const postID = props.props.postID;
-  const userId = props.props.userId;
 
   console.log("postID from props", postID);
   console.log("userId from props", userId);
@@ -39,7 +35,7 @@ const Comment = (props) => {
       {comments.length > 0
         ? comments.map((comment) => (
             <div key={comment._id} className="-pr-6">
-            <PostHeader userId={userId} />
+            <PostHeader userId={comment.userId} />
               <div>
                 <p className="pl-4 -mt-7 text-slate-400 text-xs pt-3 pb-6">Created on: {comment.createdAt}</p>
                 <p className="color-medblue text-l pl-4 ">{comment.commentText}</p>
