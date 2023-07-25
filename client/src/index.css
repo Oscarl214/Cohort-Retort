@@ -19,7 +19,7 @@
   border-radius: 5px;
   width: 80%;
   max-width: 600px;
- 
+  z-index: 1001;
 }
 
 /* Styles for the overlay */
@@ -33,7 +33,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
+  z-index: 1000;
 }
 
 .modal-container {
