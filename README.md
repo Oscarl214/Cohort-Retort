@@ -39,14 +39,15 @@
 
   The Cohort-Retort application was built using the following:
 
+  - MongoDB
+  - Express.js
   - React
+  - Node.js
   - SWS S3 Service
   - GraphQL
   - Apollo Server Express
   - Bycript
-  - Express.js
   - Mongoose
-  - MongoDB
   - TailwindCSS
 
   ## License
