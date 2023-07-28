@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AWS from "aws-sdk";
 import { useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
+import { authService } from "../utils/auth";
 import { ADD_USER } from "../utils/mutations";
 
 function Signup(props) {
@@ -45,7 +45,7 @@ function Signup(props) {
         },
       });
 
-      Auth.login(data.addUser.token);
+      authService.login(data.addUser.token);
       window.location.href = "/";
     } catch (e) {
       console.error(e);
@@ -205,31 +205,34 @@ function Signup(props) {
             </label>
           </div>
 
-            <div className="pt-4 text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                name="profilePicUrl"
-                className="grid justify-items-end"
-              />
-              {selectedFile && (
-                <div className="mt-2">
-                  <img
-                    src={URL.createObjectURL(selectedFile)}
-                    alt="Selected"
-                    style={{ width: "100px", height: "auto" }}
-                  />
-                </div>
-              )}
-              {uploadProgress > 0 && (
-                <div>Upload Progress: {uploadProgress}%</div>
-              )}
-              <button className="background-darkBlue text-white py-2 mt-2 px-4 rounded hover:background-yellow hover:text-black text-bold" type="button" onClick={handleUpload}>
-                Upload Image
-              </button>
-            </div>
-         
+          <div className="pt-4 text-white after:content-['*'] after:ml-0.5 after:text-red-500">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              name="profilePicUrl"
+              className="grid justify-items-end"
+            />
+            {selectedFile && (
+              <div className="mt-2">
+                <img
+                  src={URL.createObjectURL(selectedFile)}
+                  alt="Selected"
+                  style={{ width: "100px", height: "auto" }}
+                />
+              </div>
+            )}
+            {uploadProgress > 0 && (
+              <div>Upload Progress: {uploadProgress}%</div>
+            )}
+            <button
+              className="background-darkBlue text-white py-2 mt-2 px-4 rounded hover:background-yellow hover:text-black text-bold"
+              type="button"
+              onClick={handleUpload}
+            >
+              Upload Image
+            </button>
+          </div>
 
           <div className="flex justify-between items-center mt-8">
             <button

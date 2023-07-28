@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { LOGIN } from "../utils/mutations";
-import Auth from "../utils/auth";
+import { authService } from "../utils/auth";
 
 function Login(props) {
   const [formState, setFormState] = useState({ email: "", password: "" });
@@ -15,7 +15,7 @@ function Login(props) {
         variables: { email: formState.email, password: formState.password },
       });
       const token = mutationResponse.data.login.token;
-      Auth.login(token);
+      authService.login(token);
     } catch (e) {
       console.log(e);
     }
@@ -31,15 +31,19 @@ function Login(props) {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen background-darkBlue">
-      <h1 className="text-7xl font-bold text-center mb-6 color-yellow">COHORT RETORT</h1>
-      <h3 className="text-2xl text-center mb-6 text-white">Connect with your classmates</h3>
+      <h1 className="text-7xl font-bold text-center mb-6 color-yellow">
+        COHORT RETORT
+      </h1>
+      <h3 className="text-2xl text-center mb-6 text-white">
+        Connect with your classmates
+      </h3>
 
-    <div className="container w-full max-w-md background-medBlue p-5 rounded-lg shrink-1">      
-      <form onSubmit={handleFormSubmit} className="mt-4">
+      <div className="container w-full max-w-md background-medBlue p-5 rounded-lg shrink-1">
+        <form onSubmit={handleFormSubmit} className="mt-4">
           <div className="flex flex-col mb-4">
-            
             <input
-              placeholder="youremail@test.com" required
+              placeholder="youremail@test.com"
+              required
               name="email"
               type="email"
               id="email"
@@ -51,9 +55,9 @@ function Login(props) {
             </label>
           </div>
           <div className="flex flex-col mb-4">
-
             <input
-              placeholder="******" required
+              placeholder="******"
+              required
               name="password"
               type="password"
               id="pwd"
