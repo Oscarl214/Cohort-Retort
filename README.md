@@ -1,56 +1,65 @@
 # Cohort Retort
 
-  [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
-  ## Description
-  Social Networking App using MERN. Create an account and continue networking with your former classmates!
+## Description
 
-  ## Table of Contents
-  * [Features](#features)
-  * [Contributors](#contributors)
-  * [Technologies](#technologies)
-  * [License](#license)
- 
-  
-  ## Features
+Social Networking App using MERN. Create an account and continue networking with your former classmates!
 
-  After you have created an account, you will have access to the following features:
+## Table of Contents
 
-  1. **Access to Community Page**: Here you will be able to view and interact with other users.
+- [Features](#features)
+- [Contributors](#contributors)
+- [Technologies](#technologies)
+- [License](#license)
+- [UI](#ui)
 
-  2. **Create Posts**: Share your job posting or request via a post on the Community Page. You can also delete your posts if you want. Update post option will be implemented soon.
+## Features
 
-  3. **Create Comments**: Comment on any post to join in the conversation.
+After you have created an account, you will have access to the following features:
 
-  4. **Profile**: Here you can see your information that you're sharing on the site and can update your Username, Github and LinkedIn links. In the future you will be able to update all of your information and profile picture. 
-  
-  Many more features to come!
+1. **Access to Community Page**: Here you will be able to view and interact with other users.
 
-  ## Contributors
-  This application was developed by the following contributors:
+2. **Create Posts**: Share your job posting or request via a post on the Community Page. You can also delete your posts if you want. Update post option will be implemented soon.
 
-  - [Scott Hale](https://github.com/shale00)
-  - [Oscar Leal](https://github.com/Oscarl214)
-  - [Whitney White](https://github.com/Whitney15)
-  - [Michael Formico](https://github.com/MichaelFormico)
-  - [Tim Mackie](https://github.com/Timmackie)
+3. **Create Comments**: Comment on any post to join in the conversation.
 
-  ## Technologies
+4. **Profile**: Here you can see your information that you're sharing on the site and can update your Username, Github and LinkedIn links. In the future you will be able to update all of your information and profile picture.
 
-  The Cohort-Retort application was built using the following:
+Many more features to come!
 
-  - MongoDB
-  - Express.js
-  - React
-  - Node.js
-  - SWS S3 Service
-  - GraphQL
-  - Apollo Server Express
-  - Bycript
-  - Mongoose
-  - TailwindCSS
+## Contributors
 
-  ## License
+This application was developed by the following contributors:
+
+- [Scott Hale](https://github.com/shale00)
+- [Oscar Leal](https://github.com/Oscarl214)
+- [Whitney White](https://github.com/Whitney15)
+- [Michael Formico](https://github.com/MichaelFormico)
+- [Tim Mackie](https://github.com/Timmackie)
+
+## UI
+
+![SignUpPage](./images/SignUpPage.png)
+![LoginPage](./images/LoginPage.png)
+![HomePage](/images/HomePage.png)
+![ProfilePage](/images/ProfilePage.png)
+
+## Technologies
+
+The Cohort-Retort application was built using the following:
+
+- MongoDB
+- Express.js
+- React
+- Node.js
+- SWS S3 Service
+- GraphQL
+- Apollo Server Express
+- Bycript
+- Mongoose
+- TailwindCSS
+
+## License
+
     This app is licensed under the MIT license.
-
-
