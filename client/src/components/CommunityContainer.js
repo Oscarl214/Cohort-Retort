@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import CreatePost from "./CreatePost";
 import PostCard from "./PostComponents/PostCard";
-import Auth from "../utils/auth"; // Bring in your Auth middleware
+import { authService } from "../utils/auth"; // Bring in your Auth middleware
 import { Link } from "react-router-dom";
 import { UserContext } from "../utils/userContext";
 import { QUERY_USER } from "../utils/queries";
@@ -30,7 +30,7 @@ const CommunityContainer = () => {
 
   return (
     <div className="md:pt-80 lg:pt-80 sm:pt-20 bg-gray-200 top-5 md:top-0 lg:top-0">
-      {Auth.loggedIn() ? (
+      {authService.loggedIn() ? (
         <>
          <div className="md:fixed lg:fixed left-0 right-0 z-50 top-72 min-w-full bg-gray-200">
           <CreatePost /></div>

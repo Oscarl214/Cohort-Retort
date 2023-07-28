@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AWS from "aws-sdk";
 import { useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
+import {authService} from "../utils/auth";
 import { ADD_USER } from "../utils/mutations";
 
 function Signup(props) {
@@ -45,7 +45,7 @@ function Signup(props) {
         },
       });
 
-      Auth.login(data.addUser.token);
+      authService.login(data.addUser.token);
       window.location.href = "/";
     } catch (e) {
       console.error(e);

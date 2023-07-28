@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { ADD_COMMENT } from "../utils/mutations"; //Bringing in the add comment mutation
 import { QUERY_COMMENTS, QUERY_POST } from "../utils/queries"; //Bringing in my comment queries and my user query
-import Auth from "../utils/auth"; //bringing in my Auth middleware
+import {authService} from "../utils/auth"; //bringing in my Auth middleware
 
 
 const CreateComment = ({ postID, showcomments }) => {
@@ -62,7 +62,7 @@ const CreateComment = ({ postID, showcomments }) => {
 
   return (
     <div className="flex mx-auto items-center justify-center mt-2 mb-8">
-      {Auth.loggedIn() ? (
+      {authService.loggedIn() ? (
         <>
           <form
             className="w-full max-w-xl items-stretch rounded-lg pt-2 "

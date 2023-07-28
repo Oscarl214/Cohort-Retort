@@ -1,12 +1,12 @@
 import React from "react";
-import Auth from "../utils/auth";
+import {authService} from "../utils/auth";
 import { Link, useLocation } from "react-router-dom";
 
 function Nav() {
   const location = useLocation();
 
   function showNavigation() {
-    if (Auth.loggedIn()) {
+    if (authService.loggedIn()) {
       return (
         <ul className="flex items-center">
           {location.pathname !== "/Profile" && (
@@ -32,7 +32,7 @@ function Nav() {
           <li className="ml-3">
             <a
               href="/"
-              onClick={() => Auth.logout()}
+              onClick={() => authService.logout()}
               className="background-medBlue text-white py-2 px-4 rounded hover:background-yellow hover:text-black text-bold"
             >
               Logout
