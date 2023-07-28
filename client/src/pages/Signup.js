@@ -33,7 +33,6 @@ function Signup(props) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log("form state", formState);
 
     try {
       const response = await handleImageUpload(selectedFile);
@@ -59,7 +58,6 @@ function Signup(props) {
     const accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY;
     const secretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
 
-    console.log(bucketName);
     AWS.config.update({
       region,
       accessKeyId,
@@ -94,7 +92,7 @@ function Signup(props) {
     await handleImageUpload(selectedFile);
   };
   return (
-    <div className="flex flex-col items-center justify-center h-full lg:h-screen background-darkBlue">
+    <div className="flex flex-col items-center justify-center background-darkBlue">
       <h1 className="display: inline text-7xl font-bold text-center mb-2 mt-20 color-yellow">
         COHORT RETORT
       </h1>
