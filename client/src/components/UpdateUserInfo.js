@@ -37,7 +37,7 @@ const UpdateUserInfo = ({ user }) => {
           website: formState.website,
         },
       });
-      // You may want to handle the update success logic here
+      
       // Close the modal after submission
       setShowModal(false);
       window.location.reload();
