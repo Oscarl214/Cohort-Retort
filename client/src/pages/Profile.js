@@ -25,13 +25,8 @@ if (error) {
   return <p>Error: {error.message}</p>;
 }
 
-
-
 const data = userData;
 const user = data.user;
- console.log("user in profile", data);
- console.log("user in profileasfafasf", user);
-
 
   return (
     <div className="bg-gray-200 min-h-screen">

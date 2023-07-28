@@ -8,7 +8,6 @@ const PostHeader = ({ userId, postId }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const { usersData } = useContext(UserContext);
-  console.log(usersData);
 
   const handleDropdownToggle = useCallback(() => {
     setShowDropdown(!showDropdown);

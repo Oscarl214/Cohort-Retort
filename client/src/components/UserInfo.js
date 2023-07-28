@@ -31,8 +31,6 @@ const UserInfo = () => {
 
   const user = data?.user;
 
-  console.log("userdata in UserInfo", user);
-
   return (
     <div className="min-h-screen md:pl-6 md:pr-6 mx-4">
       <div className="mx-auto grid md:grid-cols-2 gap-4">

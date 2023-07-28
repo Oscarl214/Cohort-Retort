@@ -7,10 +7,6 @@ const Comment = ({postID, userId}) => {
   
   const [comments, setComments] = useState([]);
 
-  console.log("postID from props", postID);
-  console.log("userId from props", userId);
-  
-
   const { data, loading, error } = useQuery(QUERY_POST, {
     variables: { postID },
   });
