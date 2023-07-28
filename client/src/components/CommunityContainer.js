@@ -18,9 +18,6 @@ const CommunityContainer = () => {
     return <p>Error: {error.message}</p>;
   }
 
-  const user = data?.user;
-
-  console.log("userDATAincontainer",user);
 
   return (
     <div className="md:pt-80 lg:pt-80 sm:pt-20 bg-gray-200 top-5 md:top-0 lg:top-0">
