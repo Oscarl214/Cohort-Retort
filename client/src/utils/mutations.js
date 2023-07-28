@@ -37,7 +37,7 @@ export const ADD_USER = gql`
     }
   }
 `;
-// TODO: Double check update user mutation
+
 export const UPDATE_USER = gql`
   mutation updateUser(
     $username: String
@@ -100,16 +100,3 @@ export const REMOVE_COMMENT = gql`
   }
 `;
 
-// export const UPLOAD_PROFILE_PIC = gql`
-//   mutation UploadProfilePic {
-//     uploadProfilePic {
-//       _id
-//       username
-//       email
-//       website
-//       linkedin
-//       github
-//       profilePicUrl
-//     }
-//   }
-// `;
