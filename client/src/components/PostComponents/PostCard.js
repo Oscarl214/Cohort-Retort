@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { QUERY_POSTS, USER_BY_ID } from "../../utils/queries";
+import { QUERY_POSTS } from "../../utils/queries";
 import CreateComment from "../CreateComment";
 import Comment from "../Comment";
 import PostHeader from "./PostHeader";

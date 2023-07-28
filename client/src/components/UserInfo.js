@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { QUERY_USER_BY_ID, QUERY_USER } from "../utils/queries";
-import CreateComment from "../components/CreateComment";
-import Comment from "../components/Comment";
+import { QUERY_USER } from "../utils/queries";
 import PostHeader from "./PostComponents/PostHeader";
 import UpdateUserInfo from "./UpdateUserInfo";
 import Linkify from "react-linkify";

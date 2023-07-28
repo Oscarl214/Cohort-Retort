@@ -1,9 +1,8 @@
-import React, { useEffect, useContext } from "react";
+import React from "react";
 import CreatePost from "./CreatePost";
 import PostCard from "./PostComponents/PostCard";
 import { authService } from "../utils/auth"; // Bring in your Auth middleware
 import { Link } from "react-router-dom";
-import { UserContext } from "../utils/userContext";
 import { QUERY_USER } from "../utils/queries";
 import { useQuery } from "@apollo/client";
 
