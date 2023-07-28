@@ -29,9 +29,7 @@ const CreatePost = () => {
           postText,
         },
       });
-
       setPostText("");
-      console.log("Post created:", data.addPost);
     } catch (err) {
       console.error("error adding post", err);
     }

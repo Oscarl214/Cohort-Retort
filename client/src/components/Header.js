@@ -16,9 +16,7 @@ const Header = () => {
   }
 
   const user = data?.user;
-
-  console.log("userDATAinHeader", user);
-  // console.log("userDATAinHeader", data);
+ 
 
   return (
     <>

@@ -7,10 +7,6 @@ const Comment = ({postID, userId}) => {
   
   const [comments, setComments] = useState([]);
 
-  console.log("postID from props", postID);
-  console.log("userId from props", userId);
-  
-
   const { data, loading, error } = useQuery(QUERY_POST, {
     variables: { postID },
   });
@@ -31,7 +27,7 @@ const Comment = ({postID, userId}) => {
 
 
   return (
-    <div className="w-full items-stretch rounded-lg pt-1 p-6 mb-12 space-y-9">
+    <div className="w-full items-stretch rounded-lg pt-1 space-y-9">
       {comments.length > 0
         ? comments.map((comment) => (
             <div key={comment._id} className="-pr-6">
