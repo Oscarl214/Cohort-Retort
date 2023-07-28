@@ -157,7 +157,7 @@ const UserInfo = () => {
                   </p>
                 </div>
               </div>
-              <div className="grid justify-items-end pr-5 pb-8">
+              <div className="grid justify-items-end pr-5 ">
                 {/* <button
                   onClick={() => handleShowComments(post._id)}
                   className="flex text-gray-700 text-sm pr-8 rounded"

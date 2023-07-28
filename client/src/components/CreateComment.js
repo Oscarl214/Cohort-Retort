@@ -57,7 +57,7 @@ const CreateComment = ({ postID }) => {
   
 
   return (
-    <div className="flex mx-auto items-center justify-center mt-2 mb-8">
+    <div className="flex mx-auto items-center justify-center mt-2 mb-1">
       {Auth.loggedIn() ? (
         <>
           <form

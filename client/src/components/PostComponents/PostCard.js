@@ -80,13 +80,13 @@ const PostCardItem = ({ post }) => {
               </a>
             )}
           >
-            <p className="mt-2 color-medblue text-l pb-6">{post.postText}</p>
+            <p className="mt-2 color-medblue text-l pb-2">{post.postText}</p>
           </Linkify>
         </div>
 
         <div className="">{/* Rest of the component code */}</div>
       </div>
-      <div className="grid justify-items-end pr-5 pb-8">
+      <div className="grid justify-items-end pr-5 pb-4">
         <button
           onClick={handleShowComments}
           className="flex text-gray-700 text-sm pr-8 rounded"
