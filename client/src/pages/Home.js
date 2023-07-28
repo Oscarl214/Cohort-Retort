@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import Nav from "../components/Nav";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CommunityContainer from "../components/CommunityContainer";

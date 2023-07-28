@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { ADD_POST } from "../utils/mutations"; //Bringing in the add post mutation
-import { QUERY_POSTS, QUERY_USER, GET_POSTS } from "../utils/queries"; //Bringing in my post queries and my user query
+import { QUERY_POSTS } from "../utils/queries"; //Bringing in my post queries and my user query
 import { authService } from "../utils/auth"; //bringing in my Auth middleware
 import Linkify from "react-linkify";
 
