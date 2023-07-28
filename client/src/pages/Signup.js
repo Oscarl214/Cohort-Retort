@@ -33,7 +33,6 @@ function Signup(props) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log("form state", formState);
 
     try {
       const response = await handleImageUpload(selectedFile);
@@ -59,7 +58,6 @@ function Signup(props) {
     const accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY;
     const secretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
 
-    console.log(bucketName);
     AWS.config.update({
       region,
       accessKeyId,

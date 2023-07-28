@@ -9,7 +9,6 @@ import Auth from "../utils/auth"; //bringing in my Auth middleware
 const CreateComment = ({ postID }) => {
   //state use of comment Text that will be provided
   const [commentText, setCommentText] = useState("");
-  console.log("postID", postID);
 
   const [addComment, { error }] = useMutation(ADD_COMMENT, {
     update(cache, { data: { addComment } }) {
@@ -46,7 +45,6 @@ const CreateComment = ({ postID }) => {
         },
       });
       setCommentText("");
-      console.log("Add comment mutation result:", data);
     } catch (err) {
       console.error(err);
     }
@@ -54,8 +52,6 @@ const CreateComment = ({ postID }) => {
   const handleTextareaChange = (event) => {
     // Update the commentText state when the textarea value changes
     setCommentText(event.target.value);
-    // Add a console.log to see the updated commentText
-    console.log("Updated Comment Text:", event.target.value);
   };
 
   

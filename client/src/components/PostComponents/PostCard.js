@@ -13,8 +13,6 @@ const PostCard = () => {
 
   const posts = data?.posts || [];
 
-  console.log("postsData", posts);
-
   return (
     <div className="">
       {posts.map((post) => (
@@ -49,10 +47,6 @@ const PostCardItem = ({ post }) => {
   const handleShowComments = () => {
     setShowComments(!showComments);
   };
-
-  console.log("Post from card item", post);
-  console.log("Post.user from card item", post.user);
-  console.log("Post.user._id from card item", post.user._id);
 
   const props = {
     postID: post._id,

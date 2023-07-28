@@ -26,7 +26,7 @@ const UpdateUserInfo = ({ user }) => {
   };
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log("form state", formState);
+
     try {
       const { data } = await updateUser({
         variables: {
