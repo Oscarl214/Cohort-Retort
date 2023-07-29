@@ -2,6 +2,7 @@ const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
 const path = require("path");
 const { authMiddleware } = require("./utils/auth");
+const cors = require('cors');
 
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
@@ -16,6 +17,7 @@ const server = new ApolloServer({
   playground: process.env.NODE_ENV === "production" ? false : true,
 });
 
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -28,7 +30,7 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
   });
 }
-app.use(express.static(path.join(__dirname, "../client/build")));
+app.use(express.static(path.join(__dirname, "build")));
 
 // Serve up static assets
 app.use("/images", express.static(path.join(__dirname, "../client/images")));
