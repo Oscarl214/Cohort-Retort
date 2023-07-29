@@ -28,6 +28,7 @@
     "aws-sdk": "^2.1422.0",
     "dot-env": "^0.0.1",
     "dotenv-webpack": "^8.0.1",
+    "mongodb": "^5.7.0",
     "path-browserify": "^1.0.1",
     "postcss": "^8.4.26",
     "react-linkify": "^1.0.0-alpha",
