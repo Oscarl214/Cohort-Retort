@@ -8,9 +8,7 @@
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
-    "build": "cd client && npm run build && cd ../ && npm run server-build",
-    "server-build": "cd server && npm install",
-    "vercel-build": "echo hello"
+    "build": "cd client && npm run build"
   },
   "keywords": [],
   "author": "",
