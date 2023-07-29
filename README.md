@@ -67,4 +67,4 @@ The Cohort-Retort application was built using the following:
 
 ## LiveSite
 
-[![Cohort-Retort](https://cohort-retort-v1-3ead1d24c761.herokuapp.com/)]
+(https://cohort-retort-v1-3ead1d24c761.herokuapp.com/)
