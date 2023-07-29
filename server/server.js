@@ -43,6 +43,8 @@ app.use('/images', express.static(path.join(__dirname, '../client/images')));
 //   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 // });
 
+// Define your API route for Apollo Server
+server.applyMiddleware({ app, path: '/graphql' });
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
