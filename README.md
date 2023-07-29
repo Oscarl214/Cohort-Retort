@@ -41,9 +41,16 @@ This application was developed by the following contributors:
 
 ## UI
 
+1. Sign Up Page
 ![SignUpPage](./images/SignUpPage.png)
+
+2. Login Page
 ![LoginPage](./images/LoginPage.png)
+
+3. Home Page
 ![HomePage](/images/HomePage.png)
+
+4. Profile Page
 ![ProfilePage](/images/ProfilePage.png)
 
 ## Technologies
