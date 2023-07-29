@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { QUERY_USER_BY_ID, QUERY_USER } from "../utils/queries";
-import CreateComment from "../components/CreateComment";
-import Comment from "../components/Comment";
+import { QUERY_USER } from "../utils/queries";
 import PostHeader from "./PostComponents/PostHeader";
 import UpdateUserInfo from "./UpdateUserInfo";
 import Linkify from "react-linkify";
@@ -32,8 +30,6 @@ const UserInfo = () => {
   }
 
   const user = data?.user;
-
-  console.log("userdata in UserInfo", user);
 
   return (
     <div className="min-h-screen md:pl-6 md:pr-6 mx-4">
@@ -161,7 +157,7 @@ const UserInfo = () => {
                   </p>
                 </div>
               </div>
-              <div className="grid justify-items-end pr-5 pb-8">
+              <div className="grid justify-items-end pr-5 ">
                 {/* <button
                   onClick={() => handleShowComments(post._id)}
                   className="flex text-gray-700 text-sm pr-8 rounded"

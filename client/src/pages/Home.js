@@ -1,9 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import Nav from "../components/Nav";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CommunityContainer from "../components/CommunityContainer";
-import Auth from "../utils/auth";
+import { authService } from "../utils/auth";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../utils/userContext";
 import { useQuery } from "@apollo/client";
@@ -19,18 +18,16 @@ const Home = () => {
     }
   }, [userData, setUsersData]);
 
-  if (!Auth.loggedIn()) {
+  if (!authService.loggedIn()) {
     return <Navigate to="/login" />;
   }
 
-  // console.log(process.env.REACT_APP_AWS_ACCESS_KEY);
-  // console.log(process.env.REACT_APP_AWS_BUCKET_REGION);
   return (
     <div className="bg-gray-200 min-h-screen">
       <div className="fixed top-0 left-0 right-0 z-50">
         <Header />
       </div>
-      <CommunityContainer className="mt-6"/>
+      <CommunityContainer className="mt-6" />
       <Footer />
     </div>
   );

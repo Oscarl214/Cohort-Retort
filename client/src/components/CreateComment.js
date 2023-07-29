@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { ADD_COMMENT } from "../utils/mutations"; //Bringing in the add comment mutation
-import { QUERY_COMMENTS, QUERY_POST } from "../utils/queries"; //Bringing in my comment queries and my user query
-import Auth from "../utils/auth"; //bringing in my Auth middleware
+import { QUERY_POST } from "../utils/queries"; //Bringing in my comment queries and my user query
+import { authService } from "../utils/auth"; //bringing in my Auth middleware
 
 
-const CreateComment = ({ postID, showcomments }) => {
+const CreateComment = ({ postID }) => {
   //state use of comment Text that will be provided
   const [commentText, setCommentText] = useState("");
-  console.log("postID", postID);
 
   const [addComment, { error }] = useMutation(ADD_COMMENT, {
     update(cache, { data: { addComment } }) {
@@ -46,7 +45,6 @@ const CreateComment = ({ postID, showcomments }) => {
         },
       });
       setCommentText("");
-      console.log("Add comment mutation result:", data);
     } catch (err) {
       console.error(err);
     }
@@ -54,15 +52,11 @@ const CreateComment = ({ postID, showcomments }) => {
   const handleTextareaChange = (event) => {
     // Update the commentText state when the textarea value changes
     setCommentText(event.target.value);
-    // Add a console.log to see the updated commentText
-    console.log("Updated Comment Text:", event.target.value);
   };
-
-  
 
   return (
     <div className="flex mx-auto items-center justify-center mt-2 mb-8">
-      {Auth.loggedIn() ? (
+      {authService.loggedIn() ? (
         <>
           <form
             className="w-full max-w-xl items-stretch rounded-lg pt-2 "

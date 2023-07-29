@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { QUERY_POSTS, USER_BY_ID } from "../../utils/queries";
+import { QUERY_POSTS } from "../../utils/queries";
 import CreateComment from "../CreateComment";
 import Comment from "../Comment";
 import PostHeader from "./PostHeader";
@@ -12,8 +12,6 @@ const PostCard = () => {
   if (error) return <p>Error fetching posts: {error.message}</p>;
 
   const posts = data?.posts || [];
-
-  console.log("postsData", posts);
 
   return (
     <div className="">
@@ -50,10 +48,6 @@ const PostCardItem = ({ post }) => {
     setShowComments(!showComments);
   };
 
-  console.log("Post from card item", post);
-  console.log("Post.user from card item", post.user);
-  console.log("Post.user._id from card item", post.user._id);
-
   const props = {
     postID: post._id,
     userId: post.user._id,
@@ -86,13 +80,13 @@ const PostCardItem = ({ post }) => {
               </a>
             )}
           >
-            <p className="mt-2 color-medblue text-l pb-6">{post.postText}</p>
+            <p className="mt-2 color-medblue text-l pb-2">{post.postText}</p>
           </Linkify>
         </div>
 
         <div className="">{/* Rest of the component code */}</div>
       </div>
-      <div className="grid justify-items-end pr-5 pb-8">
+      <div className="grid justify-items-end pr-5 pb-4">
         <button
           onClick={handleShowComments}
           className="flex text-gray-700 text-sm pr-8 rounded"

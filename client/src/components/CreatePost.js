@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { ADD_POST } from "../utils/mutations"; //Bringing in the add post mutation
-import { QUERY_POSTS, QUERY_USER, GET_POSTS } from "../utils/queries"; //Bringing in my post queries and my user query
-import Auth from "../utils/auth"; //bringing in my Auth middleware
+import { QUERY_POSTS } from "../utils/queries"; //Bringing in my post queries and my user query
+import { authService } from "../utils/auth"; //bringing in my Auth middleware
 import Linkify from "react-linkify";
 
 const CreatePost = () => {
@@ -29,9 +29,7 @@ const CreatePost = () => {
           postText,
         },
       });
-
       setPostText("");
-      console.log("Post created:", data.addPost);
     } catch (err) {
       console.error("error adding post", err);
     }
@@ -49,7 +47,7 @@ const CreatePost = () => {
 
   return (
     <div className="mx-4 md:mx-auto md:max-w-2xl my-6 pt-24 lg:pt-0 ">
-      {Auth.loggedIn() ? (
+      {authService.loggedIn() ? (
         <>
           {showInputBox ? (
             <form
@@ -58,7 +56,8 @@ const CreatePost = () => {
             >
               <textarea
                 name="postText"
-                placeholder="Share your Post here..." required
+                placeholder="Share your Post here..."
+                required
                 value={postText}
                 className="w-full p-5 px-4 py-2 border border-gray-300 rounded-lg resize-none"
                 style={{ lineHeight: "1.5", resize: "vertical" }}

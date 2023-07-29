@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "rewrites": [
+    { "source": "/graphql", "destination": "/server.js" },
+    { "source": "/(.*)", "destination": "/server.js" }
+  ]
+}
